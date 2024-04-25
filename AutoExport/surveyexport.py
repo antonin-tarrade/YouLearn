@@ -9,13 +9,14 @@ from pathlib import Path
 
 
 # Define your paths here
-PATH_TO_WATCH = "/home/gaut/eclipse-workspace/essai"
+PATH_TO_WATCH = r"D:/Mon_Dossier/Cours/2A/S8-Application_Web/Projet/YouLearn/YouLearn"
 FOLDER_NAME = PATH_TO_WATCH.split("/")[-1]
-PATH_TO_JBB_EXPORT_FOLDER ="/home/gaut/EAP-7.0.0/standalone/deployments/"
-EAP_HOME = "/home/gaut/EAP-7.0.0"
-EAP_TO_JBB_EXPORT_FOLDER = EAP_HOME + "/standalone/deployments/"
+print("nom",FOLDER_NAME)
+PATH_TO_JBB_EXPORT_FOLDER = r"D:/Logiciels/JBoss/standalone/deployments/"
+EAP_HOME = r"D:/Logiciels/JBoss"
+EAP_TO_JBB_EXPORT_FOLDER = EAP_HOME + r"/standalone/deployments/"
 PYTHON_SCRIPT_FOLDER = os.path.dirname(os.path.realpath(__file__))
-
+POWERSHELL=r"C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
 JAR_FILES_IN_FOLDER = os.listdir()
 txt=""
 for i in range(len(JAR_FILES_IN_FOLDER)):
@@ -29,7 +30,7 @@ for i in range(len(JAR_FILES_IN_FOLDER)):
 
 print(JAR_FILES_IN_FOLDER)
 
-EXPORT_COMMAND = f"jar -cvf {os.path.join(PATH_TO_JBB_EXPORT_FOLDER, 'projet.war')} *"
+EXPORT_COMMAND = f"jar -cvf {os.path.join(PATH_TO_JBB_EXPORT_FOLDER, 'YouLearn.war')} *"
 COMPILE_COMMAND = f"javac -classpath "+txt+" -d build/classes ./*/*/*.java"
 print(COMPILE_COMMAND)
 class ChangeHandler(FileSystemEventHandler):
@@ -40,17 +41,17 @@ class ChangeHandler(FileSystemEventHandler):
         print(f"File {event.src_path} has been modified.")
         # Execute the command to create the .war file
         print("Copying folder to current directory...")
-        result = subprocess.run("cp -r " + PATH_TO_WATCH + " .", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = subprocess.run("cp -r " + PATH_TO_WATCH + " .", shell=True,executable=POWERSHELL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         
         # Compile the java files
         print("Compiling java files...")
         print(COMPILE_COMMAND)
         print("current directory: "+os.getcwd())
-        result = subprocess.run("cd "+FOLDER_NAME + ";" +  COMPILE_COMMAND, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = subprocess.run("cd "+FOLDER_NAME + ";" +  COMPILE_COMMAND, shell=True,executable=POWERSHELL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 
         #Deleting export folder if it exist
         if os.path.exists("export"):
-            result = subprocess.run("rm -r export", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            result = subprocess.run("rm -r export", shell=True,executable=POWERSHELL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         
         #Creating export folder
         os.mkdir("export")
@@ -62,25 +63,25 @@ class ChangeHandler(FileSystemEventHandler):
         #Copying the compiled java files to the export folder
         java_files = os.listdir(FOLDER_NAME+"/build/classes/pack")
         for file in java_files:
-            result = subprocess.run("cp " + FOLDER_NAME + "/build/classes/pack/" + file + " export/WEB-INF/classes/pack/" + file, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            result = subprocess.run("cp " + FOLDER_NAME + "/build/classes/pack/" + file + " export/WEB-INF/classes/pack/" + file, shell=True,executable=POWERSHELL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         
         # Find all HTML and JSP files
         files = []
-        files = list(Path(".").rglob("*.html")) + list(Path(".").rglob("*.jsp"))
+        files = list(Path(".").rglob(FOLDER_NAME+"/*.html")) + list(Path(".").rglob(FOLDER_NAME + "/*.jsp"))
         
         # Copy the HTML and JSP files to the export folder
         
         for file in files:
             print(str(file))
-            result = subprocess.run("cp " + str(file) + " export/" + str(file).split("/")[-1], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            result = subprocess.run("cp " + str(file) + " export/" + str(file).split("/")[-1], shell=True,executable=POWERSHELL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                                     
         
         print("Executing jar command...")
         print(EXPORT_COMMAND)
-        result = subprocess.run("cd export;"+EXPORT_COMMAND, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = subprocess.run("cd export;"+EXPORT_COMMAND, shell=True,executable=POWERSHELL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode == 0:
             print("Command executed successfully:")
-            print(result.stdout.decode())
+            #print(result.stdout.decode())
         else:
             print("Error in executing command:")
             print(result.stderr.decode())
