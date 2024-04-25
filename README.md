@@ -26,15 +26,3 @@ YouLearn est une application web qui vise à faciliter l'apprentissage en ligne 
 ## Base de données
 
 ## FIGMA
-
-## VLOG
-
-### Semaine 1
-
-Antonin:
-
-Guilhem:
-
-Gauthier:
-
-Romain:
