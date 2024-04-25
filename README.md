@@ -23,7 +23,18 @@ YouLearn est une application web qui vise à faciliter l'apprentissage en ligne 
 - **Créer des cours :** Les enseignants peuvent créer et publier des cours sous la forme de playliste de vidéos.
 - **Interagir avec les étudiants :** Les enseignants peuvent répondre aux questions des étudiants.
 
+## Base de données
+
+## FIGMA
+
 ## VLOG
 
 ### Semaine 1
 
+Antonin:
+
+Guilhem:
+
+Gauthier:
+
+Romain:
