@@ -14,11 +14,36 @@ public class Student {
 
     private String department;
 
+    public Student() {
+    }
+
+    public Student(User user, String department) {
+        this.user = user;
+        this.department = department;
+    }
+
     // Getters / setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public User getUser() {  return user; }
-    public void setUser(User user) { this.user = user; }
-    public String getDepartment() { return department; }
-    public void setDepartment(String department) { this.department = department; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 }

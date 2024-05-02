@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import pack.UserRole;
+
 @Entity
 public class Teacher {
     @Id
@@ -19,13 +21,44 @@ public class Teacher {
 
     private String name;
 
+    public Teacher() {
+    }
+
+    public Teacher(User user, String name) {
+        this.user = user;
+        this.name = name;
+    }
+
     // Getters / setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-    public Collection<Course> getCourses() { return courses; }
-    public void setCourses(Collection<Course> courses) { this.courses = courses; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

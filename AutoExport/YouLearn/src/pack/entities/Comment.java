@@ -19,13 +19,46 @@ public class Comment {
     private String content;
     private Date date;
 
+    public Comment() {
+    }
+
+    public Comment(String content, Date date, Video video, User author) {
+        this.content = content;
+        this.date = date;
+        this.video = video;
+        this.author = author;
+    }
+
     // Getters / setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public User getAuthor() { return author; }
-    public void setAuthor(User author) { this.author = author; }
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
-    public Date getDate() { return date; }
-    public void setDate(Date date) { this.date = date; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
