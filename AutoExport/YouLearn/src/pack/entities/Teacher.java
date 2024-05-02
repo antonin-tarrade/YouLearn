@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import pack.UserRole;
-
 @Entity
 public class Teacher {
     @Id
