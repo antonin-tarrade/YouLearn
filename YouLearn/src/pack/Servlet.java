@@ -26,10 +26,10 @@ public class Servlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().println("<html><body>bjr caca de merde d'eclipse dmes couilles !</body></html>");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	throws ServletException, IOException {
+		String message = "HELLO REACT";
+		response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+		response.getWriter().write(message);
 	}
 
 	/**

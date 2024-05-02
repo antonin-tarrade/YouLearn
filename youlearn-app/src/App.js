@@ -3,7 +3,7 @@ import Header from './Header';
 
 import axios from 'axios';
 
-axios.get('http://localhost:8080/')
+axios.get('http://localhost:8080/YouLearn/Servlet')
   .then(response => {
     console.log(response.data);
   })
