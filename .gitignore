@@ -81,6 +81,7 @@ local.properties
 #.project
 
 # AutoExport
-./AutoExport
-AutoExport/
+AutoExport/*
 ./AutoExport/
+AutoExport/
+./AutoExport

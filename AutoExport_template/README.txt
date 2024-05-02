@@ -1,0 +1,3 @@
+- Dupliquer ce dossier
+- Renommer la copie AutoExport
+- Faire vos modifs locales dans ce dossier uniquement (il est dans le .gitignore de la racine)
