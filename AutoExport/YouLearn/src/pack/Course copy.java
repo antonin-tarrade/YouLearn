@@ -15,7 +15,7 @@ public class Course {
 
     @ManyToOne
     private Teacher owner;
-    @ManyToMany(mappedBy="followedCourses")
+    @ManyToMany(mappedBy = "followedCourses")
     private Collection<User> user;
 
     private String title;
@@ -25,30 +25,39 @@ public class Course {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public Teacher getOwner() {
         return owner;
     }
+
     public void setOwner(Teacher owner) {
         this.owner = owner;
     }
+
     public Collection<User> getUser() {
         return user;
     }
+
     public void setUser(Collection<User> user) {
         this.user = user;
     }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }

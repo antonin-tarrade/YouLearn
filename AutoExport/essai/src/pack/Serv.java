@@ -18,22 +18,24 @@ import javax.servlet.http.HttpServletResponse;
 public class Serv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
-	Facade facade ;
-
-    /**
-     * Default constructor. 
-     */
-    public Serv() {
-        // TODO Auto-generated constructor stub
-    }
+	Facade facade;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Default constructor.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public Serv() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
-		String op =	request.getParameter("op");
+
+		String op = request.getParameter("op");
 
 		switch (op) {
 			case "associer":
@@ -53,31 +55,32 @@ public class Serv extends HttpServlet {
 				RequestDispatcher rd2 = request.getRequestDispatcher("lister.jsp");
 				rd2.forward(request, response);
 				break;
-			
+
 		}
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//test type
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// test type
 		String type = request.getParameter("type");
 
 		switch (type) {
-		case "ajoutPersonne":
-			String nom = request.getParameter("nom");
-			String prenom = request.getParameter("prenom");
-			facade.ajoutPersonne(nom, prenom);
-			break;
-		case "ajoutAdresse":
-			String rue = request.getParameter("rue");
-			String ville = request.getParameter("ville");
-			facade.ajoutAdresse(rue, ville);			break;
+			case "ajoutPersonne":
+				String nom = request.getParameter("nom");
+				String prenom = request.getParameter("prenom");
+				facade.ajoutPersonne(nom, prenom);
+				break;
+			case "ajoutAdresse":
+				String rue = request.getParameter("rue");
+				String ville = request.getParameter("ville");
+				facade.ajoutAdresse(rue, ville);
+				break;
 		}
 	}
 
-	
 }
-

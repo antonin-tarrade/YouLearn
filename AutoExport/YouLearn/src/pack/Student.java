@@ -16,7 +16,7 @@ public class Student {
 
     @OneToOne
     private User user;
-   
+
     private String department;
 
     // Getters / setters
