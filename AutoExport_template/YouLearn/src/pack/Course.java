@@ -1,4 +1,4 @@
-package pack.entities;
+package pack;
 
 import java.util.Collection;
 
@@ -16,21 +16,10 @@ public class Course {
     @ManyToOne
     private Teacher owner;
     @ManyToMany(mappedBy = "followedCourses")
-    private Collection<User> followers;
-    @OneToMany(mappedBy = "course")
-    private Collection<Video> videos;
+    private Collection<User> user;
 
     private String title;
     private String description;
-
-    public Course() {
-    }
-
-    public Course(String title, String description, Teacher owner) {
-        this.title = title;
-        this.description = description;
-        this.owner = owner;
-    }
 
     // Getters / setters
     public int getId() {

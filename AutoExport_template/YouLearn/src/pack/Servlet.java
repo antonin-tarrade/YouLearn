@@ -27,9 +27,9 @@ public class Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String message2 = "HELLO MON AMI";
-		response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-		response.getWriter().write(message2);
+		// TODO Auto-generated method stub
+		response.getWriter().println("<html><body>bjr caca de merde d'eclipse dmes couilles !</body></html>");
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
