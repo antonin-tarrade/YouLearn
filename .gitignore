@@ -85,3 +85,9 @@ AutoExport/*
 ./AutoExport/
 AutoExport/
 ./AutoExport
+
+
+#poetry
+*.toml
+*.poetry
+*.lock
