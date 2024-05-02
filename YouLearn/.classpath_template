@@ -14,6 +14,7 @@
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
 
-1. copiez coller ce fichier
-2. modifier le chemin des jar
-3. supprimez ces instructions mdr logique
+1. copiez collez ce fichier
+2. renommez le .classpath
+3. remplacez le chemin des jar par les chemins de votre machine
+4. supprimez ces instructions mdr logique
