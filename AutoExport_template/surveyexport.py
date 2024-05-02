@@ -108,7 +108,7 @@ class ChangeHandler(FileSystemEventHandler):
         # Copying the compiled java files to the export folder
         java_files = os.listdir(FOLDER_NAME + "/build/classes/pack")
         for file in java_files:
-            execute_command("cp " + FOLDER_NAME + "/build/classes/pack/" + file + " export/WEB-INF/classes/pack/" + file)
+            execute_command("cp -r " + FOLDER_NAME + "/build/classes/pack/" + file + " export/WEB-INF/classes/pack/" + file)
         # Find all HTML and JSP files
         files = []
         files = list(Path(".").rglob(FOLDER_NAME + "/*.html")) + list(

@@ -59,7 +59,7 @@ public class Facade {
         Playlist playlist = new Playlist(isPrivate, title, description, author);
         System.out.println("[DEBUG] adding " + playlist.getClass().getName() + " (id=" + playlist.getId() + ")");
         em.persist(playlist);
-    } 
+    }   
 
     public void addComment(String content, Date date, int videoId, int userId) {
         Video video = em.find(Video.class, videoId);
