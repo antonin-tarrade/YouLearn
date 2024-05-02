@@ -16,7 +16,7 @@ public class Course {
     @ManyToOne
     private Teacher owner;
     @ManyToMany(mappedBy = "followedCourses")
-    private Collection<User> user;
+    private Collection<User> followers;
     @OneToMany(mappedBy = "course")
     private Collection<Video> videos;
 
