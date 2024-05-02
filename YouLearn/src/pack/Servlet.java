@@ -26,10 +26,10 @@ public class Servlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	throws ServletException, IOException {
-		String message = "HELLO REACT";
+			throws ServletException, IOException {
+		String message2 = "HELLO MON AMI";
 		response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-		response.getWriter().write(message);
+		response.getWriter().write(message2);
 	}
 
 	/**
