@@ -4,19 +4,12 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import subprocess
-
+from config import *
 from pathlib import Path
 
 
 # Define your paths here
-PATH_TO_WATCH = "/home/gaut/Documents/GitHub/YouLearn/YouLearn"
-FOLDER_NAME = PATH_TO_WATCH.split("/")[-1]
-PATH_TO_JBB_EXPORT_FOLDER ="/home/gaut/EAP-7.0.0/standalone/deployments/"
-EAP_HOME = "/home/gaut/EAP-7.0.0"
-EAP_TO_JBB_EXPORT_FOLDER = EAP_HOME + "/standalone/deployments/"
-PYTHON_SCRIPT_FOLDER = os.path.dirname(os.path.realpath(__file__))
-POWERSHELL = r"C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
-WINDOWS = False
+
 JAR_FILES_IN_FOLDER = os.listdir()
 txt = ""
 
@@ -73,11 +66,11 @@ class ChangeHandler(FileSystemEventHandler):
         
         #Deleting copied project folder if it exist
         if os.path.exists(FOLDER_NAME):
-            execute_command_in_folder("rm -r " + FOLDER_NAME, ".")
+            execute_command_in_folder("rm -r " + FOLDER_NAME +"_copy", ".")
         
         # Execute the command to create the .war file
         print("Copying folder to current directory...")
-        execute_command("cp -r " + PATH_TO_WATCH + " .")
+        execute_command("cp -r " + PATH_TO_WATCH + " " + FOLDER_NAME + "_copy")
         
         #Deleting the compiled java file if it exist
         if os.path.exists(FOLDER_NAME + "/build"):
