@@ -13,3 +13,7 @@
 	<classpathentry kind="lib" path="D:/Logiciels/JBoss/modules/system/layers/base/javax/servlet/api/main/jboss-servlet-api_3.1_spec-1.0.0.Final-redhat-1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
+
+1. copiez coller ce fichier
+2. modifier le chemin des jar
+3. supprimez ces instructions mdr logique
