@@ -80,10 +80,12 @@ local.properties
 # Typically, this file would be tracked if it contains build/dependency configurations:
 #.project
 
-# AutoExport
+# AutoExport j'en peux plus
 ./AutoExport
 AutoExport/
 ./AutoExport/
 AutoExport
 /AutoExport
 /AutoExport/
+*.class
+*.py
