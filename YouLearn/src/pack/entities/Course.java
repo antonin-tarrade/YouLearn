@@ -49,14 +49,6 @@ public class Course {
         this.owner = owner;
     }
 
-    public Collection<User> getUser() {
-        return user;
-    }
-
-    public void setUser(Collection<User> user) {
-        this.user = user;
-    }
-
     public String getTitle() {
         return title;
     }
