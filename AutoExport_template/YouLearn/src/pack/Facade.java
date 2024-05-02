@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
+ 
 import pack.entities.Comment;
 import pack.entities.Course;
 import pack.entities.Playlist;
@@ -14,6 +14,7 @@ import pack.entities.User;
 import pack.entities.Video;
 
 public class Facade {
+        
     @PersistenceContext
     EntityManager em;
     
@@ -58,7 +59,7 @@ public class Facade {
         Playlist playlist = new Playlist(isPrivate, title, description, author);
         System.out.println("[DEBUG] adding " + playlist.getClass().getName() + " (id=" + playlist.getId() + ")");
         em.persist(playlist);
-    }
+    } 
 
     public void addComment(String content, Date date, int videoId, int userId) {
         Video video = em.find(Video.class, videoId);
