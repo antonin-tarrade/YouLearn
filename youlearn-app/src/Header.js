@@ -11,14 +11,9 @@ function Header() {
   const [showSignInForm, setShowSignInForm] = useState(false);
 
   const handleUserIconClick = () => {
-    if (!isUserSignedIn) {
-      setShowSignInForm(true);
+    if (isUserSignedIn) {
+      window.location.href = "/user-account"; 
     }
-  };
-
-  const handleFormSubmit = () => {
-    setIsUserSignedIn(true);
-    setShowSignInForm(false);
   };
 
   return (
@@ -29,10 +24,10 @@ function Header() {
         <button className="search-button">
             <SearchIcon className="search-icon"/>
         </button>
-        <button className="signin-button" onClick={handleUserIconClick}>
-            {isUserSignedIn ? <UserSignedInIcon className="user-icon"/> : <UserSignedOutIcon className="user-icon"/>}
+        <button className="signin-button" onClick={isUserSignedIn ? handleUserIconClick : null}>
+          {isUserSignedIn ? <UserSignedInIcon className="user-icon"/> : <UserSignedOutIcon className="user-icon"/>}
         </button>
-        {showSignInForm && <SignInForm onSubmit={handleFormSubmit} />}
+        {showSignInForm && <SignInForm />}
     </header>
   );
 }
