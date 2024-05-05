@@ -21,6 +21,8 @@
     width: 80%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .form-field{
@@ -40,4 +42,8 @@
     font-family: 'Roboto Mono', monospace;
     color: white;
     font-size: 1.5em;
+  }
+
+  .form-content .global-button{
+    width: 60%;
   }

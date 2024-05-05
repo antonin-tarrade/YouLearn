@@ -9,6 +9,7 @@ function SignInForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Email: ${email}, Password: ${password}`);
+    
   };
 
   return (
@@ -23,7 +24,7 @@ function SignInForm() {
             <p className='form-text'>Mot de passe:</p>
             <input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </label>
-          <input className="global-button" type="submit" value="Se connecter" />
+          {email && password && <input className="global-button" type="submit" value="Se connecter" />}
         </form>
     </div>
   );
