@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import './SignInForm.css';
 import logo from './img/logo_color.png';
 
-function SignInForm() {
+function SignInForm({ onSignIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Email: ${email}, Password: ${password}`);
-    
+    onSignIn(email,password)
   };
 
   return (
@@ -25,6 +24,7 @@ function SignInForm() {
             <input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </label>
           {email && password && <input className="global-button" type="submit" value="Se connecter" />}
+          <a href='/' className='mdp'>mot de passe oublié ?</a>
         </form>
     </div>
   );

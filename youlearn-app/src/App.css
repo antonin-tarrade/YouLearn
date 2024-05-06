@@ -29,7 +29,7 @@ body{
   background: linear-gradient(to right,var(--appGreen), var(--appBlue));
   transition: --appGreen 1s;
   border-radius: 15px;
-  padding: 15px 32px;
+  padding: 15px 25px;
   text-align: center;
   cursor: pointer;
   color: white;
@@ -39,6 +39,7 @@ body{
 
 .global-button:hover {
   --appGreen: #00A8F5;
+  transform: scale(1.005);
 }
 
 .global-button:active{

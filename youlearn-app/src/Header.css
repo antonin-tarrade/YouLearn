@@ -9,7 +9,12 @@
   }
   
   .logo {
-    height: 50px
+    height: 3em;
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover{
+    transform: scale(1.05);
   }
   
   .signin-button {

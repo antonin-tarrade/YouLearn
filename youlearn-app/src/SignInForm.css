@@ -4,7 +4,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: solid; */
     scale: 85%;
     border-radius: 10px;
     margin: 2em;
@@ -45,5 +44,13 @@
   }
 
   .form-content .global-button{
-    width: 60%;
+    width: 50%;
+    margin: 1.5em;
+  }
+
+  .mdp{
+    color: #ACACAC;
+    text-decoration: underline;
+    margin: 2em;
+    font-size: 1.5em;
   }
