@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import logo from './img/logo_color.png';
 import './Header.css';
 import { ReactComponent as SearchIcon } from './img/search.svg';
-import { ReactComponent as UserSignedInIcon} from './img/user-signed-in.svg'
-import { ReactComponent as UserSignedOutIcon} from './img/user-signed-out.svg'
+import { ReactComponent as UserSignedInIcon} from './img/user-signed-in.svg';
+import { ReactComponent as UserSignedOutIcon} from './img/user-signed-out.svg';
 
-function Header({ isUserSignedIn, userEmail }) {
+function Header({ isSignedIn, userEmail }) {
+  const [isSearchShown, setIsSearchShown] = useState(false);
+  const searchFieldRef = useRef(null);
+  const searchButtonRef = useRef(null);
+
+  const handleSearchButtonClick = () => {
+    setIsSearchShown(true);
+  };
 
   const handleUserIconClick = () => {
     // if (isUserSignedIn) {
@@ -13,17 +20,46 @@ function Header({ isUserSignedIn, userEmail }) {
     // }
   };
 
+  const handleDocumentMouseDown = (event) => {
+    if (searchFieldRef.current && !searchFieldRef.current.contains(event.target) && !searchButtonRef.current.contains(event.target)) {
+      setIsSearchShown(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isSearchShown && searchFieldRef.current) {
+      searchFieldRef.current.focus();
+    }
+  }, [isSearchShown]);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleDocumentMouseDown);
+
+    return () => {
+      document.removeEventListener('mousedown', handleDocumentMouseDown);
+    };
+  }, []);
   return (
     <header className="header">
-        <a href='/'>
-            <img src={logo} alt="logo" className="logo" />
-        </a>
-        <button className="search-button">
-            <SearchIcon className="search-icon"/>
+      <a href='/'>
+        <img src={logo} alt="logo" className="logo" />
+      </a>
+      <div className="search-wrapper" tabIndex="-1">
+        <button className="search-button" onClick={handleSearchButtonClick} style={{opacity: isSearchShown ? 0 : 1}} ref={searchButtonRef}>
+          <SearchIcon className="search-icon"/>
         </button>
-        <button className="signin-button" onClick={isUserSignedIn ? handleUserIconClick : null}>
-          {isUserSignedIn ? <UserSignedInIcon className="user-icon"/> : <UserSignedOutIcon className="user-icon"/>}
-        </button>
+        <input
+          type="text"
+          className={`search-field ${isSearchShown ? 'visible' : ''}`}
+          ref={searchFieldRef}
+          style={{width: isSearchShown ? '60%' : '0', opacity: isSearchShown ? 1 : 0}}
+          onBlur={() => setIsSearchShown(false)}
+        />
+      </div>
+      { userEmail ? <p>{userEmail}</p> : null }
+      <button className="signin-button" onClick={isSignedIn ? handleUserIconClick : null}>
+        {isSignedIn ? <UserSignedInIcon className="user-icon"/> : <UserSignedOutIcon className="user-icon"/>}
+      </button>
     </header>
   );
 }
