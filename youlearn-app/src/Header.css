@@ -17,6 +17,8 @@
     transform: scale(1.05);
   }
   
+
+
   .signin-button {
     background: transparent;
     border: none;
@@ -39,11 +41,51 @@
     width: 30px;
   }
 
+  .search-wrapper {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 0;
+  }
   .search-button {
     background: transparent;
     border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 14px;
+    position: absolute;
+    transition: opacity 0.5s ease;
   }
+
+  
+  .search-field {
+    pointer-events: none;
+    width: 100%;
+    border: double 0.2em transparent;
+    height : 1.5rem;
+    border-radius: 20px;
+    background-image: linear-gradient(white, white), 
+                      linear-gradient(to right, var(--appGreen), var(--appBlue));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    font-size: 16px;
+    outline: none;
+    transition: width 0.5s ease, opacity 0.5s, visibility 0s linear 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .search-field.visible {
+    pointer-events: auto;
+  }
+  
+  .header .search-wrapper:focus-within .search-field,
+  .header .search-wrapper .search-field:focus {
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  

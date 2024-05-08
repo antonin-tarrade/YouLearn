@@ -8,26 +8,26 @@ import FrontPage from './FrontPage';
 
 
 function App() {
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('');
 
   const handleSignIn = (email, password) => {
     console.log(`Email: ${email}, Password: ${password}`);
-    setUserEmail(email);
     setIsSignedIn(true);
+    setUserEmail(email);
   };
 
-  useEffect(() => {
-    axios.get(`http://localhost:8080/YouLearn/Servlet?${Date.now}`)
-      .then(response => {
-        console.log(response.data);
-        setMessage(response.data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8080/YouLearn/Servlet?${Date.now}`)
+  //     .then(response => {
+  //       console.log(response.data);
+  //       setMessage(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // }, []);
 
   return (
     <div className="App">
