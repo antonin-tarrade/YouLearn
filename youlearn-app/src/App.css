@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 .App {
   background-color: #262626; 
   color: white;
@@ -8,33 +9,47 @@
   flex-direction: column;
 }
 
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body{
+  font-family: 'Roboto Mono',monospace;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+@property --appGreen {
+  syntax: '<color>';
+  initial-value: #00FF99;
+  inherits: false;
+}
+
+@property --appBlue {
+  syntax: '<color>';
+  initial-value: #00A8F5;
+  inherits: false;
+}
+
+.global-button {
+  background: linear-gradient(to right,var(--appGreen), var(--appBlue));
+  transition: --appGreen 1s;
+  border-radius: 15px;
+  padding: 15px 25px;
+  text-align: center;
+  cursor: pointer;
   color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 2em;
 }
+
+.global-button:hover {
+  --appGreen: #00A8F5;
+  transform: scale(1.005);
+}
+
+.global-button:active{
+  --appGreen: #00FF99;
+  --appBlue: #00FF99;
+}
+
+
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

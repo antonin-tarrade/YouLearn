@@ -4,21 +4,13 @@ import './Header.css';
 import { ReactComponent as SearchIcon } from './img/search.svg';
 import { ReactComponent as UserSignedInIcon} from './img/user-signed-in.svg'
 import { ReactComponent as UserSignedOutIcon} from './img/user-signed-out.svg'
-import SignInForm from './SignInForm';
 
-function Header() {
-  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
-  const [showSignInForm, setShowSignInForm] = useState(false);
+function Header({ isUserSignedIn, userEmail }) {
 
   const handleUserIconClick = () => {
-    if (!isUserSignedIn) {
-      setShowSignInForm(true);
-    }
-  };
-
-  const handleFormSubmit = () => {
-    setIsUserSignedIn(true);
-    setShowSignInForm(false);
+    // if (isUserSignedIn) {
+    //   window.location.href = "/user-account"; 
+    // }
   };
 
   return (
@@ -29,10 +21,9 @@ function Header() {
         <button className="search-button">
             <SearchIcon className="search-icon"/>
         </button>
-        <button className="signin-button" onClick={handleUserIconClick}>
-            {isUserSignedIn ? <UserSignedInIcon className="user-icon"/> : <UserSignedOutIcon className="user-icon"/>}
+        <button className="signin-button" onClick={isUserSignedIn ? handleUserIconClick : null}>
+          {isUserSignedIn ? <UserSignedInIcon className="user-icon"/> : <UserSignedOutIcon className="user-icon"/>}
         </button>
-        {showSignInForm && <SignInForm onSubmit={handleFormSubmit} />}
     </header>
   );
 }

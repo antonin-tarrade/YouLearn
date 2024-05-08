@@ -27,7 +27,7 @@ public class Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String message2 = "React Ouvre Toi !";
+		String message2 = "REACT OUVRE TOI!";
 		response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 		response.getWriter().write(message2);
 	}
