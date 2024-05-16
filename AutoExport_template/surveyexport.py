@@ -103,12 +103,17 @@ class ChangeHandler(FileSystemEventHandler):
         os.mkdir("export/WEB-INF")
         os.mkdir("export/WEB-INF/classes")
         os.mkdir("export/WEB-INF/classes/pack")
+        os.mkdir("export/WEB-INF/classes/META-INF")
         os.mkdir("export/WEB-INF/lib")
 
         # Copying the compiled java files to the export folder
         java_files = os.listdir(FOLDER_NAME + "/build/classes/pack")
         for file in java_files:
             execute_command("cp -r " + FOLDER_NAME + "/build/classes/pack/" + file + " export/WEB-INF/classes/pack/" + file)
+        ## Copying the persistence.xml # fix persistence
+        src_meta_inf_files = os.listdir(FOLDER_NAME + "/src/META-INF/")
+        for file in src_meta_inf_files:
+            execute_command("cp -r " + FOLDER_NAME + "/src/META-INF/" + file + " export/WEB-INF/classes/META-INF/" + file)
         # Find all HTML and JSP files
         files = []
         files = list(Path(".").rglob(FOLDER_NAME + "/*.html")) + list(

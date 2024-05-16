@@ -1,7 +1,7 @@
 package pack;
 
 import java.util.Date;
-
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
  
@@ -13,6 +13,7 @@ import pack.entities.Teacher;
 import pack.entities.User;
 import pack.entities.Video;
 
+@Singleton
 public class Facade {
         
     @PersistenceContext

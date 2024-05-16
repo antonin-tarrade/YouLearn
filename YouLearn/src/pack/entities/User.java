@@ -7,12 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 import pack.UserRole;
 
 @Entity
 public class User {
-    @Id
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @ManyToMany
