@@ -104,13 +104,13 @@ public class Facade {
     @GET
 	@Path("/signUpStudent")
     @Produces({"application/json"})
-    public User signUpStudent(String pseudo, String email, String password, String department) {
+    public User signUpStudent(Student student) {
         // Check if user already exists
-        if (doesUserExist(pseudo)) {
+        if (doesUserExist(student.getUser().getUsername())) {
             return null;
         }
         // Create student
-        return addStudent(pseudo, email, password, department);
+        return addStudent(student.getUser().getUsername(), student.getUser().getEmail(), student.getUser().getPassword(), student.getDepartment());
     }
 
     @GET
