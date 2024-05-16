@@ -113,16 +113,17 @@ public class Facade {
         return addStudent(student.getUser().getUsername(), student.getUser().getEmail(), student.getUser().getPassword(), student.getDepartment());
     }
 
-    @GET
+    @POST
 	@Path("/signUpTeacher")
     @Produces({"application/json"})
-    public User signUpTeacher(String pseudo, String email, String password, String name) {
+    public User signUpTeacher(Teacher teacher) {
         // Check if user already exists
-        if (doesUserExist(pseudo)) {
+        if (doesUserExist(teacher.getUser().getUsername())) {
             return null;
         }
+        System.out.println("oui");
         // Create teacher
-        return addTeacher(pseudo, email, password, name);
+        return addTeacher(teacher.getUser().getUsername(), teacher.getUser().getEmail(), teacher.getUser().getPassword(), teacher.getName());
     }
 
     @POST

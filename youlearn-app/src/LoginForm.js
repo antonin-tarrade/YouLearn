@@ -5,8 +5,9 @@ import logo from './img/logo_color.png';
 import {invokePost,invokeGet} from './api'
 
 function LogInForm({onLogIn}) {
-  const [option, setOption] = useState('');
-  const [department, setDepartment] = useState('SN');
+  const [role, setRole] = useState(null);
+  const [department, setDepartment] = useState('');
+  const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,14 +15,24 @@ function LogInForm({onLogIn}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let student = {}
     let user ={}
-    user.username = id;
-    user.email = email;
-    user.password = password;
-    student.user = user;
-    student.department = department;
-    invokePost("signUpStudent",student,"SUCCESS","FAILURE");
+      user.username = id;
+      user.email = email;
+      user.password = password;
+      user.role = role;
+    if(role == 0) { 
+      let student = {}
+      student.user = user;
+      student.department = department;
+      invokePost("signUpStudent",student,"Sucess adding student","Failure adding student");
+    } else if (role == 1){
+      let teacher = {}
+      teacher.user = user;
+      teacher.name = name;
+      invokePost("signUpTeacher",teacher,"Sucess adding teacher","Failure adding teacher");
+    } else {
+      console.log("Role Error");
+    }
     // invokePost("testGlorieux","HELLO","SUCCESS+TEXT","FAILURE+TEST");
     onLogIn(id,password)
   };
@@ -31,7 +42,7 @@ function LogInForm({onLogIn}) {
     setHasAccount(!hasAccount);
     setEmail('');
     setId('');
-    setOption('');
+    setRole('');
     setPassword('');
   }
 
@@ -42,20 +53,31 @@ function LogInForm({onLogIn}) {
           <div className={`form-field ${hasAccount ? '' : 'visible'}`}>
             <label className='form-option'>
               <p className='form-text'>Professeur:</p>
-              <input className="form-radio" type="radio" name="option" value="option1" onChange={e => setOption(e.target.value)} />
+              <input className="form-radio" type="radio" name="role" value={1} onChange={e => setRole(e.target.value)} required/>
             </label>
             <label className='form-option'>
               <p className='form-text'>Etudiant:</p>
-              <input className="form-radio" type="radio" name="option" value="option2" onChange={e => setOption(e.target.value)} />
+              <input className="form-radio" type="radio" name="role" value={0} onChange={e => setRole(e.target.value)} required/>
             </label>
           </div>
+
+          <label className={`form-field ${role == 0 ? 'visible' : '' }`}>
+            <p className='form-text'>Department:</p>
+            <input className="form-input" type="text" value={department} onChange={e => setDepartment(e.target.value)} required={role == 0} />
+          </label>
+
+          <label className={`form-field ${role == 1 ? 'visible' : '' }`}>
+            <p className='form-text'>Nom:</p>
+            <input className="form-input" type="text" value={name} onChange={e => setName(e.target.value)} required={role == 1} />
+          </label>
+
           <label className='form-field visible'>
             <p className='form-text'>Identifiant:</p>
             <input className="form-input" type="text" value={id} onChange={e => setId(e.target.value)} required />
           </label>
           <label className={`form-field ${hasAccount ? '' : 'visible'}`}>
             <p className='form-text'>Adresse Email:</p>
-            <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+            <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} required={hasAccount} />
           </label>
           <label className='form-field visible'>
             <p className='form-text'>Mot de passe:</p>
