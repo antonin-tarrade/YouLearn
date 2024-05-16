@@ -22,6 +22,7 @@ function LogInForm({onLogIn}) {
     student.user = user;
     student.department = department;
     invokePost("signUpStudent",student,"SUCCESS","FAILURE");
+    // invokePost("testGlorieux","HELLO","SUCCESS+TEXT","FAILURE+TEST");
     onLogIn(id,password)
   };
 
