@@ -105,7 +105,6 @@ public class Facade {
 	@Path("/signUpStudent")
     @Produces({"application/json"})
     public User signUpStudent(Student student) {
-        System.out.println("studenttt");
         // Check if user already exists
         if (doesUserExist(student.getUser().getUsername())) {
             return null;
