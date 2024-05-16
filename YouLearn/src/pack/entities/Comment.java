@@ -5,10 +5,12 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Comment {
-    @Id
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @ManyToOne
