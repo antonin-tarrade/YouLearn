@@ -7,13 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 import pack.UserRole;
 
 @Entity
 public class User {
-    @Id
-    private int id;
+    @Id 
+    private String username;
+
 
     @ManyToMany
     private Collection<Course> followedCourses;
@@ -24,7 +27,7 @@ public class User {
     @OneToMany(mappedBy = "author")
     private Collection<Playlist> playlists;
 
-    private String username;
+    
     private String email;
     private String password;
     private UserRole role;
@@ -41,15 +44,7 @@ public class User {
         this.followedCourses = new ArrayList<Course>();
     }
 
-    // Getters / setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+ 
     public Collection<Course> getFollowedCourses() {
         return followedCourses;
     }
