@@ -1,5 +1,4 @@
 import './App.css';
-import Header from './Header';
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
@@ -10,13 +9,21 @@ import VideoPage from './VideoPage';
 
 function App() {
   // const [message, setMessage] = useState('');
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [hasAccount, setHasAccount] = useState(true);
+  const [userId, setUserId] = useState('');
 
-  const handleSignIn = (email, password) => {
-    console.log(`Email: ${email}, Password: ${password}`);
+  const handleLogIn = (userId, password) => {
+    console.log(`Id: ${userId}, Password: ${password}`);
     setIsSignedIn(true);
-    setUserEmail(email);
+    setUserId(userId);
+  };
+
+  const handleSignIn = (userId, userEmail,password) => {
+    console.log(`Id: ${userId}, Email: ${userEmail}, Password: ${password}`);
+    setUserEmail(userEmail);
+    setUserId(userId);
   };
 
   // useEffect(() => {
@@ -32,8 +39,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header isSignedIn={isSignedIn} userEmail={userEmail}/> 
-      <WelcomePage isSignedIn={isSignedIn} onSignIn={handleSignIn} userEmail={userEmail}/>
+      <WelcomePage onLogIn={handleLogIn} onSignin={handleSignIn} userId={userId} isSignedIn={isSignedIn}/>
+
       <VideoPage/>
     </div>
   );

@@ -101,16 +101,17 @@ public class Facade {
     }
 
 
-    @GET
+    @POST
 	@Path("/signUpStudent")
     @Produces({"application/json"})
-    public User signUpStudent(String pseudo, String email, String password, String department) {
+    public User signUpStudent(Student student) {
+        System.out.println("studenttt");
         // Check if user already exists
-        if (doesUserExist(pseudo)) {
+        if (doesUserExist(student.getUser().getUsername())) {
             return null;
         }
         // Create student
-        return addStudent(pseudo, email, password, department);
+        return addStudent(student.getUser().getUsername(), student.getUser().getEmail(), student.getUser().getPassword(), student.getDepartment());
     }
 
     @GET
@@ -123,6 +124,13 @@ public class Facade {
         }
         // Create teacher
         return addTeacher(pseudo, email, password, name);
+    }
+
+    @POST
+	@Path("/testGlorieux")
+    @Produces({"application/json"})
+    public void testGlorieux (String msg0){
+        System.out.println(msg0);
     }
 
 }

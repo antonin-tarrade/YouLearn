@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from './img/search.svg';
 import { ReactComponent as UserSignedInIcon} from './img/user-signed-in.svg';
 import { ReactComponent as UserSignedOutIcon} from './img/user-signed-out.svg';
 
-function Header({ isSignedIn, userEmail }) {
+function Header({ isSignedIn, userId }) {
   const [isSearchShown, setIsSearchShown] = useState(false);
   const searchFieldRef = useRef(null);
   const searchButtonRef = useRef(null);
@@ -56,7 +56,7 @@ function Header({ isSignedIn, userEmail }) {
           onBlur={() => setIsSearchShown(false)}
         />
       </div>
-      { userEmail ? <p>{userEmail}</p> : null }
+      { userId ? <p>{userId}</p> : null }
       <button className="signin-button" onClick={isSignedIn ? handleUserIconClick : null}>
         {isSignedIn ? <UserSignedInIcon className="user-icon"/> : <UserSignedOutIcon className="user-icon"/>}
       </button>

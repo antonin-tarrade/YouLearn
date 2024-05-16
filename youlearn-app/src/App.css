@@ -22,7 +22,7 @@ body{
 
 .global-button {
   background: linear-gradient(to right,var(--appGreen), var(--appBlue));
-  transition: --appGreen 1s;
+  transition: --appGreen 1s, opacity  ease 0.5s;
   border-radius: 15px;
   padding: 15px 25px;
   text-align: center;
