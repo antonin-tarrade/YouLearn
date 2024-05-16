@@ -101,10 +101,11 @@ public class Facade {
     }
 
 
-    @GET
+    @POST
 	@Path("/signUpStudent")
     @Produces({"application/json"})
     public User signUpStudent(Student student) {
+        System.out.println("studenttt");
         // Check if user already exists
         if (doesUserExist(student.getUser().getUsername())) {
             return null;
@@ -125,4 +126,11 @@ public class Facade {
         return addTeacher(pseudo, email, password, name);
     }
 
+    @POST
+	@Path("/testGlorieux")
+    @Produces({"application/json"})
+    public void testGlorieux (String msg0){
+        System.out.println(msg0);
+
+    }
 }

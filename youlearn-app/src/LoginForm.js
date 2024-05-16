@@ -6,7 +6,7 @@ import {invokePost,invokeGet} from './api'
 
 function LogInForm({onLogIn}) {
   const [option, setOption] = useState('');
-  const [departement, setDepartement] = useState('SN');
+  const [department, setDepartment] = useState('SN');
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ function LogInForm({onLogIn}) {
     user.email = email;
     user.password = password;
     student.user = user;
-    student.departement = departement;
+    student.department = department;
     invokePost("signUpStudent",student,"SUCCESS","FAILURE");
     onLogIn(id,password)
   };
