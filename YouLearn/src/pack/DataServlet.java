@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 @WebServlet("/api/")
 public class DataServlet extends HttpServlet {
@@ -29,6 +30,16 @@ public class DataServlet extends HttpServlet {
             return;
         }
 
+        Map<String, String[]> args = request.getParameterMap();
+
+        switch (pathInfo) {
+            case "/signUpStudent":
+                facade.signUpStudent(args.get("pseudo"), args.get("email"), args.get("password"), args.get("department"));
+                break;
+            case "/signUpTeacher":
+                facade.signUpTeacher(args.get("pseudo"), args.get("email"), args.get("password"), args.get("name"));
+                break;
+        }
 
         PrintWriter out = response.getWriter();
         out.print("{\"message\": \"Hello from JBoss!\"}");

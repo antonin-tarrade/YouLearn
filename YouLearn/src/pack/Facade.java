@@ -4,6 +4,11 @@ import java.util.Date;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
  
 import pack.entities.Comment;
 import pack.entities.Course;
@@ -14,6 +19,7 @@ import pack.entities.User;
 import pack.entities.Video;
 
 @Singleton
+@Path("/")
 public class Facade {
         
     @PersistenceContext
@@ -94,6 +100,10 @@ public class Facade {
         return user != null;
     }
 
+
+    @GET
+	@Path("/signUpStudent")
+    @Produces({"application/json"})
     public User signUpStudent(String pseudo, String email, String password, String department) {
         // Check if user already exists
         if (doesUserExist(pseudo)) {
@@ -103,6 +113,9 @@ public class Facade {
         return addStudent(pseudo, email, password, department);
     }
 
+    @GET
+	@Path("/signUpTeacher")
+    @Produces({"application/json"})
     public User signUpTeacher(String pseudo, String email, String password, String name) {
         // Check if user already exists
         if (doesUserExist(pseudo)) {
