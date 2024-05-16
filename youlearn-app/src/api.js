@@ -1,5 +1,6 @@
 
-async function invokePost(method, data, successMsg, failureMsg) {
+export async function invokePost(method, data, successMsg, failureMsg) {
+    console.log("JINVOQUE");
     const requestOptions = {
          method: "POST",
          headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -10,7 +11,7 @@ async function invokePost(method, data, successMsg, failureMsg) {
      else console.log(failureMsg);
  }
  
- async function invokeGet(method, failureMsg) {
+ export async function invokeGet(method, failureMsg) {
  
    const res = await fetch("/YouLearn/rest/"+method);
    if (res.ok) return await res.json();    

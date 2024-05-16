@@ -14,7 +14,14 @@ function LogInForm({onLogIn}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    invokeGet("signUpStudent",id,email,password,departement);
+    let student = {}
+    let user ={}
+    user.username = id;
+    user.email = email;
+    user.password = password;
+    student.user = user;
+    student.departement = departement;
+    invokePost("signUpStudent",student,"SUCCESS","FAILURE");
     onLogIn(id,password)
   };
 
