@@ -1,8 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 
-// import axios from 'axios';
+import axios from 'axios';
 import WelcomePage from './WelcomePage';
+import VideoPage from './VideoPage';
 
 
 
@@ -39,6 +40,7 @@ function App() {
   return (
     <div className="App">
       <WelcomePage onLogIn={handleLogIn} onSignin={handleSignIn} userId={userId} isSignedIn={isSignedIn}/>
+      <VideoPage/>
     </div>
   );
 }

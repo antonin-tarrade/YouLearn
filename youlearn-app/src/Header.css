@@ -2,14 +2,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background-color: #414141; 
-    height: 60px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: #414141;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .logo {
-    height: 3em;
+    height: 2em;
     transition: transform 0.3s ease;
   }
 
