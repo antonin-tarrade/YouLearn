@@ -131,6 +131,6 @@ public class Facade {
     @Produces({"application/json"})
     public void testGlorieux (String msg0){
         System.out.println(msg0);
-
     }
+
 }

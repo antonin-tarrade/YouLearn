@@ -40,6 +40,7 @@ function App() {
   return (
     <div className="App">
       <WelcomePage onLogIn={handleLogIn} onSignin={handleSignIn} userId={userId} isSignedIn={isSignedIn}/>
+
       <VideoPage/>
     </div>
   );
