@@ -1,0 +1,41 @@
+/* VideoPage.css */
+
+.videoPageMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+iframe {
+  border: none;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.hBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0% 5%;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    
+  }
+  
+  button {
+    font-size: 16px;
+    color: #fff;
+    transition: color 0.3s;
+  }
+  
+  button.liked {
+    color: var(--appGreen);
+  }
+  

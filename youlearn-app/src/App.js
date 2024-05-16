@@ -3,7 +3,8 @@ import Header from './Header';
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
-import FrontPage from './FrontPage';
+import WelcomePage from './WelcomePage';
+import VideoPage from './VideoPage';
 
 
 
@@ -31,8 +32,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header isSignedIn={isSignedIn} userEmail={userEmail} /> 
-      <FrontPage isSignedIn={isSignedIn} onSignIn={handleSignIn} userEmail={userEmail}/>
+      <Header isSignedIn={isSignedIn} userEmail={userEmail}/> 
+      {/* <WelcomePage isSignedIn={isSignedIn} onSignIn={handleSignIn} userEmail={userEmail}/> */}
+      <VideoPage/>
     </div>
   );
 }
