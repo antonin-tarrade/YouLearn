@@ -2,11 +2,6 @@
 .App {
   background-color: #262626; 
   color: white;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
 }
 
 body{
@@ -46,7 +41,6 @@ body{
   --appGreen: #00FF99;
   --appBlue: #00FF99;
 }
-
 
 
 .App-link {
