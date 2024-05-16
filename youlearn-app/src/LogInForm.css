@@ -27,6 +27,24 @@
   .form-field{
     display:flex;
     align-items: center;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out ;
+    overflow: hidden;
+  }
+
+  .form-field.visible{
+    max-height: 10em;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .form-option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
   }
 
   .form-text{
@@ -47,11 +65,36 @@
   .form-content .global-button{
     width: 50%;
     margin: 1.5em;
+    opacity : 0%;
+  }
+  .form-content .global-button.visible{
+    width: 50%;
+    margin: 1.5em;
+    opacity : 100%;
   }
 
-  .mdp{
+  .links{
+    display: flex;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+  }
+
+  .link{
+    background: none;
+    border: none;
     color: #ACACAC;
     text-decoration: underline;
     margin: 2em;
     font-size: 1.5em;
+  }
+
+  .links.visible{
+    max-height: 2em;
+    opacity: 1;
+    visibility: visible;
   }
