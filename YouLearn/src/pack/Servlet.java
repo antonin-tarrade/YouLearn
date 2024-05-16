@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pack.entities.User;
+
 /**
  * Servlet implementation class Servlet
  */
@@ -40,7 +42,14 @@ public class Servlet extends HttpServlet {
 
 		System.out.println("=== REQUEST : " + op);
 
-		facade.addStudent("Dupont", "jen@sais.rien", "password", "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEA");
+		facade.signUpStudent("Dupont", "jen@sais.rien", "password", "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEA");
+		// Test login 
+		User user = facade.login("Dupont", "password");
+		if (user != null) {
+			System.out.println("User found: " + user.getUsername());
+		} else {
+			System.out.println("User not found");
+		}
 	}
 
 	/**

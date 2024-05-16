@@ -3,10 +3,12 @@ package pack.entities;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Student {
-    @Id
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @OneToOne
