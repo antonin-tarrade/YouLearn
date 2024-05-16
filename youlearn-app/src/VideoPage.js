@@ -19,7 +19,7 @@ const LikeButton = () => {
 
   return (
     <button onClick={handleClick} className={liked ? 'liked' : ''}>
-      image de pouce en l'air
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <i className="fa fa-thumbs-up"></i>
     </button>
   );

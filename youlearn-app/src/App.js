@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="App">
       <Header isSignedIn={isSignedIn} userEmail={userEmail}/> 
-      {/* <WelcomePage isSignedIn={isSignedIn} onSignIn={handleSignIn} userEmail={userEmail}/> */}
+      <WelcomePage isSignedIn={isSignedIn} onSignIn={handleSignIn} userEmail={userEmail}/>
       <VideoPage/>
     </div>
   );
