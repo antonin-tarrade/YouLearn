@@ -91,3 +91,5 @@ AutoExport/
 *.toml
 *.poetry
 *.lock
+AutoExport_template/surveyexport.py
+*.py
