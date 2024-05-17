@@ -44,8 +44,17 @@ function LogInForm({onLogIn}) {
     setHasAccount(!hasAccount);
     setEmail('');
     setId('');
-    setRole('');
+    setRole(null);
     setPassword('');
+    setDepartment('');
+    setName('');
+  }
+
+  const handleRoleChange = (event) => {
+    setRole(event.target.value);
+    setDepartment('');
+    setName('');
+    
   }
 
   return (
@@ -55,11 +64,11 @@ function LogInForm({onLogIn}) {
           <div className={`form-field ${hasAccount ? '' : 'visible'}`}>
             <label className='form-option'>
               <p className='form-text'>Professeur:</p>
-              <input className="form-radio" type="radio" name="role" value={1} onChange={e => setRole(e.target.value)} required/>
+              <input className="form-radio" type="radio" name="role" value={1} onChange={handleRoleChange} required/>
             </label>
             <label className='form-option'>
               <p className='form-text'>Etudiant:</p>
-              <input className="form-radio" type="radio" name="role" value={0} onChange={e => setRole(e.target.value)} required/>
+              <input className="form-radio" type="radio" name="role" value={0} onChange={handleRoleChange} required/>
             </label>
           </div>
 
