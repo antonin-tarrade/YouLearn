@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './LogInForm.css';
 import logo from './img/logo_color.png';
 
-import {invokePost,invokeGet} from './api'
+import {invokePost,invokePostAndAwaitResponse,invokeGet} from './api'
 
 function LogInForm({onLogIn}) {
   const [role, setRole] = useState(null);
@@ -24,16 +24,18 @@ function LogInForm({onLogIn}) {
       let student = {}
       student.user = user;
       student.department = department;
-      invokePost("signUpStudent",student,"Sucess adding student","Failure adding student");
+      invokePostAndAwaitResponse("signUpStudent",student)
+        .then(data => console.log(data.json()));
     } else if (role == 1){
       let teacher = {}
       teacher.user = user;
       teacher.name = name;
-      invokePost("signUpTeacher",teacher,"Sucess adding teacher","Failure adding teacher");
+      invokePostAndAwaitResponse("signUpTeacher",teacher)
+      .then(data => console.log(data.json()));
     } else {
       console.log("Role Error");
     }
-    // invokePost("testGlorieux","HELLO","SUCCESS+TEXT","FAILURE+TEST");
+    
     onLogIn(id,password)
   };
 
