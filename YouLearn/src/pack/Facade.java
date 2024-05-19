@@ -27,7 +27,7 @@ public class Facade {
     @PersistenceContext
     EntityManager em;
 
-    public Student addStudent(String username, String email, String password, String department) {
+    private Student addStudent(String username, String email, String password, String department) {
         // Create user
         User user = new User(username, email, password, UserRole.Student);
         System.out.println("[DEBUG] adding " + user.getClass().getName() + " (username=" + user.getUsername() + ")");
@@ -39,7 +39,7 @@ public class Facade {
         return student;
     }
 
-    public Teacher addTeacher(String username, String email, String password, String name) {
+    private Teacher addTeacher(String username, String email, String password, String name) {
         // Create user
         User user = new User(username, email, password, UserRole.Teacher);
         System.out.println("[DEBUG] adding " + user.getClass().getName() + " (username=" + user.getUsername() + ")");
@@ -51,6 +51,10 @@ public class Facade {
         return teacher;
     }
 
+    @POST
+    @Path("/addVideo")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
     public Video addVideo(String title, int order, String url, int courseId) {
         Course course = em.find(Course.class, courseId);
         Video video = new Video(title, order, url, course);
@@ -59,6 +63,10 @@ public class Facade {
         return video;
     }
 
+    @POST
+    @Path("/addCourse")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
     public Course addCourse(String title, String description, int teacherId) {
         Teacher owner = em.find(Teacher.class, teacherId);
         Course course = new Course(title, description, owner);
@@ -67,6 +75,10 @@ public class Facade {
         return course;
     }
 
+    @POST
+    @Path("/addPlaylist")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
     public Playlist addPlaylist(boolean isPrivate, String title, String description, int userId) {
         User author = em.find(User.class, userId);
         Playlist playlist = new Playlist(isPrivate, title, description, author);
@@ -75,6 +87,10 @@ public class Facade {
         return playlist;
     }
 
+    @POST
+    @Path("/addComment")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
     public Comment addComment(String content, Date date, int videoId, int userId) {
         Video video = em.find(Video.class, videoId);
         User author = em.find(User.class, userId);
@@ -84,7 +100,6 @@ public class Facade {
         return comment;
     }
 
-    // Login Logic
     @POST
     @Path("/login")
     @Consumes({ "application/json" })
@@ -103,8 +118,8 @@ public class Facade {
     @GET
     @Path("/doesUserExist")
     @Produces({ "application/json" })
-    public boolean doesUserExist(@QueryParam("email") String email) {
-        User user = em.find(User.class, email);
+    public boolean doesUserExist(@QueryParam("username") String username) {
+        User user = em.find(User.class, username);
         return user != null;
     }
 

@@ -15,7 +15,7 @@ import pack.UserRole;
 @Entity
 public class User {
     @Id 
-    private String email;
+    private String username;
 
     @ManyToMany
     private Collection<Course> followedCourses;
@@ -26,7 +26,7 @@ public class User {
     @OneToMany(mappedBy = "author")
     private Collection<Playlist> playlists;
 
-    private String username;
+    private String email;
     private String password;
     private UserRole role;
 
