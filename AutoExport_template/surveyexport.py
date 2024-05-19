@@ -71,78 +71,82 @@ class ChangeHandler(FileSystemEventHandler):
             return
         print(f"File {event.src_path} has been modified.")
         
-        #Deleting copied project folder if it exist
-        if os.path.exists(FOLDER_NAME):
-            execute_command_in_folder("rm -r " + FOLDER_NAME, ".")
-        
-        # Execute the command to create the .war file
-        print("Copying folder to current directory...")
-        execute_command("cp -r " + PATH_TO_WATCH + " .")
-        
-        #Deleting the compiled java file if it exist
-        if os.path.exists(FOLDER_NAME + "/build"):
-            execute_command_in_folder("rm -r build", FOLDER_NAME)
-        
-        #Creating the build folder
-        os.mkdir(FOLDER_NAME + "/build")
-        os.mkdir(FOLDER_NAME + "/build/classes")
-        
-
-        # Compile the java files
-        print("Compiling java files...")
-        print(COMPILE_COMMAND)
-        print("current directory: " + os.getcwd())
-        execute_command_in_folder(COMPILE_COMMAND, FOLDER_NAME)
-
-        # Deleting export folder if it exist
-        if os.path.exists("export"):
-            execute_command("rm -r export")
-
-        # Creating export folder
-        os.mkdir("export")
-        os.mkdir("export/WEB-INF")
-        os.mkdir("export/WEB-INF/classes")
-        os.mkdir("export/WEB-INF/classes/pack")
-        os.mkdir("export/WEB-INF/classes/META-INF")
-        os.mkdir("export/WEB-INF/lib")
-
-        # Copying the compiled java files to the export folder
-        java_files = os.listdir(FOLDER_NAME + "/build/classes/pack")
-        for file in java_files:
-            execute_command("cp -r " + FOLDER_NAME + "/build/classes/pack/" + file + " export/WEB-INF/classes/pack/" + file)
-        ## Copying the persistence.xml # fix persistence
-        src_meta_inf_files = os.listdir(FOLDER_NAME + "/src/META-INF/")
-        for file in src_meta_inf_files:
-            execute_command("cp -r " + FOLDER_NAME + "/src/META-INF/" + file + " export/WEB-INF/classes/META-INF/" + file)
-        # Find all HTML and JSP files
-        files = []
-        files = list(Path(".").rglob(FOLDER_NAME + "/*.html")) + list(
-            Path(".").rglob(FOLDER_NAME + "/*.jsp")
-        )
-
-        # Copy the HTML and JSP files to the export folder
-
-        for file in files:
-            print(str(file))
-            execute_command("cp " + str(file) + " export/" + str(file).split("/")[-1])
-
-        print("Executing jar command...")
-        print(EXPORT_COMMAND)
-        result = subprocess.run(
-            "cd export;" + EXPORT_COMMAND,
-            shell=True,
+        try :
             
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        if result.returncode == 0:
-            print("Command executed successfully:")
-            # print(result.stdout.decode())
-        else:
-            print("Error in executing command:")
-            print(result.stderr.decode())
-        print("Export complete. Going back to watching...")
+            #Deleting copied project folder if it exist
+            if os.path.exists(FOLDER_NAME):
+                execute_command_in_folder("rm -r " + FOLDER_NAME, ".")
+            
+            # Execute the command to create the .war file
+            print("Copying folder to current directory...")
+            execute_command("cp -r " + PATH_TO_WATCH + " .")
+            
+            #Deleting the compiled java file if it exist
+            if os.path.exists(FOLDER_NAME + "/build"):
+                execute_command_in_folder("rm -r build", FOLDER_NAME)
+            
+            #Creating the build folder
+            os.mkdir(FOLDER_NAME + "/build")
+            os.mkdir(FOLDER_NAME + "/build/classes")
+            
 
+            # Compile the java files
+            print("Compiling java files...")
+            print(COMPILE_COMMAND)
+            print("current directory: " + os.getcwd())
+            execute_command_in_folder(COMPILE_COMMAND, FOLDER_NAME)
+
+            # Deleting export folder if it exist
+            if os.path.exists("export"):
+                execute_command("rm -r export")
+
+            # Creating export folder
+            os.mkdir("export")
+            os.mkdir("export/WEB-INF")
+            os.mkdir("export/WEB-INF/classes")
+            os.mkdir("export/WEB-INF/classes/pack")
+            os.mkdir("export/WEB-INF/classes/META-INF")
+            os.mkdir("export/WEB-INF/lib")
+
+            # Copying the compiled java files to the export folder
+            java_files = os.listdir(FOLDER_NAME + "/build/classes/pack")
+            for file in java_files:
+                execute_command("cp -r " + FOLDER_NAME + "/build/classes/pack/" + file + " export/WEB-INF/classes/pack/" + file)
+            ## Copying the persistence.xml # fix persistence
+            src_meta_inf_files = os.listdir(FOLDER_NAME + "/src/META-INF/")
+            for file in src_meta_inf_files:
+                execute_command("cp -r " + FOLDER_NAME + "/src/META-INF/" + file + " export/WEB-INF/classes/META-INF/" + file)
+            # Find all HTML and JSP files
+            files = []
+            files = list(Path(".").rglob(FOLDER_NAME + "/*.html")) + list(
+                Path(".").rglob(FOLDER_NAME + "/*.jsp")
+            )
+
+            # Copy the HTML and JSP files to the export folder
+
+            for file in files:
+                print(str(file))
+                execute_command("cp " + str(file) + " export/" + str(file).split("/")[-1])
+
+            print("Executing jar command...")
+            print(EXPORT_COMMAND)
+            result = subprocess.run(
+                "cd export;" + EXPORT_COMMAND,
+                shell=True,
+                
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            if result.returncode == 0:
+                print("Command executed successfully:")
+                # print(result.stdout.decode())
+            else:
+                print("Error in executing command:")
+                print(result.stderr.decode())
+            print("Export complete. Going back to watching...")
+        except :
+            print("Error in executing command:")
+            print("Export complete. Going back to watching...")
 
 if __name__ == "__main__":
     # Set up the observer and event handler
