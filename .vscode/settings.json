@@ -1,0 +1,9 @@
+// Workspace settings
+{
+    // The following will hide the js and map files in the editor
+    "files.exclude": {
+        "AutoExport/"   : true,
+        "AutoExport_template/"   : true,
+        "graphic_assets/"   : true,
+    }
+}
