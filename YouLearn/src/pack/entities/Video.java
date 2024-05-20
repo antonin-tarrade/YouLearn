@@ -24,7 +24,7 @@ public class Video {
     private Collection<Comment> comments;
 
     private String title;
-    private int order;
+    private int orderInCourse;
     private String url;
 
     public Video() {
@@ -32,7 +32,7 @@ public class Video {
 
     public Video(String title, int order, String url, Course course) {
         this.title = title;
-        this.order = order;
+        this.orderInCourse = order;
         this.url = url;
         this.course = course;
 
@@ -81,11 +81,11 @@ public class Video {
     }
 
     public int getOrder() {
-        return order;
+        return this.orderInCourse;
     }
 
     public void setOrder(int order) {
-        this.order = order;
+        this.orderInCourse = order;
     }
 
     public String getUrl() {

@@ -135,4 +135,43 @@ public class Facade {
         User user = teacher.getUser();
         return addTeacher(user.getUsername(), user.getEmail(), user.getPassword(), teacher.getName());
     }
+
+    // Playlist Logic
+
+    @POST
+    @Path("/addPlaylist")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    public Playlist addPlaylist(Playlist playlist) {
+        return addPlaylist(playlist.isPrivate(), playlist.getTitle(), playlist.getDescription(), playlist.getAuthor().getId());
+    }
+
+    @GET
+    @Path("/getPlaylist")
+    @Produces({ "application/json" })
+    public Playlist getPlaylist(@QueryParam("id") int id) {
+        return em.find(Playlist.class, id);
+    }
+
+    @POST
+    @Path("/addVideoToPlaylist")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    public Playlist addVideoToPlaylist(@QueryParam("playlistId") int playlistId, @QueryParam("videoId") int videoId) {
+        Playlist playlist = em.find(Playlist.class, playlistId);
+        Video video = em.find(Video.class, videoId);
+        playlist.addVideo(video);
+        return playlist;
+    }
+
+    @POST
+    @Path("/removeVideoFromPlaylist")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    public Playlist removeVideoFromPlaylist(@QueryParam("playlistId") int playlistId, @QueryParam("videoId") int videoId) {
+        Playlist playlist = em.find(Playlist.class, playlistId);
+        Video video = em.find(Video.class, videoId);
+        playlist.removeVideo(video);
+        return playlist;
+    }
 }
