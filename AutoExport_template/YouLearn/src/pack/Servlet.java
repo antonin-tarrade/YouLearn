@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pack.entities.User;
-import pack.entities.Video;
 
 /**
  * Servlet implementation class Servlet
@@ -51,13 +50,7 @@ public class Servlet extends HttpServlet {
 		} else {
 			System.out.println("User not found");
 		}
-
-		// Test playlist
-		Playlist playlist = facade.createPlaylist("Playlist 1", user);
-		Video video = facade.addVideo("Video 1", 1, "https://www.youtube.com/watch?v=1", 1);
-		facade.addVideoToPlaylist(video.getId(), playlist.getId());
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

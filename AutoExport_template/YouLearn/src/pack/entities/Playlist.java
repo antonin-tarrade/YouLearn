@@ -2,12 +2,9 @@ package pack.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne; 
+import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
-import pack.entities.User;
-import pack.entities.Video;
 
 @Entity
 public class Playlist {
@@ -54,7 +51,7 @@ public class Playlist {
 
     public void setPrivate(boolean isPrivate) {
         this.isPrivate = isPrivate;
-    }  
+    }
 
     public String getTitle() {
         return title;
@@ -70,13 +67,5 @@ public class Playlist {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Video> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<Video> videos) {
-        this.videos = videos;
     }
 }

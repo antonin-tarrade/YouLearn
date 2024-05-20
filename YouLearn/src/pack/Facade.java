@@ -4,7 +4,7 @@ import java.util.Date;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.Consumes; 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,18 +12,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import pack.entities.Comment; 
+import pack.entities.Comment;
 import pack.entities.Course;
 import pack.entities.Playlist;
 import pack.entities.Student;
 import pack.entities.Teacher;
 import pack.entities.User;
 import pack.entities.Video;
- 
+
 @Singleton
 @Path("/")
 public class Facade {
- 
+
     @PersistenceContext
     EntityManager em;
 
@@ -135,28 +135,4 @@ public class Facade {
         User user = teacher.getUser();
         return addTeacher(user.getUsername(), user.getEmail(), user.getPassword(), teacher.getName());
     }
-
-    // Playlist logic
-
-    public Playlist addVideoToPlaylist(int videoId, int playlistId) {
-        Video video = em.find(Video.class, videoId);
-        Playlist playlist = em.find(Playlist.class, playlistId);
-        playlist.getVideos().add(video);
-        em.merge(playlist);
-        return playlist;
-    }
-
-    public Playlist removeVideoFromPlaylist(int videoId, int playlistId) {
-        Video video = em.find(Video.class, videoId);
-        Playlist playlist = em.find(Playlist.class, playlistId);
-        playlist.getVideos().remove(video);
-        em.merge(playlist);
-        return playlist;
-    }
-
-    public void removePlaylist(int playlistId) {
-        Playlist playlist = em.find(Playlist.class, playlistId);
-        em.remove(playlist);
-    }
-
 }
