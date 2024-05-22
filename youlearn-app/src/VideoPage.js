@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './VideoPage.css';
 
 const playlists = [
   { id: 1, title: 'Playlist 1 de fouuuuuuuuuuuuu', isVideoInPlaylist: true },
-  { id: 2, title: 'Playlist 2', isVideoInPlaylist: true },
+  { id: 2, title: 'Playlist 2fffffffff', isVideoInPlaylist: true },
   { id: 3, title: 'Playlist 3', isVideoInPlaylist: false },
 ];
 
@@ -24,31 +24,33 @@ const PlaylistButton = ({ playlists, onPlaylistToggle }) => {
 
   return (
     <div className="playlist-button-container">
-      <button onClick={handleClick} className="playlist-button">
+      <button 
+        onClick={handleClick} 
+        className={`playlist-button ${open ? 'open' : ''}`}
+      >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
         <i className="fa fa-plus"></i>
       </button>
-      {open && (
-        <div className="playlist-dropdown">
-          <ul>
-            {playlists.map((playlist) => (
-              <li key={playlist.id} className="playlist-item">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={playlist.isVideoInPlaylist}
-                    onChange={() => handleCheckboxChange(playlist.id)}
-                  />
-                  {playlist.title}
-                </label>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className={`playlist-dropdown ${open ? 'open' : ''}`}>
+        <ul>
+          {playlists.map((playlist) => (
+            <li key={playlist.id} className="playlist-item">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={playlist.isVideoInPlaylist}
+                  onChange={() => handleCheckboxChange(playlist.id)}
+                />
+                {playlist.title}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
+
 
 const LikeButton = () => {
   const [liked, setLiked] = useState(false);
@@ -84,7 +86,10 @@ function VideoPage({video}) {
         </iframe>
 
         <div className='hBar'>
-          <p><strong>Auteur:</strong> {video.author}</p>
+          <p>
+            <strong>Auteur : </strong>
+            <text className='App-link'>{video.author}</text>
+          </p>
           <PlaylistButton playlists={playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
             <LikeButton/>

@@ -41,6 +41,10 @@ function App() {
     { id: 1, content: 'Super vidéo !', author: 'Jean Dupont'},
     { id: 2, content: 'Merci pour cette vidéo !', author: 'Marie Martin'},
     { id: 3, content: 'Je n\'ai pas compris la fin...', author: 'Pierre Durand'},
+    { id: 4, content: 'Je n\'ai pas compris la fin...', author: 'Pierre Durand'},
+    { id: 5, content: 'Je n\'ai pas compris la fin...', author: 'Pierre Durand'},
+    { id: 6, content: 'Je n\'ai pas compris la fin...', author: 'Pierre Durand'},
+    { id: 7, content: 'Je n\'ai pas compris la fin...', author: 'Pierre Durand'}
   ];
 
   const videoExample = {
@@ -54,8 +58,7 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <WelcomePage onLogIn={handleLogIn} onSignIn={handleSignIn} hasAccount={hasAccount} setHasAccount={setHasAccount}/>    
+    <div className="App">   
       <Header userId={userId} isSignedIn={isSignedIn}/>
       <VideoPage video={videoExample}/>
     </div>
