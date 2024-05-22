@@ -2,75 +2,85 @@ import React, { useState } from 'react';
 import './VideoPage.css';
 
 const playlists = [
-  { id: 1, title: 'Playlist 1 de fouuuuuuuuuuuuu', isVideoInPlaylist: true },
+  { id: 1, title: 'Playlist 1 de fouuuuuuuujjjjjjjjjjjjjjjuuuuu', isVideoInPlaylist: true },
   { id: 2, title: 'Playlist 2fffffffff', isVideoInPlaylist: true },
   { id: 3, title: 'Playlist 3', isVideoInPlaylist: false },
 ];
 
-const handlePlaylistToggle = (playlistId) => {
-  // Logique pour ajouter ou retirer la vidéo de la playlist avec l'id `playlistId`
-};
 
-const PlaylistButton = ({ playlists, onPlaylistToggle }) => {
-  const [open, setOpen] = useState(false);
+function VideoPage({ video }) {
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handlePlaylistToggle = (playlistId) => {
+    
   };
 
-  const handleCheckboxChange = (playlistId) => {
-    onPlaylistToggle(playlistId);
-  };
+  const PlaylistButton = ({ playlists, onPlaylistToggle }) => {
+    const [open, setOpen] = useState(false);
 
-  return (
-    <div className="playlist-button-container">
-      <button 
-        onClick={handleClick} 
-        className={`playlist-button ${open ? 'open' : ''}`}
-      >
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        <i className="fa fa-plus"></i>
-      </button>
-      <div className={`playlist-dropdown ${open ? 'open' : ''}`}>
-        <ul>
-          {playlists.map((playlist) => (
-            <li key={playlist.id} className="playlist-item">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={playlist.isVideoInPlaylist}
-                  onChange={() => handleCheckboxChange(playlist.id)}
-                />
-                {playlist.title}
-              </label>
-            </li>
-          ))}
-        </ul>
+    const handleClick = () => {
+      setOpen(!open);
+    };
+
+    const handleCheckboxChange = (playlistId) => {
+      onPlaylistToggle(playlistId);
+    };
+
+    return (
+      <div className="playlist-button-container">
+        <button 
+          onClick={handleClick} 
+          className={`playlist-button ${open ? 'open' : ''}`}
+        >
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+          <i className="fa fa-plus"></i>
+        </button>
+        <div className={`playlist-dropdown ${open ? 'open' : ''}`}>
+          <ul>
+            {playlists.map((playlist) => (
+              <li key={playlist.id} className="playlist-item">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={playlist.isVideoInPlaylist}
+                    onChange={() => handleCheckboxChange(playlist.id)}
+                  />
+                  {playlist.title}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
+  const LikeButton = () => {
+    const [liked, setLiked] = useState(false);
 
-const LikeButton = () => {
-  const [liked, setLiked] = useState(false);
+    const handleClick = () => {
+      setLiked(!liked);
+    };
 
-  const handleClick = () => {
-    setLiked(!liked);
+    return (
+      <button onClick={handleClick} className={liked ? 'liked' : ''}>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <i className="fa fa-thumbs-up"></i>
+      </button>
+    );
+  }
+
+  const [comment, setComment] = useState('');
+
+  const handleSendComment = () => {
+    if (comment.trim()) {
+      // Logique pour envoyer le commentaire
+      console.log('Comment sent:', comment);
+      setComment('');
+    }
   };
 
-  return (
-    <button onClick={handleClick} className={liked ? 'liked' : ''}>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-      <i className="fa fa-thumbs-up"></i>
-    </button>
-  );
-}
-
-function VideoPage({video}) {
   return (
     <div className='videoPageMain'>
-
       {/* Titre */}
       <h1>{video.cour} - {video.title}</h1>
 
@@ -88,11 +98,11 @@ function VideoPage({video}) {
         <div className='hBar'>
           <p>
             <strong>Auteur : </strong>
-            <text className='App-link'>{video.author}</text>
+            <span className='App-link'>{video.author}</span>
           </p>
           <PlaylistButton playlists={playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
-            <LikeButton/>
+            <LikeButton />
             <p><strong>{video.numberOfLike} likes</strong></p>
           </div>
         </div>
@@ -104,22 +114,26 @@ function VideoPage({video}) {
 
       {/* Ajouter un commentaire */}
       <h2>Ajouter un commentaire :</h2>
-      <div className='hBar'>
-      <textarea placeholder='Votre commentaire'></textarea>
-      <button className='global-button'>Envoyer</button>
+      <div className='comment-bar'>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder='Votre commentaire'
+        ></textarea>
+        <button className='send-button' onClick={handleSendComment}>Envoyer</button>
       </div>
 
       {/* Les commentaires */}
       <h2>Commentaires :</h2>
-      <ul>
-      {video.comments.map((comment) => (
-        <li key={comment.id} className="comment-item">
-            <p>{comment.author} : {comment.content}</p>
-        </li>
-      ))}
+      <ul className='comments'>
+        {video.comments.map((comment) => (
+          <li key={comment.id} className="comment-item">
+            <p className='author'>{comment.author}: </p>
+            <p>{comment.content}</p>
+          </li>
+        ))}
       </ul>
     </div>
-  
   );
 }
 

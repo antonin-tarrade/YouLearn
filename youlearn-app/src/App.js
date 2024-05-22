@@ -58,7 +58,7 @@ function App() {
   };
 
   return (
-    <div className="App">   
+    <div className="App">
       <Header userId={userId} isSignedIn={isSignedIn}/>
       <VideoPage video={videoExample}/>
     </div>

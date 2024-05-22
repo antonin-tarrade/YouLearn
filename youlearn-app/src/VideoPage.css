@@ -1,5 +1,3 @@
-/* VideoPage.css */
-
 .videoPageMain {
   display: flex;
   flex-direction: column;
@@ -21,6 +19,11 @@ h2 {
   padding: 0;
 }
 
+ul {
+  padding: 0px;
+  margin: 0px;
+}
+
 iframe {
   border: none;
   margin: 0 auto;
@@ -33,6 +36,7 @@ iframe {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .hGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -51,7 +55,6 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  
 }
 
 button {
@@ -63,8 +66,6 @@ button {
 button.liked {
   color: var(--appGreen);
 }
-
-
 
 .playlist-button-container {
   position: relative;
@@ -111,7 +112,7 @@ button.liked {
 }
 
 .playlist-item {
-  padding: 8px 43px 0px 0px;
+  padding: 5px 10px;
   font-size: 1.5em;
   list-style-type: none;
   display: flex;
@@ -155,3 +156,65 @@ button.liked {
   line-height: 20px;
 }
 
+.comment-bar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.comment-bar textarea {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  background-color: transparent;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: large;
+  height: 25px;
+}
+
+.comment-bar .send-button {
+  /* largeur fixe */
+  width: 150px;
+  background-color: var(--appBlue);
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease-in-out, letter-spacing 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.comment-bar .send-button:hover {
+  background-color: var(--appGreen);
+  letter-spacing: 5px;
+  color: black;
+}
+
+.comment-item {
+  padding: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0px;
+}
+
+.comment-item p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.author {
+  font-size: 1em;
+  color: #888888;
+}
+
+.comments {
+  padding: px 0;
+}
