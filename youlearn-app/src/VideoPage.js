@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import './VideoPage.css';
 
-const playlists = [
-  { id: 1, title: 'Playlist 1 de fouuuuuuuujjjjjjjjjjjjjjjuuuuu', isVideoInPlaylist: true },
-  { id: 2, title: 'Playlist 2fffffffff', isVideoInPlaylist: true },
-  { id: 3, title: 'Playlist 3', isVideoInPlaylist: false },
-];
 
-
-function VideoPage({ video }) {
+function VideoPage({ video, user }) {
 
   const handlePlaylistToggle = (playlistId) => {
     
@@ -100,7 +94,7 @@ function VideoPage({ video }) {
             <strong>Auteur : </strong>
             <span className='App-link'>{video.author}</span>
           </p>
-          <PlaylistButton playlists={playlists} onPlaylistToggle={handlePlaylistToggle} />
+          <PlaylistButton playlists={user.playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
             <LikeButton />
             <p><strong>{video.numberOfLike} likes</strong></p>
