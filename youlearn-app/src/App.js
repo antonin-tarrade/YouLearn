@@ -1,31 +1,34 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-
+import Header from './Header'
+import LogInForm from './LoginForm';
 import axios from 'axios';
-import WelcomePage from './WelcomePage';
 import VideoPage from './VideoPage';
-import Header from "./Header";
+import Homepage from './Homepage';
 
 
 function App() {
-  // const [message, setMessage] = useState('');
+  const [user, setUser] = useState({
+    username : '',
+    email : '',
+    password : '',
+    role : null,
+  });
   const [userEmail, setUserEmail] = useState('');
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [hasAccount, setHasAccount] = useState(true);
   const [userId, setUserId] = useState('');
 
-  const handleLogIn = (userId, password) => {
-    console.log(`Id: ${userId}, Password: ${password}`);
+  const onLogIn = (user) => {
+    console.log(`Id: ${user.username}, Password: ${user.password}`);
     setIsSignedIn(true);
-    setUserId(userId);
+    setUserId(user.username);
   };
 
-  const handleSignIn = (userId, userEmail,password) => {
+  const onSignIn = (userId, userEmail,password) => {
     console.log(`Id: ${userId}, Email: ${userEmail}, Password: ${password}`);
     setUserEmail(userEmail);
     setUserId(userId);
   };
-
   // useEffect(() => {
   //   axios.get(`http://localhost:8080/YouLearn/Servlet?${Date.now}`)
   //     .then(response => {
@@ -59,8 +62,15 @@ function App() {
 
   return (
     <div className="App">
-      <Header userId={userId} isSignedIn={isSignedIn}/>
-      <VideoPage video={videoExample}/>
+      {!isSignedIn ? 
+        <LogInForm onLogIn ={onLogIn} onSignIn={onSignIn} user={user} setUser={setUser}/> : 
+      
+        <div>
+            <Header userId={userId}/>
+            <Homepage user={user}/>
+            <VideoPage video={videoExample}/>
+        </div>
+      }
     </div>
   );
 }
