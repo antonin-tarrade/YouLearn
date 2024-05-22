@@ -8,6 +8,6 @@ function WelcomePage ({onLogIn,onSignin,userId,isSignedIn}) {
         <Header userId={userId} isSignedIn={isSignedIn}/>
         <LogInForm onLogIn={onLogIn} onSignin={onSignin}/>
         </div>
-    )       
+    )
 }
 export default WelcomePage;

@@ -1,11 +1,27 @@
-/* VideoPage.css */
-
 .videoPageMain {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 15%;
   padding-right: 15%;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin: 15px 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: #888888;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
 }
 
 iframe {
@@ -19,23 +35,186 @@ iframe {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0% 5%;
+}
+
+.hGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-auto-flow: column;
+}
+
+.vGrid {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+  grid-auto-flow: row;
+  width: 960px;
+  margin: 0 auto;
 }
 
 button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    
-  }
-  
-  button {
-    font-size: 20px;
-    color: #fff;
-    transition: color 0.3s;
-  }
-  
-  button.liked {
-    color: var(--appGreen);
-  }
-  
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button {
+  font-size: 20px;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+button.liked {
+  color: var(--appGreen);
+}
+
+.playlist-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.playlist-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.playlist-button.open {
+  transform: rotate(45deg);
+}
+
+.playlist-dropdown {
+  display: block;
+  position: absolute;
+  padding: 0;
+  border-radius: 10px;
+  background-color: #000000;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  bottom: calc(100%);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.playlist-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+.playlist-item {
+  padding: 5px 10px;
+  font-size: 1.5em;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.playlist-item input[type="checkbox"] {
+  margin: 0 16px 0 0;
+}
+
+.playlist-item label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.playlist-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.playlist-item input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.playlist-item input[type="checkbox"]:checked::after {
+  content: '\2714';
+  font-size: 16px;
+  color: white;
+  display: block;
+  text-align: center;
+  line-height: 20px;
+}
+
+.comment-bar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.comment-bar textarea {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  background-color: transparent;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: large;
+  height: 25px;
+}
+
+.comment-bar .send-button {
+  /* largeur fixe */
+  width: 150px;
+  background-color: var(--appBlue);
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease-in-out, letter-spacing 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.comment-bar .send-button:hover {
+  background-color: var(--appGreen);
+  letter-spacing: 5px;
+  color: black;
+}
+
+.comment-item {
+  padding: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0px;
+}
+
+.comment-item p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.author {
+  font-size: 1em;
+  color: #888888;
+}
+
+.comments {
+  padding: px 0;
+}
