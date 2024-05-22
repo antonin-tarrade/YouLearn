@@ -21,7 +21,6 @@ public class UserAPI {
 
     @PersistenceContext
     EntityManager em;
-
     @POST
     @Path("/loginUser")
     @Consumes({ "application/json" })
@@ -29,10 +28,11 @@ public class UserAPI {
     public User loginUser(User json) {
         try {
             User user = (User) em
-                    .createQuery("SELECT u FROM User u WHERE u.username = :username AND u.password = :password")
-                    .setParameter("username", json.getUsername()).setParameter("password", json.getPassword()).getSingleResult();
+            .createQuery("SELECT u FROM User u WHERE u.username = :username AND u.password = :password")
+            .setParameter("username", json.getUsername()).setParameter("password", json.getPassword()).getSingleResult();
             return user;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

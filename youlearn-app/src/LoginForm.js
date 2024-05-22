@@ -4,7 +4,7 @@ import logo from './img/logo_color.png';
 
 import {invokePost,invokePostAndAwaitResponse,invokeGet} from './api'
 
-function LogInForm({onLogIn}) {
+function LogInForm({onLogIn, onSignIn, user, setUser}) {
   const [role, setRole] = useState(null);
   const [department, setDepartment] = useState('');
   const [name, setName] = useState('');
@@ -13,34 +13,43 @@ function LogInForm({onLogIn}) {
   const [password, setPassword] = useState('');
   const [hasAccount, setHasAccount] = useState(true);
 
-  const handleSubmit = (event) => {
+  const handleSignIn = (event) => {
     event.preventDefault();
-    let user ={}
-      user.username = id;
-      user.email = email;
-      user.password = password;
-      user.role = role;
-    if(role == 0) { 
+    let newUser = {} 
+      newUser.username = id;
+      newUser.email = email;
+      newUser.password = password;
+      newUser.role = role;
+    if(role === 0) { 
       let student = {}
-      student.user = user;
+      student.user = newUser;
       student.department = department;
       invokePostAndAwaitResponse("signUpStudent",student)
         .then(data => console.log(data.json()));
-    } else if (role == 1){
+    } else if (role === 1){
       let teacher = {}
-      teacher.user = user;
+      teacher.user = newUser;
       teacher.name = name;
       invokePostAndAwaitResponse("signUpTeacher",teacher)
       .then(data => console.log(data.json()));
     } else {
       console.log("Role Error");
     }
-    
-    onLogIn(id,password)
+    onSignIn(id,email,password);
   };
+
+  const handleLogIn = (event) => {
+    event.preventDefault();
+    let signUser ={}
+      signUser.username = id;
+      signUser.password = password;
+    invokePostAndAwaitResponse("loginUser",signUser).then(data =>console.log(data));
+    onLogIn(user);
+  }
 
 
   const handleCreateAccount = (event) => {
+    event.preventDefault();
     setHasAccount(!hasAccount);
     setEmail('');
     setId('');
@@ -51,35 +60,34 @@ function LogInForm({onLogIn}) {
   }
 
   const handleRoleChange = (event) => {
-    setRole(event.target.value);
+    setRole(Number(event.target.value));
     setDepartment('');
     setName('');
-    
   }
 
   return (
     <div className="form">
       <img src={logo} alt="logo" className="form-logo"></img>
-        <form onSubmit={handleSubmit} className="form-content">
+        <form onSubmit={hasAccount ? handleLogIn : handleSignIn} className="form-content">
           <div className={`form-field ${hasAccount ? '' : 'visible'}`}>
             <label className='form-option'>
               <p className='form-text'>Professeur:</p>
-              <input className="form-radio" type="radio" name="role" value={1} onChange={handleRoleChange} required/>
+              <input className="form-radio" type="radio" name="role" value={1} onChange={handleRoleChange} required={!hasAccount}/>
             </label>
             <label className='form-option'>
               <p className='form-text'>Etudiant:</p>
-              <input className="form-radio" type="radio" name="role" value={0} onChange={handleRoleChange} required/>
+              <input className="form-radio" type="radio" name="role" value={0} onChange={handleRoleChange} required={!hasAccount}/>
             </label>
           </div>
 
-          <label className={`form-field ${role == 0 ? 'visible' : '' }`}>
+          <label className={`form-field ${!hasAccount && role === 0 ? 'visible' : '' }`}>
             <p className='form-text'>Department:</p>
-            <input className="form-input" type="text" value={department} onChange={e => setDepartment(e.target.value)} required={role == 0} />
+            <input className="form-input" type="text" value={department} onChange={e => setDepartment(e.target.value)} required={!hasAccount && role === 0} />
           </label>
 
-          <label className={`form-field ${role == 1 ? 'visible' : '' }`}>
+          <label className={`form-field ${!hasAccount && role === 1 ? 'visible' : '' }`}>
             <p className='form-text'>Nom:</p>
-            <input className="form-input" type="text" value={name} onChange={e => setName(e.target.value)} required={role == 1} />
+            <input className="form-input" type="text" value={name} onChange={e => setName(e.target.value)} required={!hasAccount && role === 1} />
           </label>
 
           <label className='form-field visible'>
@@ -88,13 +96,13 @@ function LogInForm({onLogIn}) {
           </label>
           <label className={`form-field ${hasAccount ? '' : 'visible'}`}>
             <p className='form-text'>Adresse Email:</p>
-            <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} required={hasAccount} />
+            <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} required={!hasAccount} />
           </label>
           <label className='form-field visible'>
             <p className='form-text'>Mot de passe:</p>
             <input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </label>
-          <input className={`global-button ${id && password? 'visible' : ''}` } type="submit" value={`${hasAccount ? 'Se connecter' : 'S\'enregistrer'}`} />
+          <input className={`global-button ${id && password? 'visible' : ''}` } type="submit" value={`${hasAccount ? 'Se connecter' : 'S\'enregistrer'}`} name="button" />
           <div className={`links ${hasAccount ? 'visible' : ''}`}>
             <button className='link' onClick={handleCreateAccount}>Créer un compte</button>
             <button className='link'>Mot de passe oublié ?</button>

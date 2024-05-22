@@ -3,9 +3,8 @@ import logo from './img/logo_color.png';
 import './Header.css';
 import { ReactComponent as SearchIcon } from './img/search.svg';
 import { ReactComponent as UserSignedInIcon} from './img/user-signed-in.svg';
-import { ReactComponent as UserSignedOutIcon} from './img/user-signed-out.svg';
 
-function Header({ isSignedIn, userId }) {
+function Header({ userId }) {
   const [isSearchShown, setIsSearchShown] = useState(false);
   const searchFieldRef = useRef(null);
   const searchButtonRef = useRef(null);
@@ -57,8 +56,8 @@ function Header({ isSignedIn, userId }) {
         />
       </div>
       { userId ? <p>{userId}</p> : null }
-      <button className="signin-button" onClick={isSignedIn ? handleUserIconClick : null}>
-        {isSignedIn ? <UserSignedInIcon className="user-icon"/> : <UserSignedOutIcon className="user-icon"/>}
+      <button className="signin-button" onClick={handleUserIconClick}>
+        <UserSignedInIcon className="user-icon"/> 
       </button>
     </header>
   );
