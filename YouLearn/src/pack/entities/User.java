@@ -3,6 +3,8 @@ package pack.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -14,8 +16,8 @@ import pack.UserRole;
 
 @Entity
 public class User {
-    @Id 
-    private String email;
+    @Id
+    private String username;
 
     @ManyToMany
     private Collection<Course> followedCourses;
@@ -26,7 +28,7 @@ public class User {
     @OneToMany(mappedBy = "author")
     private Collection<Playlist> playlists;
 
-    private String username;
+    private String email;
     private String password;
     private UserRole role;
 
@@ -42,7 +44,7 @@ public class User {
         this.followedCourses = new ArrayList<Course>();
     }
 
- 
+
     public Collection<Course> getFollowedCourses() {
         return followedCourses;
     }
@@ -81,5 +83,29 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public Collection<Video> getLikedVideos() {
+        return likedVideos;
+    }
+
+    public void setLikedVideos(Collection<Video> likedVideos) {
+        this.likedVideos = likedVideos;
+    }
+
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Collection<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(Collection<Playlist> playlists) {
+        this.playlists = playlists;
     }
 }

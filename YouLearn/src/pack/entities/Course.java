@@ -1,6 +1,8 @@
 package pack.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,7 +14,8 @@ import javax.persistence.GenerationType;
 
 @Entity
 public class Course {
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @ManyToOne
@@ -49,6 +52,22 @@ public class Course {
 
     public void setOwner(Teacher owner) {
         this.owner = owner;
+    }
+
+    public Collection<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Collection<User> followers) {
+        this.followers = followers;
+    }
+
+    public Collection<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Collection<Video> videos) {
+        this.videos = videos;
     }
 
     public String getTitle() {
