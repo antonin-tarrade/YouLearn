@@ -43,5 +43,6 @@ body{
 
 .App-link {
   color: #61dafb;
+  cursor: pointer;
 }
 
