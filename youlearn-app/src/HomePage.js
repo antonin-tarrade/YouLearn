@@ -40,7 +40,36 @@ function HomePage({ user }) {
     return (
         <div className='homePageMain'>
             <h1>Welcome {user.username}!</h1>
+            <div className="playlist">
+                <h2>Vidéos likées</h2>
+                <div className="playlistContent">
+                    {videoRow(user.likedVideos)}
+                </div>
+            </div>
 
+            <h1>Tes Playlistes</h1>
+            <div className="videoList">
+                {user.playlists.map((playlist, index) => (
+                    <div key={index} className="playlist">
+                        <h2>{playlist.title}</h2>
+                        <div className="playlistContent">
+                            {videoRow(playlist.videos)}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <h1>Tes abonnements</h1>
+            <div className="videoList">
+                {user.cours.map((cour, index) => (
+                    <div key={index} className="playlist">
+                        <h2>{cour.title}</h2>
+                        <div className="playlistContent">
+                            {videoRow(cour.videos)}
+                        </div>
+                    </div>
+                ))}
+            </div>
 
 
         </div>
