@@ -105,6 +105,8 @@ class ChangeHandler(FileSystemEventHandler):
         os.mkdir("export/WEB-INF/classes/pack")
         os.mkdir("export/WEB-INF/classes/META-INF")
         os.mkdir("export/WEB-INF/lib")
+        os.mkdir("export/WebContent")
+        os.mkdir("export/WebContent/WEB-INF")
 
         # Copying the compiled java files to the export folder
         java_files = os.listdir(FOLDER_NAME + "/build/classes/pack")
@@ -119,6 +121,12 @@ class ChangeHandler(FileSystemEventHandler):
         files = list(Path(".").rglob(FOLDER_NAME + "/*.html")) + list(
             Path(".").rglob(FOLDER_NAME + "/*.jsp")
         )
+        #Copying web.xml
+                    # Copying the web.xml to the export folder
+        print("Copying the web.xml file to the export folder ... ")
+        java_files = os.listdir(FOLDER_NAME + "/WebContent/WEB-INF/")
+        for file in java_files:
+            execute_command("cp -r " + FOLDER_NAME + "/WebContent/WEB-INF/" + file + " export/WEB-INF/" + file)
 
         # Copy the HTML and JSP files to the export folder
 
