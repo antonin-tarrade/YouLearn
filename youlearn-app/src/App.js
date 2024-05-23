@@ -30,32 +30,16 @@ function App() {
     setUserEmail(userEmail);
     setUserId(userId);
   };
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/YouLearn/Servlet?${Date.now}`)
-  //     .then(response => {
-  //       console.log(response.data);
-  //       setMessage(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error:', error);
-  //     });
-  // }, []);
-
-  
-
-
 
   return (
     <div className="App">
       <Header userId={userId}/>
-      <HomePage user={userExample}/>
-      {/* {!isSignedIn ? 
+      {!isSignedIn ? 
         <LogInForm onLogIn ={onLogIn} onSignIn={onSignIn} user={user} setUser={setUser}/> : 
         <div>
-            <Homepage user={user}/>
-            <VideoPage video={videoExample} user={userExample}/>
+            <HomePage user={user}/>
         </div>
-      } */}
+      }
     </div>
   );
 }
