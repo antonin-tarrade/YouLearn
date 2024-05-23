@@ -37,7 +37,7 @@ public class VideoAPI {
             // Find course
             Course course = em.find(Course.class, json.getCourse().getId());
             // Create video
-            Video video = new Video(json.getTitle(), json.getOrder(), json.getUrl(), course);
+            Video video = new Video(json.getTitle(), json.getorderInCourse(), json.getUrl(), course);
             System.out.println("[PERSIST] " + video.getClass().getName() + " (id=" + video.getId() + ")");
             em.persist(video);
             // Return
