@@ -43,7 +43,7 @@ function LogInForm({onLogIn, onSignIn, user, setUser}) {
     let signUser ={}
       signUser.username = id;
       signUser.password = password;
-    invokePostAndAwaitResponse("loginUser",signUser).then(data =>console.log(data));
+    invokePostAndAwaitResponse("loginUser",signUser).then(data => data.json()).then(data => setUser(data))
     onLogIn(user);
   }
 

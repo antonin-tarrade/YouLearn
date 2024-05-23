@@ -40,7 +40,7 @@ function HomePage({ user }) {
     return (
         <div className='homePageMain'>
             <h1>Welcome {user.username}!</h1>
-            <div className="playlist">
+            {/* <div className="playlist">
                 <h2>Vidéos likées</h2>
                 <div className="playlistContent">
                     {videoRow(user.likedVideos)}
@@ -69,7 +69,7 @@ function HomePage({ user }) {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div> */}
 
 
         </div>
