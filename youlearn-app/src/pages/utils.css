@@ -1,0 +1,33 @@
+.videoRow {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.videoListContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.videoItem {
+    margin-right: 30px;
+    text-align: left;
+}
+
+.thumbnailContainer {
+    width: 400px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    display: block;
+}

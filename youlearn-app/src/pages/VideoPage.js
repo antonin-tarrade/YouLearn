@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useUser } from '../UserContext';
+import { Link, useNavigate } from 'react-router-dom';
 import './VideoPage.css';
 
 
-function VideoPage({ video, user }) {
+function VideoPage() {
+
+  const { user, video } = useUser(); 
 
   const handlePlaylistToggle = (playlistId) => {
     
@@ -30,7 +34,7 @@ function VideoPage({ video, user }) {
         </button>
         <div className={`playlist-dropdown ${open ? 'open' : ''}`}>
           <ul>
-            {playlists.map((playlist) => (
+            {user.playlists.map((playlist) => (
               <li key={playlist.id} className="playlist-item">
                 <label>
                   <input

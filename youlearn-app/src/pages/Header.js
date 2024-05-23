@@ -1,22 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
-import logo from './img/logo_color.png';
+import { useUser } from '../UserContext';
+import { Link, useNavigate } from 'react-router-dom';
+import logo from '../img/logo_color.png';
 import './Header.css';
-import { ReactComponent as SearchIcon } from './img/search.svg';
-import { ReactComponent as UserSignedInIcon} from './img/user-signed-in.svg';
+import { ReactComponent as SearchIcon } from '../img/search.svg';
+import { ReactComponent as UserSignedInIcon } from '../img/user-signed-in.svg';
 
-function Header({ userId }) {
+function Header() {
+
+  const { user, setIsSignedIn } = useUser();
+
   const [isSearchShown, setIsSearchShown] = useState(false);
   const searchFieldRef = useRef(null);
   const searchButtonRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleSearchButtonClick = () => {
     setIsSearchShown(true);
-  };
-
-  const handleUserIconClick = () => {
-    // if (isUserSignedIn) {
-    //   window.location.href = "/user-account"; 
-    // }
   };
 
   const handleDocumentMouseDown = (event) => {
@@ -38,27 +38,40 @@ function Header({ userId }) {
       document.removeEventListener('mousedown', handleDocumentMouseDown);
     };
   }, []);
+
+  const handleLogout = () => {
+    setIsSignedIn(false);
+    navigate('/login');
+  };
+
   return (
     <header className="header">
-      <a href='/'>
+
+      <Link to="/">
         <img src={logo} alt="logo" className="logo" />
-      </a>
+      </Link>
+
       <div className="search-wrapper" tabIndex="-1">
-        <button className="search-button" onClick={handleSearchButtonClick} style={{opacity: isSearchShown ? 0 : 1}} ref={searchButtonRef}>
-          <SearchIcon className="search-icon"/>
+        <button className="search-button" onClick={handleSearchButtonClick} style={{ opacity: isSearchShown ? 0 : 1 }} ref={searchButtonRef}>
+          <SearchIcon className="search-icon" />
         </button>
         <input
           type="text"
           className={`search-field ${isSearchShown ? 'visible' : ''}`}
           ref={searchFieldRef}
-          style={{width: isSearchShown ? '60%' : '0', opacity: isSearchShown ? 1 : 0}}
+          style={{ width: isSearchShown ? '60%' : '0', opacity: isSearchShown ? 1 : 0 }}
           onBlur={() => setIsSearchShown(false)}
         />
       </div>
-      { userId ? <p>{userId}</p> : null }
-      <button className="signin-button" onClick={handleUserIconClick}>
-        <UserSignedInIcon className="user-icon"/> 
+
+      <Link to="/user" className='App-link'>
+        <p>{user.username}</p>
+      </Link>
+
+      <button onClick={handleLogout} className="logout-button">
+        <UserSignedInIcon className="user-icon" />
       </button>
+
     </header>
   );
 }

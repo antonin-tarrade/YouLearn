@@ -12,7 +12,7 @@ export const videoExample = {
   description: 'Vidéo de fou zinzin vraiment trop bien !',
   url: 'https://www.youtube.com/watch?v=UNjMSFLkMZA',
   numberOfLike: 1000,
-  cour: null,
+  cour: 'Modélisation',
   author: 'LEGOAT',
   comments : commentsExample
 };
