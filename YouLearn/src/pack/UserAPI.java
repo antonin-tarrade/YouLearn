@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 import pack.entities.*;
 
-@Singleton
+@Singleton 
 @Path("/")
 public class UserAPI {
 
@@ -24,7 +24,7 @@ public class UserAPI {
     @POST
     @Path("/loginUser")
     @Consumes({ "application/json" })
-    @Produces({ "application/json" })
+    @Produces({ "application/json" }) 
     public User loginUser(User json) {
         try {
             User user = (User) em
@@ -117,6 +117,24 @@ public class UserAPI {
     public boolean doesUserExist(@QueryParam("username") String username) {
         User user = em.find(User.class, username);
         return user != null;
+    }
+
+    @GET
+    @Path("/findAssociatedStudent")
+    @Produces({ "application/json" })
+    public Student findAssociatedStudent(@QueryParam("username") String username) {
+        Student student = (Student) em.createQuery("SELECT s FROM Student s WHERE s.user = :username")
+                .setParameter("username", username).getSingleResult();
+        return student;
+    }
+
+    @GET
+    @Path("/findAssociatedTeacher")
+    @Produces({ "application/json" })
+    public Teacher findAssociatedTeacher(@QueryParam("username") String username) {
+        Teacher teacher = (Teacher) em.createQuery("SELECT t FROM Teacher t WHERE t.user = :username")
+                .setParameter("username", username).getSingleResult();
+        return teacher;
     }
 
     private Student addStudent(String username, String email, String password, String department) {
