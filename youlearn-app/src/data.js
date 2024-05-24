@@ -10,9 +10,9 @@ export const commentsExample = [
 export const videoExample = {
   title: 'Top 100 Artiste',
   description: 'Vidéo de fou zinzin vraiment trop bien !',
-  url: 'https://www.youtube.com/watch?v=UNjMSFLkMZA',
+  url: 'https://www.youtube.com/watch?v=fIPA8oT5qBo',
   numberOfLike: 1000,
-  cour: null,
+  cour: 'Modélisation',
   author: 'LEGOAT',
   comments : commentsExample
 };
