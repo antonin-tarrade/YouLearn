@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+ 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToMany; 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 
 import pack.UserRole;
 
@@ -19,13 +21,13 @@ public class User {
     @Id
     private String username;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Course> followedCourses;
-    @ManyToMany(mappedBy = "userLikes")
+    @ManyToMany(mappedBy = "userLikes",fetch = FetchType.EAGER)
     private Collection<Video> likedVideos;
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
     private Collection<Comment> comments;
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
     private Collection<Playlist> playlists;
 
     private String email;

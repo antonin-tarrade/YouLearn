@@ -26,15 +26,15 @@ public class Video {
     private Collection<Comment> comments;
 
     private String title;
-    private int order;
+    private int orderInCourse;
     private String url;
 
     public Video() {
     }
 
-    public Video(String title, int order, String url, Course course) {
+    public Video(String title, int orderInCourse, String url, Course course) {
         this.title = title;
-        this.order = order;
+        this.orderInCourse = orderInCourse;
         this.url = url;
         this.course = course;
 
@@ -82,12 +82,12 @@ public class Video {
         this.title = title;
     }
 
-    public int getOrder() {
-        return order;
+    public int getorderInCourse () {
+        return orderInCourse;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setorderInCourse(int orderInCourse) {
+        this.orderInCourse = orderInCourse;
     }
 
     public String getUrl() {
