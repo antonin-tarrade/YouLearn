@@ -15,6 +15,13 @@
     text-align: left;
 }
 
+.videoInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
 .thumbnailContainer {
     width: 400px;
     aspect-ratio: 16 / 9;
@@ -27,7 +34,6 @@
 }
 
 .thumbnail {
-    width: 100%;
     height: auto;
     display: block;
 }

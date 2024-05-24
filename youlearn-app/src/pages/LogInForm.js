@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '../UserContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import './LogInForm.css';
 import logo from '../img/logo_color.png';
 import { userExample } from '../data';
@@ -9,8 +10,18 @@ import { invokePost, invokePostAndAwaitResponse, invokeGet } from '../api';
 
 function LogInForm() {
 
-  const { user, setUser, setIsSignedIn } = useUser();
+  const { userLoged, setUserLoged } = useUser();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userLoged !== null) {
+      navigate('/');
+    }
+  }, [userLoged, navigate]);
+
+  if (userLoged !== null) {
+    return null;
+  }
 
   const [role, setRole] = useState(null);
   const [department, setDepartment] = useState('');
@@ -43,18 +54,20 @@ function LogInForm() {
       console.log("Role Error");
     }
     onSignIn(id, email, password);
+
+    setUserLoged(userExample);
+    navigate('/');
   };
 
   const handleLogIn = (event) => {
     event.preventDefault();
-    let signUser = {}
-    signUser.username = id;
-    signUser.password = password;
-    invokePostAndAwaitResponse("loginUser", signUser).then(data => console.log(data));
-    setIsSignedIn(true);
-    setUser(userExample);
-    console.log(user);
+    // let signUser = {}
+    // signUser.username = id;
+    // signUser.password = password;
+    // invokePostAndAwaitResponse("loginUser", signUser).then(data => console.log(data));
 
+    setUserLoged(userExample); // ICI
+    console.log("userLoged après setUserLoged:", userLoged);
     navigate('/');
   };
 

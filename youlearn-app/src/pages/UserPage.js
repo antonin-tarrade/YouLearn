@@ -1,10 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserContext';
 
 function UserPage() {
 
-    const { user } = useUser();
+    const { userLoged, user } = useUser();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (userLoged === null) {
+        navigate('/login');
+        }
+    }, [userLoged, navigate]);
+
+    if (userLoged === null) {
+        return null;
+    }
 
     return (
         <h1>{user.username}</h1>

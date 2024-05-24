@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { videoRow } from './utils';
 import { useUser } from '../UserContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
-import { userExample } from '../data';
 
 function HomePage() {
+    const { userLoged } = useUser();
+    const navigate = useNavigate();
 
-    const { user } = useUser();     
+    useEffect(() => {
+        if (userLoged === null) {
+            navigate('/login');
+        }
+    }, [userLoged, navigate]);
 
-    console.log(user);
+    if (userLoged === null) {
+        return null;
+    }
 
     return (
         <div className='homePageMain'>
-            <h1>Welcome {user.username}!</h1>
-            {videoRow(user.likedVideos, "Vidéos likées")}
+            <h1>Welcome {userLoged.username}!</h1>
+            {videoRow(userLoged.likedVideos, "Vidéos likées")}
 
             <h1>Tes Playlistes</h1>
             <div className="videoList">
-                {user.playlists.map((playlist) => (
+                {userLoged.playlists.map((playlist) => (
                     videoRow(playlist.videos, playlist.title)
                 ))}
             </div>
 
             <h1>Tes abonnements</h1>
             <div className="videoList">
-                {user.cours.map((cour, index) => (
+                {userLoged.cours.map((cour, index) => (
                     videoRow(cour.videos, cour.title)
                 ))}
             </div>
-
         </div>
     );
 }

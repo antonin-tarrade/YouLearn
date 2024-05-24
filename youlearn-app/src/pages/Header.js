@@ -4,16 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import logo from '../img/logo_color.png';
 import './Header.css';
 import { ReactComponent as SearchIcon } from '../img/search.svg';
-import { ReactComponent as UserSignedInIcon } from '../img/user-signed-in.svg';
+import { ReactComponent as UserSignedOutIcon } from '../img/user-signed-out.svg';
 
 function Header() {
 
-  const { user, setIsSignedIn } = useUser();
+  const { userLoged, setUserLoged, setUser } = useUser();
+  const navigate = useNavigate();
 
   const [isSearchShown, setIsSearchShown] = useState(false);
   const searchFieldRef = useRef(null);
   const searchButtonRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleSearchButtonClick = () => {
     setIsSearchShown(true);
@@ -40,9 +40,19 @@ function Header() {
   }, []);
 
   const handleLogout = () => {
-    setIsSignedIn(false);
+    setUserLoged(null);
     navigate('/login');
   };
+
+  const handleGoToUserLogedPage = () => {
+    setUser(userLoged);
+    navigate('/user');
+  };
+
+
+  if (userLoged === null) {
+    return null;
+  }
 
   return (
     <header className="header">
@@ -64,12 +74,12 @@ function Header() {
         />
       </div>
 
-      <Link to="/user" className='App-link'>
-        <p>{user.username}</p>
-      </Link>
+      <button onClick={handleGoToUserLogedPage} className='App-link'>
+        <p>{userLoged.username}</p>
+      </button>
 
       <button onClick={handleLogout} className="logout-button">
-        <UserSignedInIcon className="user-icon" />
+        <UserSignedOutIcon className="user-icon" />
       </button>
 
     </header>

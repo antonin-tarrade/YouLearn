@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '../UserContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import './VideoPage.css';
 
 
 function VideoPage() {
 
-  const { user, video } = useUser(); 
+  const { userLoged, video } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userLoged === null) {
+      navigate('/login');
+      }
+  }, [userLoged, navigate]);
+
+  if (userLoged === null) {
+    return null;
+  }
 
   const handlePlaylistToggle = (playlistId) => {
-    
+    // logique pour ajouter ou retirer la video de la playlist
   };
 
   const PlaylistButton = ({ playlists, onPlaylistToggle }) => {
@@ -34,7 +46,7 @@ function VideoPage() {
         </button>
         <div className={`playlist-dropdown ${open ? 'open' : ''}`}>
           <ul>
-            {user.playlists.map((playlist) => (
+            {playlists.map((playlist) => (
               <li key={playlist.id} className="playlist-item">
                 <label>
                   <input
@@ -71,7 +83,6 @@ function VideoPage() {
 
   const handleSendComment = () => {
     if (comment.trim()) {
-      // Logique pour envoyer le commentaire
       console.log('Comment sent:', comment);
       setComment('');
     }
@@ -98,7 +109,7 @@ function VideoPage() {
             <strong>Auteur : </strong>
             <span className='App-link'>{video.author}</span>
           </p>
-          <PlaylistButton playlists={user.playlists} onPlaylistToggle={handlePlaylistToggle} />
+          <PlaylistButton playlists={userLoged.playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
             <LikeButton />
             <p><strong>{video.numberOfLike} likes</strong></p>
