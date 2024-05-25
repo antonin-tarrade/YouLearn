@@ -16,31 +16,28 @@ function VideoPage() {
       }
   }, [userLoged, navigate]);
 
-  if (userLoged === null) {
-    return null;
-  }
-
+  
   const handlePlaylistToggle = (playlistId) => {
     // logique pour ajouter ou retirer la video de la playlist
   };
-
+  
   const PlaylistButton = ({ playlists, onPlaylistToggle }) => {
     const [open, setOpen] = useState(false);
-
+    
     const handleClick = () => {
       setOpen(!open);
     };
-
+    
     const handleCheckboxChange = (playlistId) => {
       onPlaylistToggle(playlistId);
     };
-
+    
     return (
       <div className="playlist-button-container">
         <button 
           onClick={handleClick} 
           className={`playlist-button ${open ? 'open' : ''}`}
-        >
+          >
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
           <i className="fa fa-plus"></i>
         </button>
@@ -53,7 +50,7 @@ function VideoPage() {
                     type="checkbox"
                     checked={playlist.isVideoInPlaylist}
                     onChange={() => handleCheckboxChange(playlist.id)}
-                  />
+                    />
                   {playlist.title}
                 </label>
               </li>
@@ -63,14 +60,14 @@ function VideoPage() {
       </div>
     );
   }
-
+  
   const LikeButton = () => {
     const [liked, setLiked] = useState(false);
-
+    
     const handleClick = () => {
       setLiked(!liked);
     };
-
+    
     return (
       <button onClick={handleClick} className={liked ? 'liked' : ''}>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
@@ -78,16 +75,20 @@ function VideoPage() {
       </button>
     );
   }
-
+  
   const [comment, setComment] = useState('');
-
+  
   const handleSendComment = () => {
     if (comment.trim()) {
       console.log('Comment sent:', comment);
       setComment('');
     }
   };
-
+  
+  if (userLoged === null) {
+    return null;
+  }
+  
   return (
     <div className='videoPageMain'>
       {/* Titre */}

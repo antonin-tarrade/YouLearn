@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { videoRow } from './utils';
+import { VideoRow } from './utils';
 import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
@@ -21,19 +21,19 @@ function HomePage() {
     return (
         <div className='homePageMain'>
             <h1>Welcome {userLoged.username}!</h1>
-            {videoRow(userLoged.likedVideos, "Vidéos likées")}
+            <VideoRow videos={userLoged.likedVideos} titre="Vidéos likées" />
 
             <h1>Tes Playlistes</h1>
             <div className="videoList">
                 {userLoged.playlists.map((playlist) => (
-                    videoRow(playlist.videos, playlist.title)
+                    <VideoRow videos={playlist.videos} titre={playlist.title} key={playlist.title} />
                 ))}
             </div>
 
             <h1>Tes abonnements</h1>
             <div className="videoList">
                 {userLoged.cours.map((cour, index) => (
-                    videoRow(cour.videos, cour.title)
+                    <VideoRow videos={cour.videos} titre={cour.title} key={index} />
                 ))}
             </div>
         </div>

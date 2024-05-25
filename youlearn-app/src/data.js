@@ -32,10 +32,12 @@ export const playlistsExample = [
 
 export const userExample = {
   username : 'Jean',
+  department : 'Sciences du Numériques',
   email : 'j@j',
   password : '123',
-  role : 1,
+  role : 0,
   likedVideos: [videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample],
   playlists : playlistsExample,
-  cours: [courExample, courExample]
+  cours: [courExample, courExample],
+  followedCourses: [courExample,courExample,courExample]
 };
