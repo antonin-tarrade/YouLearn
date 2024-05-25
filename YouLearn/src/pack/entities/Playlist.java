@@ -3,8 +3,11 @@ package pack.entities;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
+import java.util.Collection;
 
 @Entity
 public class Playlist {
@@ -17,6 +20,10 @@ public class Playlist {
     private boolean isPrivate;
     private String title;
     private String description;
+
+    //Liste des vidéos de la playlist
+    @ManyToMany
+    private Collection<Video> videos;
 
     public Playlist() {
     }
@@ -68,4 +75,20 @@ public class Playlist {
     public void setDescription(String description) {
         this.description = description;
     }
-}
+
+    public Collection<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Collection<Video> videos) {
+        this.videos = videos;
+    }
+
+    public void addVideo(Video video) {
+        this.videos.add(video);
+    }
+
+    public void removeVideo(Video video) {
+        this.videos.remove(video);
+    }
+} 
