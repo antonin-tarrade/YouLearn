@@ -35,7 +35,7 @@ export const userExample = {
   department : 'Sciences du Numériques',
   email : 'j@j',
   password : '123',
-  role : 0,
+  role : 1,
   likedVideos: [videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample],
   playlists : playlistsExample,
   cours: [courExample, courExample],

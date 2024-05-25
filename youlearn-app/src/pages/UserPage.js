@@ -8,6 +8,7 @@ function UserPage() {
 
     const { userLoged, user } = useUser();
     const navigate = useNavigate();
+    let ownPage  = userLoged == user;
 
     useEffect(() => {
         if (userLoged === null) {
@@ -17,6 +18,10 @@ function UserPage() {
 
     if (userLoged === null) {
         return null;
+    }
+    
+    const createCourse = () => {
+        navigate('/createcourse');
     }
 
     return (
@@ -31,7 +36,13 @@ function UserPage() {
                     <h2>Abonnements : {user.followedCourses.map((course,index) => (index == 0 ? '' : ' - ') + course.title)}</h2>
                 </div>
             </div>
+            {ownPage && userLoged.role == 1 && <div className='create-course'>
+                <button onClick={createCourse}>Ajouter un cour</button>
+            </div>}
             <div className='user-videos'>
+                {user.role == 1 && <div className='published-videos'>
+                    <VideoRow videos={user.likedVideos} titre={"Vidéos publiées"}/>
+                </div>}
                 <div className='liked-videos'>
                     <VideoRow videos={user.likedVideos} titre={"Vidéos likées"}/>
                 </div>

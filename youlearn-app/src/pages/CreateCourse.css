@@ -1,0 +1,51 @@
+.course-form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-course-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-label {
+    margin-bottom: 20px;
+}
+
+.course-title-label,
+.course-description-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.course-title-input,
+.course-description-input,
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.video-form {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.add-video-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-video-button:hover {
+    background-color: #0056b3;
+}
