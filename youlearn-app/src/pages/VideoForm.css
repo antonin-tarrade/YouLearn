@@ -1,0 +1,41 @@
+.video-form{
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1em 1.5em 1em 1.5em;
+    background-color: #456C86;
+    color: white;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.video-form-header{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    
+}
+
+.video-form-main{
+    display: flex;
+    align-items: flex-start;
+}
+
+.video-info{
+    margin-right: 1em;
+}
+
+.video-form-input textarea{
+    height:7em;
+    width: 12em;
+}
+
+.video-form-input input{
+    width: 12em;
+}

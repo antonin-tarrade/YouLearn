@@ -8,7 +8,6 @@
   import HomePage from './pages/HomePage';
   import UserPage from './pages/UserPage';
   import CreateCourse from './pages/CreateCourse';
-  import Test from './pages/Test'
 
   import './App.css';
 
@@ -24,7 +23,6 @@
               <Route path="/" element={<HomePage />} />
               <Route path="/user" element={<UserPage />} />
               <Route path="/video" element={<VideoPage />} />
-              <Route path="/test" element={<Test />} />
               <Route path="/createcourse" element={<CreateCourse />} />
             </Routes>
           </div>

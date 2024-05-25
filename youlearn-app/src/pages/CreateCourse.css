@@ -1,9 +1,23 @@
+.create-course-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 .course-form-container {
+    background-color: #414141;;
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+    margin-top: 2em;
+    padding: 2em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.course-form-container h1 {
+    padding: 0;
 }
 
 .add-course-form {
@@ -30,22 +44,16 @@
     border-radius: 4px;
 }
 
-.video-form {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 4px;
-}
 
 .add-video-button {
     padding: 10px 20px;
-    background-color: #007bff;
     color: white;
-    border: none;
+    border: dotted;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 2em;
 }
 
 .add-video-button:hover {
-    background-color: #0056b3;
+    background-color: var(--appBlue);
 }

@@ -33,12 +33,13 @@ function UserPage() {
                 <div className='info-container'>
                     <h1>{user.username}</h1>
                     <h2>{user.role == 0 ? "Departement : "  + user.department : "Cours : ..."}</h2>
+                    {ownPage && userLoged.role == 1 && 
+                        <div className='create-course'>
+                            <button className="add-course-button" onClick={createCourse}>Ajouter un cour </button>
+                        </div>}
                     <h2>Abonnements : {user.followedCourses.map((course,index) => (index == 0 ? '' : ' - ') + course.title)}</h2>
                 </div>
             </div>
-            {ownPage && userLoged.role == 1 && <div className='create-course'>
-                <button onClick={createCourse}>Ajouter un cour</button>
-            </div>}
             <div className='user-videos'>
                 {user.role == 1 && <div className='published-videos'>
                     <VideoRow videos={user.likedVideos} titre={"Vidéos publiées"}/>

@@ -75,32 +75,37 @@ function CreateCourse() {
         return null;
     }
     return (
-        <div className="course-form-container">
-            <form className="add-course-form">
-                <label className='course-label'>
-                    <p className='course-title-label'>Titre du cour :</p>
-                    <input className="course-title-input" type="text" name="title" value={course.title} onChange={handleCourseChange} required />
-                </label>
-                <label className='course-label'>
-                    <p className='course-description-label'>Description du cour :</p>
-                    <textarea className="course-description-input" name="description" value={course.description} onChange={handleCourseChange} required />
-                </label>
-                <p>Videos :</p>
-                <DragDropContext onDragEnd={handleOnDragEnd}>
-                    <Droppable droppableId="items">
-                        {(provided) => (
-                        <ul {...provided.droppableProps} ref={provided.innerRef} style={{ listStyle: 'none', padding: 0 }}>
-                            {videos.map((video, index) => (
-                            <VideoForm  index={index} video={video} removeVideo={removeVideo} handleInputChange={handleInputChange} />
-                            ))}
-                            {provided.placeholder}
-                        </ul>
-                        )}
-                    </Droppable>
-                </DragDropContext>
-                <button type="button" className="add-video-button" onClick={addVideo}>Add Video</button>
-            </form>
+        <div className="create-course-page">
+            <div className="course-form-container">
+                <h1>Créer le cour :</h1>
+                <form className="add-course-form">
+                    <label className='course-label'>
+                        <p className='course-title-label'>Titre du cour :</p>
+                        <input className="course-title-input" type="text" name="title" value={course.title} onChange={handleCourseChange} required />
+                    </label>
+                    <label className='course-label'>
+                        <p className='course-description-label'>Description du cour :</p>
+                        <textarea className="course-description-input" name="description" value={course.description} onChange={handleCourseChange} required />
+                    </label>
+                    <p>Videos :</p>
+                    <DragDropContext onDragEnd={handleOnDragEnd}>
+                        <Droppable droppableId="items">
+                            {(provided) => (
+                            <ul {...provided.droppableProps} ref={provided.innerRef} style={{ listStyle: 'none', padding: 0 }}>
+                                {videos.map((video, index) => (
+                                <VideoForm  index={index} video={video} removeVideo={removeVideo} handleInputChange={handleInputChange} />
+                                ))}
+                                {provided.placeholder}
+                            </ul>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
+                    <button type="button" className="add-video-button" onClick={addVideo}>Ajouter une vidéo</button>
+                    <button type="button" className='global-button create-button'> Créer le cour</button>
+                </form>
+            </div>
         </div>
+
     );
 }
 
