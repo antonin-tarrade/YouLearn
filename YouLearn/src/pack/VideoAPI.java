@@ -92,4 +92,15 @@ public class VideoAPI {
         Collection<Comment> comments = video.getComments();
         return comments;
     }
+
+    @GET
+    @Path("/searchForVideo")
+    @Produces({ "application/json" })
+    public Collection<Video> searchForVideo(@QueryParam("search") String search) {
+        String query = "%" + search.replace("%","") + "%";
+
+        Collection<Video> videos = (Collection<Video>) em.createQuery("SELECT b FROM Video v WHERE v.title LIKE :query").setParameter("query", query);
+
+        return videos;
+    }
 }
