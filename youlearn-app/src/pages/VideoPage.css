@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 15%;
-  padding-right: 15%;
+  padding-bottom: 0;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0;
 }
 
 h1 {
@@ -29,6 +31,11 @@ iframe {
   margin: 0 auto;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  padding: 0px;
+  margin: 0px;
 }
 
 .hBar {
@@ -160,7 +167,8 @@ button.liked {
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: 20px 0px;
+  margin: 0px;
+  padding-bottom: 20px;
 }
 
 .comment-bar textarea {
@@ -217,4 +225,10 @@ button.liked {
 
 .comments {
   padding: 0px 0px 80px 0px;
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
 }

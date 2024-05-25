@@ -1,3 +1,18 @@
+.userPageMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #b4b4b4;
+    margin: 0;
+    padding: 0 0 15px 0;
+}
+
 .user-info{
     display: flex;
     align-items: center;
@@ -27,11 +42,10 @@
     justify-content: center;
 }
 
-.add-course-button{
-    border: dashed;
-    border-radius: 5px;
+.playlist-button-row{
+    display: flex;
 }
 
-.add-course-button:hover{
-    background-color: var(--appBlue);
+.global-button{
+    margin-right: 30px;
 }

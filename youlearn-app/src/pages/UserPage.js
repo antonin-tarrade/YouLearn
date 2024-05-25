@@ -6,7 +6,7 @@ import { VideoRow } from './utils';
 
 function UserPage() {
 
-    const { userLoged, user } = useUser();
+    const { userLoged, user, setPlaylist } = useUser();
     const navigate = useNavigate();
     let ownPage  = userLoged == user;
 
@@ -24,8 +24,13 @@ function UserPage() {
         navigate('/createcourse');
     }
 
+    const handleGoToPlaylistPage = (playlist) => {
+        setPlaylist(playlist);
+        navigate('/playlist');
+    };
+
     return (
-        <div>      
+        <div className='userPageMain'>      
             <div className='user-info'>
                 <div className='pp-container'>
                     <h1 className='letter'>{user.username[0]}</h1>
@@ -41,16 +46,14 @@ function UserPage() {
                 </div>
             </div>
             <div className='user-videos'>
-                {user.role == 1 && <div className='published-videos'>
-                    <VideoRow videos={user.likedVideos} titre={"Vidéos publiées"}/>
-                </div>}
+                <h2>Playlistes</h2>
+                <div className='playlist-button-row'>
+                    {user.playlists.map((playlist) => (
+                        <button className='global-button' onClick={() => handleGoToPlaylistPage(playlist)}>{playlist.title}</button>
+                    ))}
+                </div>
                 <div className='liked-videos'>
                     <VideoRow videos={user.likedVideos} titre={"Vidéos likées"}/>
-                </div>
-                <div className='public-playlists'>
-                {user.playlists.map((playlist) => (
-                    <VideoRow videos={playlist.videos} titre={playlist.title} key={playlist.title} />
-                ))}
                 </div>
             </div>
         </div>
