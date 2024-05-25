@@ -10,9 +10,9 @@ export const commentsExample = [
 export const videoExample = {
   title: 'Top 100 Artiste',
   description: 'Vidéo de fou zinzin vraiment trop bien !',
-  url: 'https://www.youtube.com/watch?v=fIPA8oT5qBo',
+  url: 'https://www.youtube.com/watch?v=UNjMSFLkMZA',
   numberOfLike: 1000,
-  cour: 'Modélisation',
+  cour: null,
   author: 'LEGOAT',
   comments : commentsExample
 };
@@ -32,12 +32,10 @@ export const playlistsExample = [
 
 export const userExample = {
   username : 'Jean',
-  department : 'Sciences du Numériques',
   email : 'j@j',
   password : '123',
-  role : 0,
+  role : 1,
   likedVideos: [videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample, videoExample],
   playlists : playlistsExample,
-  cours: [courExample, courExample],
-  followedCourses: [courExample,courExample,courExample]
+  cours: [courExample, courExample]
 };

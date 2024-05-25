@@ -2,7 +2,7 @@
 
 body{
   font-family: 'Roboto Mono',monospace;
-  background-color: #262626;
+  background-color: #262626; 
   color: white;
 }
 
@@ -40,14 +40,10 @@ body{
   --appBlue: #00FF99;
 }
 
-.App-link {
-  color: var(--appBlue);
-  cursor: pointer;
-  text-decoration: none;
-}
 
-.App-link:hover {
-  color: var(--appGreen);
+.App-link {
+  color: #61dafb;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -55,10 +51,10 @@ body{
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #505050;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--appBlue);
+  background-color: #007bff;
   border-radius: 5px;
 }

@@ -1,31 +1,46 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { UserProvider } from './UserContext';
-
-import Header from './pages/Header';
-import LogInForm from './pages/LogInForm';
-import VideoPage from './pages/VideoPage';
-import HomePage from './pages/HomePage';
-import UserPage from './pages/UserPage';
-
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import Header from './Header'
+import LogInForm from './LoginForm';
+import axios from 'axios';
+import VideoPage from './VideoPage';
+import HomePage from './HomePage';
+import { userExample, videoExample } from './data';
+
 
 function App() {
+  const [user, setUser] = useState({
+    username : '',
+    email : '',
+    password : '',
+    role : null,
+  });
+  const [userEmail, setUserEmail] = useState('');
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [userId, setUserId] = useState('');
+
+  const onLogIn = (user) => {
+    console.log(`Id: ${user.username}, Password: ${user.password}`);
+    setIsSignedIn(true);
+    setUserId(user.username);
+  };
+
+  const onSignIn = (userId, userEmail,password) => {
+    console.log(`Id: ${userId}, Email: ${userEmail}, Password: ${password}`);
+    setUserEmail(userEmail);
+    setUserId(userId);
+  };
 
   return (
-    <UserProvider>
-      <Router>
-        <div className="App">
-          <Header />
-          <Routes>
-            <Route path="/login" element={<LogInForm />} />
-            <Route path="/" element={<HomePage />} />
-            <Route path="/user" element={<UserPage />} />
-            <Route path="/video" element={<VideoPage />} />
-          </Routes>
+    <div className="App">
+      <Header userId={userId}/>
+      {!isSignedIn ? 
+        <LogInForm onLogIn ={onLogIn} onSignIn={onSignIn} user={user} setUser={setUser}/> : 
+        <div>
+            <HomePage user={user}/>
         </div>
-      </Router>
-    </UserProvider>
+      }
+    </div>
   );
 }
 

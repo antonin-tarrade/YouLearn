@@ -25,7 +25,7 @@ export async function invokePostAndAwaitResponse(method, data) {
 
   if (res.ok) {
     console.log("POST(with response) success : " + url);
-    return res;
+    return await res;
   } else {
     console.log("POST(with response) failure : " + url);
     return null;
