@@ -22,7 +22,7 @@ public class Playlist {
     private String description;
 
     //Liste des vidéos de la playlist
-    @ManyToMany(mappedBy = "playlists")
+    @ManyToMany
     private Collection<Video> videos;
 
     public Playlist() {
