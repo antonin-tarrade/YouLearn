@@ -26,3 +26,12 @@
     align-items: left;
     justify-content: center;
 }
+
+.add-course-button{
+    border: dashed;
+    border-radius: 5px;
+}
+
+.add-course-button:hover{
+    background-color: var(--appBlue);
+}
