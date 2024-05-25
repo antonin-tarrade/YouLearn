@@ -1,6 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { UserProvider } from './UserContext';
+  import React from 'react';
+  import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+  import { UserProvider } from './UserContext';
 
 import Header from './pages/Header';
 import LogInForm from './pages/LogInForm';
@@ -10,9 +10,9 @@ import UserPage from './pages/UserPage';
 import CoursePage from './pages/CoursePage';
 import PlaylistPage from './pages/PlaylistPage';
 
-import './App.css';
+  import './App.css';
 
-function App() {
+  function App() {
 
   return (
     <UserProvider>
@@ -33,4 +33,4 @@ function App() {
   );
 }
 
-export default App;
+  export default App;
