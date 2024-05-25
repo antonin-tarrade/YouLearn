@@ -7,6 +7,8 @@ import LogInForm from './pages/LogInForm';
 import VideoPage from './pages/VideoPage';
 import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
+import CoursePage from './pages/CoursePage';
+import PlaylistPage from './pages/PlaylistPage';
 
 import './App.css';
 
@@ -22,6 +24,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/video" element={<VideoPage />} />
+            <Route path="/course" element={<CoursePage />} />
+            <Route path="/playlist" element={<PlaylistPage />} />
           </Routes>
         </div>
       </Router>

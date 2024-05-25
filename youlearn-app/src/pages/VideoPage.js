@@ -7,13 +7,16 @@ import './VideoPage.css';
 
 function VideoPage() {
 
-  const { userLoged, video } = useUser();
+  const { userLoged, video, setUser, setCourse } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (userLoged === null) {
       navigate('/login');
-      }
+    }
+    if (video === null) {
+      navigate('/');
+    }
   }, [userLoged, navigate]);
 
   
@@ -35,7 +38,7 @@ function VideoPage() {
     return (
       <div className="playlist-button-container">
         <button 
-          onClick={handleClick} 
+          onClick={handleClick}
           className={`playlist-button ${open ? 'open' : ''}`}
           >
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
@@ -43,8 +46,8 @@ function VideoPage() {
         </button>
         <div className={`playlist-dropdown ${open ? 'open' : ''}`}>
           <ul>
-            {playlists.map((playlist) => (
-              <li key={playlist.id} className="playlist-item">
+            {playlists.map((playlist, index) => (
+              <li key={index} className="playlist-item">
                 <label>
                   <input
                     type="checkbox"
@@ -84,31 +87,43 @@ function VideoPage() {
       setComment('');
     }
   };
+
+  const handleGoToUserPage = (user) => {
+    setUser(user);
+    navigate('/user');
+  };
+
+  const handleGoToCoursePage = (course) => {
+    setCourse(course);
+    navigate('/course');
+  };
   
+  // Rediriger l'utilisateur vers la page de connexion si l'utilisateur n'est pas connecté
   if (userLoged === null) {
     return null;
   }
   
   return (
     <div className='videoPageMain'>
-      {/* Titre */}
-      <h1>{video.cour} - {video.title}</h1>
 
-      {/* Video */}
       <div className='vGrid'>
-        <iframe 
+        <h1>{video.title}</h1>
+
+        <iframe
           width="960"
           height="540"
-          src={video.url} 
-          title={video.title} 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          src={video.url.replace('watch?v=', 'embed/')}
+          title={video.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen>
         </iframe>
 
         <div className='hBar'>
           <p>
-            <strong>Auteur : </strong>
-            <span className='App-link'>{video.author}</span>
+            <strong>Auteur:</strong>
+            <button className='App-link' onClick={() => handleGoToUserPage(video.author)}>{video.author.username}</button>
+            <strong> Cour:</strong>
+            <button className='App-link course-button' onClick={() => handleGoToCoursePage(video.course)} >{video.course.title}</button>
           </p>
           <PlaylistButton playlists={userLoged.playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
@@ -136,9 +151,11 @@ function VideoPage() {
       {/* Les commentaires */}
       <h2>Commentaires :</h2>
       <ul className='comments'>
-        {video.comments.map((comment) => (
-          <li key={comment.id} className="comment-item">
-            <p className='author'>{comment.author}: </p>
+        {video.comments.map((comment, index) => (
+          <li key={index} className="comment-item">
+            <span>
+              <button className='App-link' onClick={() => handleGoToUserPage(comment.author)} >{comment.author.username} </button>
+            </span>
             <p>{comment.content}</p>
           </li>
         ))}
