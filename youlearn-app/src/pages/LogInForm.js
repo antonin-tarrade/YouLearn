@@ -12,6 +12,13 @@ function LogInForm() {
 
   const { userLoged, setUserLoged } = useUser();
   const navigate = useNavigate();
+  const [role, setRole] = useState(null);
+  const [department, setDepartment] = useState('');
+  const [name, setName] = useState('');
+  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [hasAccount, setHasAccount] = useState(true);
 
   useEffect(() => {
     if (userLoged !== null) {
@@ -23,13 +30,6 @@ function LogInForm() {
     return null;
   }
 
-  const [role, setRole] = useState(null);
-  const [department, setDepartment] = useState('');
-  const [name, setName] = useState('');
-  const [id, setId] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [hasAccount, setHasAccount] = useState(true);
 
   const handleSignIn = (event) => {
     event.preventDefault();
@@ -53,20 +53,18 @@ function LogInForm() {
     } else {
       console.log("Role Error");
     }
-    onSignIn(id, email, password);
-
     setUserLoged(userExample);
     navigate('/');
   };
 
   const handleLogIn = (event) => {
     event.preventDefault();
-    // let signUser = {}
-    // signUser.username = id;
-    // signUser.password = password;
-    // invokePostAndAwaitResponse("loginUser", signUser).then(data => console.log(data));
+    let signUser = {}
+    signUser.username = id;
+    signUser.password = password;
+    invokePostAndAwaitResponse("loginUser", signUser).then(data => data.json()).then(json => console.log(json));
 
-    setUserLoged(userExample); // ICI
+    setUserLoged(userExample);
     console.log("userLoged après setUserLoged:", userLoged);
     navigate('/');
   };

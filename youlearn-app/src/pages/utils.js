@@ -5,7 +5,7 @@ import './utils.css';
 
 
 // Ligne de vidéo avec titre
-export const videoRow = (videos, titre) => {
+export const VideoRow = ({videos, titre}) => {
 
     const { setVideo } = useUser();
     const navigate = useNavigate();
