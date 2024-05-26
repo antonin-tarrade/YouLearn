@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Course {
@@ -20,6 +21,7 @@ public class Course {
     private int id;
 
     @ManyToOne
+    @JsonBackReference
     private Teacher owner;
     @ManyToMany(mappedBy = "followedCourses",fetch = FetchType.EAGER)
     private Collection<User> followers;

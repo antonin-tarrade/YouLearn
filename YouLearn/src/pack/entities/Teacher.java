@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Teacher {
@@ -18,6 +19,7 @@ public class Teacher {
     @OneToOne
     private User user;
     @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Collection<Course> courses;
 
     private String name;

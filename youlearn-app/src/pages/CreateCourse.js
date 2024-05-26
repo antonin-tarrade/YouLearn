@@ -85,6 +85,7 @@ function CreateCourse() {
         invokePostAndAwaitResponse("addCourse", course).then(data => data.json()).then(course => console.log(course));
         videos.map((video) => {
                 video.course = course;
+                console.log(video);
                 invokePostAndAwaitResponse("addVideo",video);
             }
         )

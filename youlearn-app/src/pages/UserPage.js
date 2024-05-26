@@ -11,7 +11,7 @@ function UserPage() {
     const navigate = useNavigate();
     let ownPage  = userLoged == user;
     const [teacher,setTeacher] = useState(null);
-    const [courses,setCourses] = useState([]);
+    // const [courses,setCourses] = useState([]);
     const [student,setStudent] = useState(null);
 
     useEffect(() => {
@@ -25,24 +25,15 @@ function UserPage() {
         initTeacherInfos()
         :
         invokeGet("getStudentInfos",{username: user.username}).then(data => data.json()).then(student => {
-            console.log("NULl");
             setStudent(student);
         })
     },[]);
 
     function initTeacherInfos(){
-        invokeGet("getTeacherInfos",{username: user.username}).then(data => console.log(data.text()));
-        // .then(teacher => {
-        //     console.log("HELLO");
-        //     console.log(teacher);
-        //     setTeacher(teacher);
-        //     invokeGet("getCourses",{teacherId: teacher.id}).then(data => data.json()).then(courses => {
-        //         console.log(courses);
-        //         courses.map((course) => console.log(course.title));
-        //         setCourses(courses);
-        //     }
-        //     );
-        // });
+        invokeGet("getTeacherInfos",{username: user.username}).then(data => data.json()).then(teacher => {
+            console.log(teacher);
+            setTeacher(teacher);
+        });
     }
 
 
@@ -72,7 +63,7 @@ function UserPage() {
                 </div>
                 <div className='info-container'>
                     <h1>{user.username}</h1>
-                    {(student || teacher && courses.length != 0) && <h2>{ user.role == "Student" ? "Departement : "  + student.department : "Cours : " + courses.map((course,index) => (index == 0 ? '' : ' - ') + course.title )}</h2>}
+                    {(student || teacher ) && <h2>{ user.role == "Student" ? "Departement : "  + student.department : "Cours : " + teacher.courses.map((course,index) => (index == 0 ? '' : ' - ') + course.title )}</h2>}
                     {ownPage && userLoged.role == "Teacher" && 
                         <div className='create-course'>
                             <button className="add-course-button" onClick={createCourse}>Ajouter un cour </button>
@@ -94,7 +85,7 @@ function UserPage() {
                     <div>    
                         <h2>Cours</h2>
                         <div className='playlist-button-row'>
-                            {teacher && courses.length!= 0 && courses.map((course) => (
+                            {teacher && teacher.courses.map((course) => (
                                 <button className='global-button' onClick={() => handleGoToCoursePage(course)}>{course.title}</button>
                             ))}
                         </div>
