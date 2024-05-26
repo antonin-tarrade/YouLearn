@@ -8,7 +8,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Teacher {
@@ -17,9 +16,7 @@ public class Teacher {
 
     @OneToOne
     private User user;
-    
     @OneToMany(mappedBy = "owner")
-    @JsonIgnoreProperties({"owner"})
     private Collection<Course> courses;
 
     private String name;
