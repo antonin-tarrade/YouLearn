@@ -27,17 +27,19 @@ public class Video {
     private Collection<Comment> comments;
 
     private String title;
+    private String description;
     private int orderInCourse;
     private String url;
 
     public Video() {
     }
 
-    public Video(String title, int orderInCourse, String url, Course course) {
+    public Video(String title, String description, int orderInCourse, String url, Course course) {
         this.title = title;
         this.orderInCourse = orderInCourse;
         this.url = url;
         this.course = course;
+        this.description = description;
 
         this.userLikes = new ArrayList<User>();
         
@@ -98,5 +100,13 @@ public class Video {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
