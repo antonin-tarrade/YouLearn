@@ -4,7 +4,7 @@
     justify-content: center;
     flex-direction: column;
     padding: 1em 1.5em 1em 1.5em;
-    background-color: #456C86;
+    background-color: #3b5e75;
     color: white;
     margin-bottom: 1em;
     border: 1px solid #ccc;
@@ -24,11 +24,11 @@
 
 .video-form-main{
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .video-info{
-    margin-right: 1em;
+    margin-right: 10px;
 }
 
 .video-form-input textarea{
@@ -38,4 +38,18 @@
 
 .video-form-input input{
     width: 12em;
+}
+
+.thumbnailContainer {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail {
+    height: auto;
+    display: block;
 }

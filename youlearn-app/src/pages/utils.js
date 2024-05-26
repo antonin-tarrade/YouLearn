@@ -4,21 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import './utils.css';
 
 
+// Obtenir l'ID de la vidéo Youtube
+export const getYoutubeID = (url) => {
+    const videoId = url.split('v=')[1];
+    if (!videoId) return null;
+    const ampersandPosition = videoId.indexOf('&');
+    if (ampersandPosition !== -1) {
+        return videoId.substring(0, ampersandPosition);
+    }
+    return videoId;
+};
+
+
 // Ligne de vidéo avec titre
 export const VideoRow = ({videos, titre}) => {
 
     const { setVideo } = useUser();
     const navigate = useNavigate();
-
-    const getYoutubeThumbnail = (url) => {
-        const videoId = url.split('v=')[1];
-        if (!videoId) return null;
-        const ampersandPosition = videoId.indexOf('&');
-        if (ampersandPosition !== -1) {
-            return videoId.substring(0, ampersandPosition);
-        }
-        return videoId;
-    };
 
     const handleGoToVideo = (video) => {
         setVideo(video);
@@ -34,14 +36,14 @@ export const VideoRow = ({videos, titre}) => {
                     <h2>{titre}</h2>
                     <div className="videoListContainer">
                         {videos.map((video, index) => {
-                            const thumbnail = getYoutubeThumbnail(video.url);
+                            const thumbnail = getYoutubeID(video.url);
                             return (
                                 <div key={index} className="videoItem">
                                     {thumbnail && (
                                         <div className="thumbnailContainer">
                                             <button onClick={() => handleGoToVideo(video)} >
                                                 <img
-                                                    src={`https://img.youtube.com/vi/${thumbnail}/0.jpg`} 
+                                                    src={`https://img.youtube.com/vi/${thumbnail}/0.jpg`}
                                                     alt={video.title}
                                                     className="thumbnail"
                                                 />

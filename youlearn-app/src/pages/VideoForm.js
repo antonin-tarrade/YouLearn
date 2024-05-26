@@ -1,6 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import './VideoForm.css'
+import { getYoutubeID } from './utils';
 
 function VideoForm ({video, index, handleInputChange , removeVideo}){
     const videoFormInput = (name, type, label, value, index) => (
@@ -33,15 +34,12 @@ function VideoForm ({video, index, handleInputChange , removeVideo}){
                             {videoFormInput("url", "text", "Video URL", video.url, index)}
                             {videoFormInput("description", "text-area", "Video Description", video.description, index)}
                         </div>
-                        <div className="video-preview">
-                            <iframe 
-                                width="350"
-                                height="280"
-                                src={video.url} 
-                                title={video.title} 
-                                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowFullScreen>
-                            </iframe>
+                        <div className="thumbnailContainer">
+                            <img
+                                src={`https://img.youtube.com/vi/${getYoutubeID(video.url)}/0.jpg`}
+                                className="thumbnail"
+                                width="400px"
+                            />
                         </div>
                     </div>
                     
