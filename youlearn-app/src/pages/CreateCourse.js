@@ -4,34 +4,38 @@ import { useUser } from '../UserContext';
 import './CreateCourse.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import VideoForm from './VideoForm';
+import { invokeGet, invokePostAndAwaitResponse } from '../api';
 
 
 function CreateCourse() {
 
-    // const [items, setItems] = useState([{ id: 'item-1', content: 'Item 1' }]);
     const { userLoged } = useUser();
     const navigate = useNavigate();
     const [course, setCourse] = useState({ title: '', description: '' });
     const [videos, setVideos] = useState([{ id: `video-${generateId()}`, url: '', title: '', description: '', order: 1 }]);
+    const[teacher,setTeacher] = useState({})
 
     function generateId() {
         return Math.random().toString(36).slice(2, 10);
     }
 
     useEffect(() => {
-        if (userLoged === null || userLoged.role !== 1) {
+        if (userLoged === null || userLoged.role !== "Teacher") {
             navigate('/login');
         }
     }, [userLoged, navigate]);
 
     useEffect(() => {
-        let teacher = {};
-        setCourse(prevCourse => ({
-            ...prevCourse,
-            owner: teacher,
-            followers: [],
-            videos: videos
-        }));
+        invokeGet("getTeacherInfos",userLoged.username).then(data => data.json()).then(teacher => {
+            setTeacher(teacher);
+            setCourse(prevCourse => ({
+                ...prevCourse,
+                owner: teacher,
+                followers: [],
+                videos: videos
+            }));
+        });
+        
     }, [videos]);
 
 
@@ -67,6 +71,12 @@ function CreateCourse() {
         setVideos(newVideos);
       };
 
+    const onCourseSubmitted = () => {
+        console.log(course);
+        invokePostAndAwaitResponse("addCourse", course).then(data => data.json()).then(course => console.log(course));
+        navigate('/');
+    }
+
     if (userLoged === null) {
         return null;
     }
@@ -74,7 +84,7 @@ function CreateCourse() {
         <div className="create-course-page">
             <div className="course-form-container">
                 <h1>Créer le cour :</h1>
-                <form className="add-course-form">
+                <form className="add-course-form" onSubmit={onCourseSubmitted}>
                     <label className='course-label'>
                         <p className='course-title-label'>Titre du cour :</p>
                         <input className="course-title-input" type="text" name="title" value={course.title} onChange={handleCourseChange} required />
@@ -97,7 +107,7 @@ function CreateCourse() {
                         </Droppable>
                     </DragDropContext>
                     <button type="button" className="add-video-button" onClick={addVideo}>Ajouter une vidéo</button>
-                    <button type="button" className='global-button create-button'> Créer le cour</button>
+                    <button type="submit" className='global-button create-button'> Créer le cour</button>
                 </form>
             </div>
         </div>
