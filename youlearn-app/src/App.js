@@ -1,6 +1,6 @@
-  import React from 'react';
-  import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-  import { UserProvider } from './UserContext';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { UserProvider } from './UserContext';
 
 import Header from './pages/Header';
 import LogInForm from './pages/LogInForm';
@@ -9,11 +9,11 @@ import HomePage from './pages/HomePage';
 import UserPage from './pages/UserPage';
 import CoursePage from './pages/CoursePage';
 import PlaylistPage from './pages/PlaylistPage';
+import CreateCourse from './pages/CreateCourse';
 
-  import './App.css';
+import './App.css';
 
-  function App() {
-
+function App() {
   return (
     <UserProvider>
       <Router>
@@ -26,6 +26,7 @@ import PlaylistPage from './pages/PlaylistPage';
             <Route path="/video" element={<VideoPage />} />
             <Route path="/course" element={<CoursePage />} />
             <Route path="/playlist" element={<PlaylistPage />} />
+            <Route path="/createcourse" element={<CreateCourse />} />
           </Routes>
         </div>
       </Router>
@@ -33,4 +34,4 @@ import PlaylistPage from './pages/PlaylistPage';
   );
 }
 
-  export default App;
+export default App;

@@ -6,7 +6,6 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import VideoForm from './VideoForm';
 
 
-
 function CreateCourse() {
 
     // const [items, setItems] = useState([{ id: 'item-1', content: 'Item 1' }]);
@@ -35,9 +34,6 @@ function CreateCourse() {
         }));
     }, [videos]);
 
-    
-    
-    
 
     const addVideo = () => {
         setVideos([...videos, { id: `video-${generateId()}`, url: '', title: '', description: '', order: videos.length+1}]);
