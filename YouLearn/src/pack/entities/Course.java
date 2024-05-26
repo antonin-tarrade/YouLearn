@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Course {
@@ -23,10 +24,10 @@ public class Course {
     @JsonIgnoreProperties({"courses"})
     private Teacher owner;
     @ManyToMany(mappedBy = "followedCourses")
-    @JsonIgnoreProperties({"followedCourses","likedVideos","comments","playlists"})
+    @JsonIgnore
     private Collection<User> followers;
     @OneToMany(mappedBy = "course")
-    @JsonIgnoreProperties({"comments"})
+    @JsonIgnore
     private Collection<Video> videos;
 
     private String title;

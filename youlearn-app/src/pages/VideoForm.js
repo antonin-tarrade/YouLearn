@@ -14,7 +14,7 @@ function VideoForm ({video, index, handleInputChange , removeVideo}){
         </div>
     );
     
-   return <Draggable key={video.id} draggableId={video.id} index={index}>
+   return <Draggable key={video.id} draggableId={video.id.toString()} index={index}>
                 {(provided) => (
                   <div className='video-form' ref={provided.innerRef}
                     {...provided.draggableProps}
@@ -26,6 +26,7 @@ function VideoForm ({video, index, handleInputChange , removeVideo}){
                     
                     <div className="video-form-header">
                         {video.order}
+                        {video.id}
                         <button type="button" className="remove-video-button" onClick={() => removeVideo(index)}>x</button>
                     </div>
                     <div className="video-form-main">

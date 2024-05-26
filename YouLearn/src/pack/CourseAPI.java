@@ -60,6 +60,15 @@ public class CourseAPI {
     }
 
     @GET
+    @Path("/getCourses")
+    @Produces({ "application/json" })
+    public Collection<Course> getCourses(@QueryParam("teacherId") int teacherId){
+        Collection<Course> courses = (Collection<Course>) em.createQuery("SELECT c FROM Course c WHERE c.owner.id = :id")
+                .setParameter("id", teacherId).getResultList();
+        return courses;
+    }
+
+    @GET
     @Path("/getCourseInfos")
     @Consumes({ "application/json" })
     @Produces({ "application/json" })

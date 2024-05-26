@@ -12,11 +12,18 @@ function CreateCourse() {
     const { userLoged } = useUser();
     const navigate = useNavigate();
     const [course, setCourse] = useState({ title: '', description: '' });
-    const [videos, setVideos] = useState([{ id: `video-${generateId()}`, url: '', title: '', description: '', order: 1 }]);
+    const [videos, setVideos] = useState([{ id: generateId(), url: '', title: '', description: '', order: 1 }]);
     const[teacher,setTeacher] = useState({})
 
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     function generateId() {
-        return Math.random().toString(36).slice(2, 10);
+        return getRandomInt(1,10000);
     }
 
     useEffect(() => {
@@ -27,14 +34,14 @@ function CreateCourse() {
 
     useEffect(() => {
         console.log(userLoged.username);
-        invokeGet("getTeacherInfos",{username: userLoged.username}).then(data => data.text()).then(teacher => {
+        invokeGet("getTeacherInfos",{username: userLoged.username}).then(data => data.json()).then(teacher => {
             console.log(teacher);
             setTeacher(teacher);
             setCourse(prevCourse => ({
                 ...prevCourse,
                 owner: teacher,
                 followers: [],
-                videos: videos
+                videos: []
             }));
         });
         
@@ -42,7 +49,7 @@ function CreateCourse() {
 
 
     const addVideo = () => {
-        setVideos([...videos, { id: `video-${generateId()}`, url: '', title: '', description: '', order: videos.length+1}]);
+        setVideos([...videos, { id: generateId(), url: '', title: '', description: '', order: videos.length+1}]);
     };
 
 
@@ -76,6 +83,11 @@ function CreateCourse() {
     const onCourseSubmitted = () => {
         console.log(course);
         invokePostAndAwaitResponse("addCourse", course).then(data => data.json()).then(course => console.log(course));
+        videos.map((video) => {
+                video.course = course;
+                invokePostAndAwaitResponse("addVideo",video);
+            }
+        )
         navigate('/');
     }
 
