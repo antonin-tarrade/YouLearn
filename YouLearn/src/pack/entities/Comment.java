@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Comment {
@@ -16,8 +17,10 @@ public class Comment {
     private int id;
 
     @ManyToOne
+    @JsonIgnoreProperties({"comments","followedCourses","likedVideos","playlists"})
     private User author;
     @ManyToOne
+    @JsonIgnoreProperties({"userLikes","comments"})
     private Video video;
 
     private String content;

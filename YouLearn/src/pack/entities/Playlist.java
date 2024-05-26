@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Playlist {
@@ -15,6 +16,7 @@ public class Playlist {
     private int id;
 
     @ManyToOne
+    @JsonIgnoreProperties({"playlists","followedCourses","likedVideos","comments"})
     private User author;
 
     private boolean isPrivate;
@@ -23,6 +25,7 @@ public class Playlist {
 
     //Liste des vidéos de la playlist
     @ManyToMany
+    @JsonIgnoreProperties({"playlists"})
     private Collection<Video> videos;
 
     public Playlist() {
