@@ -9,7 +9,7 @@ function CoursePage() {
 
     const { userLoged, course, setUser } = useUser();
     const navigate = useNavigate();
-    const [videos,setVideos] = useState([]);
+    // const [videos,setVideos] = useState([]);
 
     useEffect(() => {
         if (userLoged === null) {
@@ -17,14 +17,14 @@ function CoursePage() {
         }
     }, [userLoged, navigate]);
 
-    useEffect(()=> {
-        invokeGet("getCourseVideos",{id: course.id}).then(data => data.json())
-        .then(videos => {
-            console.log("videos :" + videos);
-            setVideos(videos);
-        }
-        );
-    },[])
+    // useEffect(()=> {
+    //     invokeGet("getCourseVideos",{id: course.id}).then(data => data.json())
+    //     .then(videos => {
+    //         console.log("videos :" + videos);
+    //         setVideos(videos);
+    //     }
+    //     );
+    // },[])
 
     if (userLoged === null) {
         return null;
@@ -44,7 +44,7 @@ function CoursePage() {
             </div>
             <p>{course.description}</p>
             <div className='playlist-videos'>
-                <VideoRow videos={videos} titre={"Vidéos du cour"}/>
+                <VideoRow videos={course.videos} titre={"Vidéos du cour"}/>
             </div>
         </div>
     );

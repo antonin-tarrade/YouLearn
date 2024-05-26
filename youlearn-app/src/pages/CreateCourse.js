@@ -12,7 +12,7 @@ function CreateCourse() {
     const { userLoged } = useUser();
     const navigate = useNavigate();
     const [course, setCourse] = useState({ title: '', description: '' });
-    const [videos, setVideos] = useState([{ id: generateId(), url: '', title: '', description: '', order: 1 }]);
+    const [videos, setVideos] = useState([{ id: generateId(), url: '', title: '', description: '', orderInCourse: 1 }]);
     const[teacher,setTeacher] = useState({})
 
 
@@ -49,14 +49,14 @@ function CreateCourse() {
 
 
     const addVideo = () => {
-        setVideos([...videos, { id: generateId(), url: '', title: '', description: '', order: videos.length+1}]);
+        setVideos([...videos, { id: generateId(), url: '', title: '', description: '', orderInCourse: videos.length+1}]);
     };
 
 
     const removeVideo = (index) => {
         const values = [...videos];
         values.splice(index, 1);
-        values.map((video,index) => video.order = index+1);
+        values.map((video,index) => video.orderInCourse = index+1);
         setVideos(values);
     };
 
@@ -76,13 +76,13 @@ function CreateCourse() {
         const newVideos = Array.from(videos);
         const [reorderedVideos] = newVideos.splice(result.source.index, 1);
         newVideos.splice(result.destination.index, 0, reorderedVideos);
-        newVideos.map((video,index) => video.order = index+1);
+        newVideos.map((video,index) => video.orderInCourse = index+1);
         setVideos(newVideos);
       };
 
     const onCourseSubmitted = () => {
         console.log(course);
-        invokePostAndAwaitResponse("addCourse", course).then(data => data.json()).then(course => console.log(course));
+        invokePostAndAwaitResponse("addCourse", course).then(data => data.json()).then(course => setCourse(course));
         videos.map((video) => {
                 video.course = course;
                 console.log(video);

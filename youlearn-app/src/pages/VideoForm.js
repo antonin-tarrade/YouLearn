@@ -25,7 +25,7 @@ function VideoForm ({video, index, handleInputChange , removeVideo}){
                     }}>
                     
                     <div className="video-form-header">
-                        {video.order}
+                        {video.orderInCourse}
                         <button type="button" className="remove-video-button" onClick={() => removeVideo(index)}>x</button>
                     </div>
                     <div className="video-form-main">
