@@ -26,7 +26,9 @@ function CreateCourse() {
     }, [userLoged, navigate]);
 
     useEffect(() => {
-        invokeGet("getTeacherInfos",userLoged.username).then(data => data.json()).then(teacher => {
+        console.log(userLoged.username);
+        invokeGet("getTeacherInfos",{username: userLoged.username}).then(data => data.text()).then(teacher => {
+            console.log(teacher);
             setTeacher(teacher);
             setCourse(prevCourse => ({
                 ...prevCourse,

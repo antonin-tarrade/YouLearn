@@ -75,7 +75,7 @@ public class UserAPI {
     @Path("/getStudentInfos")
     @Produces({ "application/json" })
     public Student getStudentInfos(@QueryParam("username") String username) {
-        Student student = (Student) em.createQuery("SELECT s FROM Student s WHERE s.user = :username")
+        Student student = (Student) em.createQuery("SELECT s FROM Student s WHERE s.user.username = :username")
                 .setParameter("username", username).getSingleResult();
         return student;
     }
@@ -84,8 +84,9 @@ public class UserAPI {
     @Path("/getTeacherInfos")
     @Produces({ "application/json" })
     public Teacher getTeacherInfos(@QueryParam("username") String username) {
-        Teacher teacher = (Teacher) em.createQuery("SELECT t FROM Teacher t WHERE t.user = :username")
-                .setParameter("username", username).getSingleResult();
+        Teacher teacher = (Teacher) em.createQuery("SELECT t FROM Teacher t WHERE t.user.username = :username")
+            .setParameter("username", username).getSingleResult();
+            System.out.println(teacher.getName());
         return teacher;
     }
 
