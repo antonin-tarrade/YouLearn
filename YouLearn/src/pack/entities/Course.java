@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 
 @Entity
 public class Course {
@@ -20,9 +21,9 @@ public class Course {
 
     @ManyToOne
     private Teacher owner;
-    @ManyToMany(mappedBy = "followedCourses")
+    @ManyToMany(mappedBy = "followedCourses",fetch = FetchType.EAGER)
     private Collection<User> followers;
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
     private Collection<Video> videos;
 
     private String title;

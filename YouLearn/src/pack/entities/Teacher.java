@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 
 @Entity
 public class Teacher {
@@ -16,7 +17,7 @@ public class Teacher {
 
     @OneToOne
     private User user;
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
     private Collection<Course> courses;
 
     private String name;

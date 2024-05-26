@@ -6,6 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 
 import java.util.Collection;
 
@@ -22,7 +23,7 @@ public class Playlist {
     private String description;
 
     //Liste des vidéos de la playlist
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Video> videos;
 
     public Playlist() {

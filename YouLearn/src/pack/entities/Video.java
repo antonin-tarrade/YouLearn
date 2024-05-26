@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 
 @Entity
 public class Video {
@@ -20,9 +21,9 @@ public class Video {
 
     @ManyToOne
     private Course course;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<User> userLikes;
-    @OneToMany(mappedBy = "video")
+    @OneToMany(mappedBy = "video",fetch = FetchType.EAGER)
     private Collection<Comment> comments;
 
     private String title;
