@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Video {
@@ -21,13 +19,10 @@ public class Video {
     private int id;
 
     @ManyToOne
-    @JsonIgnore
     private Course course;
     @ManyToMany
-    @JsonIgnore
     private Collection<User> userLikes;
     @OneToMany(mappedBy = "video")
-    @JsonIgnore
     private Collection<Comment> comments;
 
     private String title;

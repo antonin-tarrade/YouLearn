@@ -31,17 +31,18 @@ function UserPage() {
     },[]);
 
     function initTeacherInfos(){
-        invokeGet("getTeacherInfos",{username: user.username}).then(data => data.json()).then(teacher => {
-            console.log("HELLO");
-            console.log(teacher);
-            setTeacher(teacher);
-            invokeGet("getCourses",{teacherId: teacher.id}).then(data => data.json()).then(courses => {
-                console.log(courses);
-                courses.map((course) => console.log(course.title));
-                setCourses(courses);
-            }
-            );
-        });
+        invokeGet("getTeacherInfos",{username: user.username}).then(data => console.log(data.text()));
+        // .then(teacher => {
+        //     console.log("HELLO");
+        //     console.log(teacher);
+        //     setTeacher(teacher);
+        //     invokeGet("getCourses",{teacherId: teacher.id}).then(data => data.json()).then(courses => {
+        //         console.log(courses);
+        //         courses.map((course) => console.log(course.title));
+        //         setCourses(courses);
+        //     }
+        //     );
+        // });
     }
 
 
