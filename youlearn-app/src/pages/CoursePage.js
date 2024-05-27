@@ -14,17 +14,9 @@ function CoursePage() {
     useEffect(() => {
         if (userLoged === null) {
         navigate('/login');
-        }
+        } 
     }, [userLoged, navigate]);
 
-    // useEffect(()=> {
-    //     invokeGet("getCourseVideos",{id: course.id}).then(data => data.json())
-    //     .then(videos => {
-    //         console.log("videos :" + videos);
-    //         setVideos(videos);
-    //     }
-    //     );
-    // },[])
 
     if (userLoged === null) {
         return null;
@@ -37,10 +29,11 @@ function CoursePage() {
 
     return (
         <div className='CoursePageMain'>
+            {console.log(course)}
             <h1>{course.title}</h1>
             <div className='course-infos'>
                 <span>Par</span>
-                <button className='App-link' onClick={() => handleGoToUserPage(course.owner)}>{course.owner.user.username}</button>
+                <button className='App-link' onClick={() => handleGoToUserPage(course.owner.user)}>{course.owner.user.username}</button>
             </div>
             <p>{course.description}</p>
             <div className='playlist-videos'>

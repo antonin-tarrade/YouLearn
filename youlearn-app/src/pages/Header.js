@@ -8,7 +8,7 @@ import { ReactComponent as UserSignedOutIcon } from '../img/user-signed-out.svg'
 
 function Header() {
 
-  const { userLoged, setUserLoged, setUser } = useUser();
+  const { userLoged, setUserLoged, setUser , setSearch} = useUser();
   const navigate = useNavigate();
 
   const [isSearchShown, setIsSearchShown] = useState(false);
@@ -49,6 +49,13 @@ function Header() {
     navigate('/user');
   };
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
+    setSearch(event.target.value);
+    navigate('/searchresultpage')
+  }
+
 
   if (userLoged === null) {
     return null;
@@ -71,6 +78,11 @@ function Header() {
           ref={searchFieldRef}
           style={{ width: isSearchShown ? '60%' : '0', opacity: isSearchShown ? 1 : 0 }}
           onBlur={() => setIsSearchShown(false)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              handleSearch(event);
+            }
+          }}
         />
       </div>
 
