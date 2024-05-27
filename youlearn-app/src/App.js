@@ -14,6 +14,9 @@ import CreateCourse from './pages/CreateCourse';
 import './App.css';
 
 function App() {
+
+  const topSpace = <div className='top-bar-spacer'></div>;
+
   return (
     <UserProvider>
       <Router>
@@ -21,12 +24,12 @@ function App() {
           <Header />
           <Routes>
             <Route path="/login" element={<LogInForm />} />
-            <Route path="/" element={<HomePage />} />
-            <Route path="/user" element={<UserPage />} />
-            <Route path="/video" element={<VideoPage />} />
-            <Route path="/course" element={<CoursePage />} />
-            <Route path="/playlist" element={<PlaylistPage />} />
-            <Route path="/createcourse" element={<CreateCourse />} />
+            <Route path="/" element={<div> {topSpace} <HomePage /></div>} />
+            <Route path="/user" element={<div> {topSpace} <UserPage /></div>} />
+            <Route path="/video" element={<div> {topSpace} <VideoPage /></div>} />
+            <Route path="/course" element={<div> {topSpace} <CoursePage /></div>} />
+            <Route path="/playlist" element={<div> {topSpace} <PlaylistPage /></div>} />
+            <Route path="/createcourse" element={<div> {topSpace} <CreateCourse /></div>} />
           </Routes>
         </div>
       </Router>

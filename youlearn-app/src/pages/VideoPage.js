@@ -128,7 +128,7 @@ function VideoPage() {
           <PlaylistButton playlists={userLoged.playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
             <LikeButton />
-            <p><strong>{video.numberOfLike} likes</strong></p>
+            <p className='likes'><strong>{video.numberOfLike} likes</strong></p>
           </div>
         </div>
       </div>
@@ -153,10 +153,10 @@ function VideoPage() {
       <ul className='comments'>
         {video.comments.map((comment, index) => (
           <li key={index} className="comment-item">
-            <span>
-              <button className='App-link' onClick={() => handleGoToUserPage(comment.author)} >{comment.author.username} </button>
-            </span>
             <p>{comment.content}</p>
+            <span>
+              ecrit part<button className='App-link' onClick={() => handleGoToUserPage(comment.author)} >{comment.author.username} </button>
+            </span>
           </li>
         ))}
       </ul>

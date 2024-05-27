@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-
 body{
-  font-family: 'Roboto Mono',monospace;
+  font-family: 'Roboto Mono', monospace;
   background-color: #262626;
   color: white;
+  display: block;
+  overflow-y: scroll;
+  scrollbar-gutter: stable both-edges;
 }
 
 @property --appGreen {
@@ -20,7 +21,7 @@ body{
 
 .global-button {
   background: linear-gradient(to right,var(--appGreen), var(--appBlue));
-  transition: --appGreen 1s, opacity  ease 0.5s;
+  transition: --appGreen 1s, opacity ease 0.5s;
   border-radius: 15px;
   padding: 15px 25px;
   text-align: center;
@@ -52,7 +53,8 @@ body{
 }
 
 ::-webkit-scrollbar {
-  height: 10px;
+  width: 15px;
+  height: 15px;
 }
 
 ::-webkit-scrollbar-track {
@@ -62,4 +64,13 @@ body{
 ::-webkit-scrollbar-thumb {
   background-color: var(--appBlue);
   border-radius: 5px;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+}
+
+.top-bar-spacer {
+  height: 50px;
 }
