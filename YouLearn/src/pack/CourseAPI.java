@@ -100,4 +100,16 @@ public class CourseAPI {
         Collection<User> followers = course.getFollowers();
         return followers;
     }
+
+    @GET
+    @Path("/getCourseOwner")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    public Teacher getCourseOwner(@QueryParam("id") int id) {
+        Course course = em.find(Course.class, id);
+        if (course == null)
+            return null;
+        Teacher owner = course.getOwner();
+        return owner;
+    }
 }
