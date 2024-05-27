@@ -72,6 +72,30 @@ public class VideoAPI {
     }
 
     @GET
+    @Path("/likeVideo")
+    @Produces({ "application/json" })
+    public boolean likeVideo(@QueryParam("username") String username, @QueryParam("id") int id) {
+        Video video = em.find(Video.class, id);
+        User user = em.find(User.class, username);
+        if (video == null || user == null || hasUserLiked(username, id))
+            return false;
+        video.addUserLikes(user);
+        return true;
+    }
+
+    @GET
+    @Path("/unlikeVideo")
+    @Produces({ "application/json" })
+    public boolean unlikeVideo(@QueryParam("username") String username, @QueryParam("id") int id) {
+        Video video = em.find(Video.class, id);
+        User user = em.find(User.class, username);
+        if (video == null || user == null || !hasUserLiked(username, id))
+            return false;
+        video.removeUserLikes(user);
+        return true;
+    }
+
+    @GET
     @Path("/getVideoLikesAmount")
     @Produces({ "application/json" })
     public int getVideoLikesAmount(@QueryParam("id") int id) {
@@ -80,6 +104,22 @@ public class VideoAPI {
             return -1;
         int likes = video.getUserLikes().size();
         return likes;
+    }
+
+    @GET
+    @Path("/hasUserLiked")
+    @Produces({ "application/json" })
+    public boolean hasUserLiked(@QueryParam("username") String username, @QueryParam("id") int id) {
+        Video video = em.find(Video.class, id);
+        User user = em.find(User.class, username);
+        if (video == null || user == null || video.getUserLikes() == null)
+            return false;
+        Collection<User> likes = video.getUserLikes();
+        for (User u : likes) {
+            if (u.getUsername() == username)
+                return true;
+        }
+        return false;
     }
 
     @GET
