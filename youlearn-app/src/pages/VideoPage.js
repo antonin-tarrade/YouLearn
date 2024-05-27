@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
+import { invokeGet, invokePostAndAwaitResponse } from '../api';
 
 import './VideoPage.css';
 
@@ -9,6 +10,8 @@ function VideoPage() {
 
   const { userLoged, video, setUser, setCourse } = useUser();
   const navigate = useNavigate();
+  const [owner,setOwner] = useState(null);
+  const [comments,setComments] = useState([]);
 
   useEffect(() => {
     if (userLoged === null) {
@@ -18,6 +21,24 @@ function VideoPage() {
       navigate('/');
     }
   }, [userLoged, navigate]);
+
+  // Init of video attributes that are hidden in JSON for 
+  useEffect(() => {
+    invokeGet("getCourseOwner",{id : video.course.id}).then(data => data.json()).then(owner => {
+      console.log(owner);
+        setOwner(owner);
+    }
+    )
+  },[])
+  useEffect(() => {
+    invokeGet("getVideoCommments",{id : video.id}).then(data => data.json()).then(comments => {
+      console.log(comments);
+        setComments(comments);
+    }
+    )
+  },[])
+
+  
 
   
   const handlePlaylistToggle = (playlistId) => {
@@ -84,6 +105,12 @@ function VideoPage() {
   const handleSendComment = () => {
     if (comment.trim()) {
       console.log('Comment sent:', comment);
+      let newComment = {
+        video: video,
+        author: userLoged,
+        content:comment
+      }
+      invokePostAndAwaitResponse("addComment",newComment);
       setComment('');
     }
   };
@@ -104,8 +131,9 @@ function VideoPage() {
   }
   
   return (
+    
     <div className='videoPageMain'>
-
+      {console.log(video)}
       <div className='vGrid'>
         <h1>{video.title}</h1>
 
@@ -121,14 +149,14 @@ function VideoPage() {
         <div className='hBar'>
           <p>
             <strong>Auteur:</strong>
-            <button className='App-link' onClick={() => handleGoToUserPage(video.author)}>{video.author.username}</button>
+            {owner && <button className='App-link' onClick={() => handleGoToUserPage(owner.user)}>{owner.user.username}</button>}
             <strong> Cour:</strong>
             <button className='App-link course-button' onClick={() => handleGoToCoursePage(video.course)} >{video.course.title}</button>
           </p>
           <PlaylistButton playlists={userLoged.playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
-            <LikeButton />
-            <p><strong>{video.numberOfLike} likes</strong></p>
+            <LikeButton />  
+            <p><strong>{0} likes</strong></p> 
           </div>
         </div>
       </div>
@@ -151,10 +179,10 @@ function VideoPage() {
       {/* Les commentaires */}
       <h2>Commentaires :</h2>
       <ul className='comments'>
-        {video.comments.map((comment, index) => (
+        {comments.map((comment, index) => (
           <li key={index} className="comment-item">
             <span>
-              <button className='App-link' onClick={() => handleGoToUserPage(comment.author)} >{comment.author.username} </button>
+              <button className='App-link' onClick={() => handleGoToUserPage(comment.owner.user)} >{comment.owner.user.username} </button>
             </span>
             <p>{comment.content}</p>
           </li>
