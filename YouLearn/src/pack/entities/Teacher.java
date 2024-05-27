@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Teacher {
@@ -21,8 +22,9 @@ public class Teacher {
     //@JsonManagedReference pas besoin car pas de variable de type Teacher dans User
     private User user;
 
+    
     @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
-    @JsonManagedReference(value = "owner-course")
+    @JsonIgnoreProperties({"owner"})
     private Collection<Course> courses;
 
     private String name;

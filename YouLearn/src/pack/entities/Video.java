@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Video {
@@ -22,15 +23,15 @@ public class Video {
     private int id;
 
     @ManyToOne
-    @JsonBackReference(value="course-video")
+    @JsonIgnoreProperties({"videos"})
     private Course course;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference(value="user-like")
+    @JsonIgnoreProperties({"likedVideos"})
     private Collection<User> userLikes;
 
     @OneToMany(mappedBy = "video",fetch = FetchType.EAGER)
-    @JsonManagedReference(value="video-comment")
+    @JsonIgnoreProperties({"video"})
     private Collection<Comment> comments;
 
     private String title;
