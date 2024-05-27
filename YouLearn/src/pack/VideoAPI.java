@@ -107,4 +107,16 @@ public class VideoAPI {
         System.out.println("Video taille : " + videos.size());
         return videos;
     }
+
+    @GET
+    @Path("/getVideoOwner")
+    @Produces({ "application/json" })
+    @Consumes({ "application/json" })
+    public User getVideoOwner(@QueryParam("id") int id) {
+        Video video = em.find(Video.class, id);
+        if (video == null)
+            return null;
+        User owner = video.getCourse().getOwner();
+        return owner;
+    }
 }
