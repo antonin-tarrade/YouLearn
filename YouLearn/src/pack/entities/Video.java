@@ -12,9 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.FetchType;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Video {
@@ -22,15 +20,13 @@ public class Video {
     private int id;
 
     @ManyToOne
-    @JsonBackReference(value="course-video")
+    @JsonIgnoreProperties({"videos"})
     private Course course;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference(value="user-like")
+    @ManyToMany
+    @JsonIgnoreProperties({"likedVideos"})
     private Collection<User> userLikes;
-
-    @OneToMany(mappedBy = "video",fetch = FetchType.EAGER)
-    @JsonManagedReference(value="video-comment")
+    @OneToMany(mappedBy = "video")
+    @JsonIgnoreProperties({"video"})
     private Collection<Comment> comments;
 
     private String title;

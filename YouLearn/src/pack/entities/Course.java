@@ -11,9 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.FetchType;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Course {
@@ -22,15 +20,13 @@ public class Course {
     private int id;
 
     @ManyToOne
-    @JsonBackReference(value = "owner-course")
+    @JsonIgnoreProperties({"courses"})
     private Teacher owner;
-
-    @ManyToMany(mappedBy = "followedCourses",fetch = FetchType.EAGER)
-    @JsonBackReference(value = "follower-course")
+    @ManyToMany(mappedBy = "followedCourses")
+    @JsonIgnoreProperties({"followedCourses","likedVideos","comments","playlists"})
     private Collection<User> followers;
-
-    @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
-    @JsonManagedReference(value = "course-video")
+    @OneToMany(mappedBy = "course")
+    @JsonIgnoreProperties({"comments"})
     private Collection<Video> videos;
 
     private String title;
