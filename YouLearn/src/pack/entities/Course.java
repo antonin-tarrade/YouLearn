@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -29,7 +30,7 @@ public class Course {
     private Collection<User> followers;
 
     @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
-    @JsonBackReference(value = "course-video")
+    @JsonManagedReference(value = "course-video")
     private Collection<Video> videos;
 
     private String title;

@@ -15,6 +15,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import pack.UserRole;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class User {
@@ -30,11 +31,11 @@ public class User {
     private Collection<Video> likedVideos;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
-    @JsonBackReference(value = "author-comment")
+    @JsonManagedReference(value = "author-comment")
     private Collection<Comment> comments;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
-    @JsonBackReference(value = "author-playlist")
+    @JsonManagedReference(value = "author-playlist")
     private Collection<Playlist> playlists;
 
     private String email;

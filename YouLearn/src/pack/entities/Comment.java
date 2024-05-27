@@ -3,6 +3,8 @@ package pack.entities;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,16 +12,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Comment {
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @ManyToOne
-    @JsonManagedReference(value="author-comment")
+    @JsonBackReference(value="author-comment")
     private User author;
     @ManyToOne
-    @JsonManagedReference(value="video-comment")
+    @JsonBackReference(value="video-comment")
     private Video video;
 
     private String content;

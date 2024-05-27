@@ -78,7 +78,7 @@ public class UserAPI {
         Student student = (Student) em.createQuery("SELECT s FROM Student s WHERE s.user.username = :username")
                 .setParameter("username", username).getSingleResult();
         return student;
-    }
+    } 
 
     @GET
     @Path("/getTeacherInfos")

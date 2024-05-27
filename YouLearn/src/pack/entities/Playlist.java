@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 
 import java.util.Collection;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Playlist {
@@ -17,7 +18,7 @@ public class Playlist {
     private int id;
 
     @ManyToOne
-    @JsonManagedReference(value="author-playlist")
+    @JsonBackReference(value="author-playlist")
     private User author;
 
     private boolean isPrivate;
