@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import './UserPage.css'
 import { VideoRow } from './utils';
@@ -49,8 +49,11 @@ function UserPage() {
                 <h2>Playlistes</h2>
                 <div className='playlist-button-row'>
                     {user.playlists.map((playlist) => (
-                        <button className='global-button' onClick={() => handleGoToPlaylistPage(playlist)}>{playlist.title}</button>
+                        <button className='playliste-button' onClick={() => handleGoToPlaylistPage(playlist)}> {playlist.title} </button>
                     ))}
+                    <Link to='/createplaylist'>
+                        <button className='playliste-button'> + </button>
+                    </Link>
                 </div>
                 <div className='liked-videos'>
                     <VideoRow videos={user.likedVideos} titre={"Vidéos likées"}/>
