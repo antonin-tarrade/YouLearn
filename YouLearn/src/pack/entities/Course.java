@@ -23,9 +23,13 @@ public class Course {
     @ManyToOne
     @JsonBackReference
     private Teacher owner;
+
     @ManyToMany(mappedBy = "followedCourses",fetch = FetchType.EAGER)
+    @JsonBackReference
     private Collection<User> followers;
+
     @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
+    @JsonBackReference
     private Collection<Video> videos;
 
     private String title;

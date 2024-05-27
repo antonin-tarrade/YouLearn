@@ -9,15 +9,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Comment {
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @ManyToOne
+    @JsonManagedReference
     private User author;
     @ManyToOne
+    @JsonManagedReference
     private Video video;
 
     private String content;

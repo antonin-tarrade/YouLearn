@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 
 import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Playlist {
@@ -16,6 +17,7 @@ public class Playlist {
     private int id;
 
     @ManyToOne
+    @JsonManagedReference
     private User author;
 
     private boolean isPrivate;
@@ -24,6 +26,7 @@ public class Playlist {
 
     //Liste des vidéos de la playlist
     @ManyToMany(fetch = FetchType.EAGER)
+    // @JsonManagedReference pas besoin car pas de variable de type Playlist dans Video
     private Collection<Video> videos;
 
     public Playlist() {

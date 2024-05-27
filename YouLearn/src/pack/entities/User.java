@@ -13,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import pack.UserRole;
 
 @Entity
@@ -22,12 +22,19 @@ public class User {
     private String username;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Collection<Course> followedCourses;
+
     @ManyToMany(mappedBy = "userLikes",fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Collection<Video> likedVideos;
+
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
+    @JsonBackReference
     private Collection<Comment> comments;
+
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
+    @JsonBackReference
     private Collection<Playlist> playlists;
 
     private String email;

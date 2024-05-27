@@ -17,7 +17,9 @@ public class Teacher {
     private int id;
 
     @OneToOne
+    //@JsonManagedReference pas besoin car pas de variable de type Teacher dans User
     private User user;
+
     @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
     @JsonManagedReference
     private Collection<Course> courses;
