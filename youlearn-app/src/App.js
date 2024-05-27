@@ -12,6 +12,7 @@ import PlaylistPage from './pages/PlaylistPage';
 import CreateCourse from './pages/CreateCourse';
 
 import './App.css';
+import SearchResultPage from './pages/SearchResultPage';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
             <Route path="/course" element={<CoursePage />} />
             <Route path="/playlist" element={<PlaylistPage />} />
             <Route path="/createcourse" element={<CreateCourse />} />
+            <Route path="/searchresultpage" element={<SearchResultPage />} />
+            
           </Routes>
         </div>
       </Router>

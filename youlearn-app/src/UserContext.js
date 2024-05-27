@@ -9,9 +9,10 @@ export const UserProvider = ({ children }) => {
     const [video, setVideo] = useState(null);
     const [course, setCourse] = useState(null);
     const [playlist, setPlaylist] = useState(null);
+    const [search, setSearch] = useState(null);
 
     return (
-        <UserContext.Provider value={{ userLoged, setUserLoged, user, setUser, video, setVideo, course, setCourse, playlist, setPlaylist }}>
+        <UserContext.Provider value={{ userLoged, setUserLoged, user, setUser, video, setVideo, course, setCourse, playlist, setPlaylist, search, setSearch }}>
             {children}
         </UserContext.Provider>
     );

@@ -94,13 +94,15 @@ public class VideoAPI {
     }
 
     @GET
-    @Path("/searchForVideo")
+    @Path("/searchForVideos")
     @Produces({ "application/json" })
-    public Collection<Video> searchForVideo(@QueryParam("search") String search) {
+    public Collection<Video> searchForVideos(@QueryParam("search") String search) {
+        System.out.println("\n\n Search : " + search);
         String query = "%" + search.replace("%","") + "%";
 
         Collection<Video> videos = (Collection<Video>) em.createQuery("SELECT b FROM Video v WHERE v.title LIKE :query").setParameter("query", query);
-
+        System.out.println("Video nulle ? " + videos==null);
+        System.out.println("Video taille : " + videos.size());
         return videos;
     }
 }

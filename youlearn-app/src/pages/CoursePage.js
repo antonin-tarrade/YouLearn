@@ -33,7 +33,7 @@ function CoursePage() {
             <h1>{course.title}</h1>
             <div className='course-infos'>
                 <span>Par</span>
-                <button className='App-link' onClick={() => handleGoToUserPage(course.owner)}>{course.owner.user.username}</button>
+                <button className='App-link' onClick={() => handleGoToUserPage(course.owner.user)}>{course.owner.user.username}</button>
             </div>
             <p>{course.description}</p>
             <div className='playlist-videos'>
