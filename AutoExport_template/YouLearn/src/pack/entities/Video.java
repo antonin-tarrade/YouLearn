@@ -2,15 +2,14 @@ package pack.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.persistence.Entity;
+import java.util.List;import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import javax.persistence.FetchType;
 @Entity
 public class Video {
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,7 +17,7 @@ public class Video {
 
     @ManyToOne
     private Course course;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<User> userLikes;
     @OneToMany(mappedBy = "video")
     private Collection<Comment> comments;

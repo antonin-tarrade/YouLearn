@@ -29,7 +29,7 @@ public class Course {
     @ManyToMany(mappedBy = "followedCourses",fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"followedCourses","likedVideos","comments","playlists"})
     private Collection<User> followers;
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"comments"})
     private Collection<Video> videos;
 
@@ -43,6 +43,10 @@ public class Course {
         this.title = title;
         this.description = description;
         this.owner = owner;
+
+        this.followers = new ArrayList<User>();
+        this.videos = new ArrayList<Video>();
+
     }
 
     // Getters / setters

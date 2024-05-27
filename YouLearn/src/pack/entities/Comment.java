@@ -36,6 +36,7 @@ public class Comment {
         this.date = date;
         this.video = video;
         this.author = author;
+
     }
 
     // Getters / setters

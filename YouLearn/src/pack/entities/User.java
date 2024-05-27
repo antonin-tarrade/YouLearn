@@ -2,8 +2,7 @@ package pack.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
- 
+import java.util.List; 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -55,6 +54,9 @@ public class User {
         this.role = role;
 
         this.followedCourses = new ArrayList<Course>();
+        this.likedVideos = new ArrayList<Video>();
+        this.comments = new ArrayList<Comment>();
+        this.playlists = new ArrayList<Playlist>();
     }
 
 

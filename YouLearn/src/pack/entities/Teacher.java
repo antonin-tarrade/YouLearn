@@ -1,7 +1,8 @@
 package pack.entities;
 
 import java.util.Collection;
-
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,7 +25,7 @@ public class Teacher {
 
     
     @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"owner"})
+    @JsonIgnoreProperties({"owner"}) 
     private Collection<Course> courses;
 
     private String name;
@@ -35,6 +36,8 @@ public class Teacher {
     public Teacher(User user, String name) {
         this.user = user;
         this.name = name;
+
+        this.courses = new ArrayList<Course>();
     }
 
     // Getters / setters
