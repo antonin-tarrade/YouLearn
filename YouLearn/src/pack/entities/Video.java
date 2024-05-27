@@ -21,15 +21,15 @@ public class Video {
     private int id;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonManagedReference(value="course-video")
     private Course course;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference(value="user-like")
     private Collection<User> userLikes;
 
     @OneToMany(mappedBy = "video",fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference(value="video-comment")
     private Collection<Comment> comments;
 
     private String title;

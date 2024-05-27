@@ -22,19 +22,19 @@ public class User {
     private String username;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @JsonManagedReference(value = "follower-course")
     private Collection<Course> followedCourses;
 
     @ManyToMany(mappedBy = "userLikes",fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @JsonManagedReference(value = "user-like")
     private Collection<Video> likedVideos;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference(value = "author-comment")
     private Collection<Comment> comments;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference(value = "author-playlist")
     private Collection<Playlist> playlists;
 
     private String email;

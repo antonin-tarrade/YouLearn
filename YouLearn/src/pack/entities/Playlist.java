@@ -17,7 +17,7 @@ public class Playlist {
     private int id;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonManagedReference(value="author-playlist")
     private User author;
 
     private boolean isPrivate;

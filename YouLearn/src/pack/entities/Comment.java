@@ -16,10 +16,10 @@ public class Comment {
     private int id;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonManagedReference(value="author-comment")
     private User author;
     @ManyToOne
-    @JsonManagedReference
+    @JsonManagedReference(value="video-comment")
     private Video video;
 
     private String content;

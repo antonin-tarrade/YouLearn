@@ -21,7 +21,7 @@ public class Teacher {
     private User user;
 
     @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @JsonManagedReference(value = "owner-course")
     private Collection<Course> courses;
 
     private String name;
