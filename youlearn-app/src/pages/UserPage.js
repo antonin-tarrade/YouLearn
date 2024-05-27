@@ -51,7 +51,7 @@ function UserPage() {
     };
 
     const handleGoToCoursePage = (course) => {
-        course.owner = teacher;
+        // course.owner = teacher;
         setCourse(course);
         navigate('/course');
     };

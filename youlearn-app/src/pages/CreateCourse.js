@@ -81,14 +81,16 @@ function CreateCourse() {
       };
 
     const onCourseSubmitted = () => {
-        console.log(course);
-        invokePostAndAwaitResponse("addCourse", course).then(data => data.json()).then(course => setCourse(course));
-        videos.map((video) => {
-                video.course = course;
-                console.log(video);
-                invokePostAndAwaitResponse("addVideo",video);
-            }
-        )
+        invokePostAndAwaitResponse("addCourse", course).then(data => data.json()).then(course => {
+            setCourse(course);
+            console.log(course);
+            videos.map((video) => {
+                    video.course = course;
+                    console.log(video);
+                    invokePostAndAwaitResponse("addVideo",video);
+                }
+            )
+        });
         navigate('/');
     }
 
