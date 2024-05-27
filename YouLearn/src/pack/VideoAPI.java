@@ -116,7 +116,7 @@ public class VideoAPI {
         Video video = em.find(Video.class, id);
         if (video == null)
             return null;
-        User owner = video.getCourse().getOwner();
+        User owner = video.getCourse().getOwner().getUser();
         return owner;
     }
 }
