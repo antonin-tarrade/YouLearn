@@ -8,6 +8,7 @@ import { invokeGet } from '../api';
 function CoursePage() {
 
     const { userLoged, course, setUser } = useUser();
+    const [videos, setVideos] = useState(course.videos || []);
     const navigate = useNavigate();
     const [owner,setOwner] = useState(null);
 
@@ -25,6 +26,16 @@ function CoursePage() {
         )
     },[])
 
+    useEffect(() => {
+        if (!course.videos) {
+            invokeGet("getCourseVideos", { id: course.id })
+                .then(data => data.json())
+                .then(videos => {
+                    setVideos(videos);
+                });
+        }
+    }, [course.id, course.videos]);
+
 
     if (userLoged === null) {
         return null;
@@ -37,7 +48,6 @@ function CoursePage() {
 
     return (
         <div className='CoursePageMain'>
-            {console.log(course)}
             <h1>{course.title}</h1>
             <div className='course-infos'>
                 <span>Par</span>
@@ -45,7 +55,7 @@ function CoursePage() {
             </div>
             <p>{course.description}</p>
             <div className='playlist-videos'>
-                <VideoRow videos={course.videos} titre={"Vidéos du cour"}/>
+                <VideoRow videos={videos} titre={"Vidéos du cour"}/>
             </div>
         </div>
     );

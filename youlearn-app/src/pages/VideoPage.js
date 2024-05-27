@@ -39,8 +39,6 @@ function VideoPage() {
   },[])
 
   
-
-  
   const handlePlaylistToggle = (playlistId) => {
     // logique pour ajouter ou retirer la video de la playlist
   };
