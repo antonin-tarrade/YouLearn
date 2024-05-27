@@ -73,7 +73,7 @@ function CreateCourse() {
     return (
         <div className="create-course-page">
             <div className="course-form-container">
-                <h1>Créer le cour :</h1>
+                <h1>Créer un Cour :</h1>
                 <form className="add-course-form">
                     <label className='course-label'>
                         <p className='course-title-label'>Titre du cour :</p>

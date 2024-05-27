@@ -10,6 +10,7 @@ import UserPage from './pages/UserPage';
 import CoursePage from './pages/CoursePage';
 import PlaylistPage from './pages/PlaylistPage';
 import CreateCourse from './pages/CreateCourse';
+import CreatePlaylist from './pages/CreatePlaylist';
 
 import './App.css';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/course" element={<div> {topSpace} <CoursePage /></div>} />
             <Route path="/playlist" element={<div> {topSpace} <PlaylistPage /></div>} />
             <Route path="/createcourse" element={<div> {topSpace} <CreateCourse /></div>} />
+            <Route path="/createplaylist" element={<div> {topSpace} <CreatePlaylist /></div>} />
           </Routes>
         </div>
       </Router>

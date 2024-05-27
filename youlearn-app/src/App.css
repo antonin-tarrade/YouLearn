@@ -1,11 +1,14 @@
-body{
+body {
   font-family: 'Roboto Mono', monospace;
-  background-color: #262626;
+  background: transparent;
   color: white;
   display: block;
   overflow-y: scroll;
   scrollbar-gutter: stable both-edges;
+  background: linear-gradient(to right, #000000 0%, #252525 100%);
+  background-color: #181818;
 }
+
 
 @property --appGreen {
   syntax: '<color>';
