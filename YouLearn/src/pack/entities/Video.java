@@ -66,6 +66,14 @@ public class Video {
         this.userLikes = userLikes;
     }
 
+    public void addUserLikes (User user) {
+        this.userLikes.add(user);
+    }
+
+    public void removeUserLikes (User user) {
+        this.userLikes.remove(user);
+    }
+
     public Collection<Comment> getComments() {
         return comments;
     }
