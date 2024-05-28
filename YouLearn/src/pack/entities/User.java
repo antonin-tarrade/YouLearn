@@ -33,7 +33,7 @@ public class User {
     private Collection<Video> likedVideos;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"author"})
+    @JsonIgnoreProperties({"author","video"})
     private Collection<Comment> comments;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)

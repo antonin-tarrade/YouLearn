@@ -22,7 +22,7 @@ public class Comment {
     @JsonIgnoreProperties({"comments","followedCourses","likedVideos","playlists"})
     private User author;
     @ManyToOne
-    @JsonIgnoreProperties({"userLikes","comments"})
+    @JsonIgnoreProperties({"comments"})
     private Video video;
 
     private String content;
