@@ -45,7 +45,7 @@ function CreateCourse() {
             }));
         });
         
-    }, [videos]);
+    }, [userLoged]);
 
 
     const addVideo = () => {

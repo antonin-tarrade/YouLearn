@@ -8,6 +8,8 @@ import { invokeGet } from '../api';
 function UserPage() {
 
     const { userLoged, user, setPlaylist , setCourse} = useUser();
+    const [followedCourses, setFollowedCourses] = useState(user.followedCourses || []);
+    const [playlists, setPlaylists] = useState(user.playlists || []);
     const navigate = useNavigate();
     let ownPage  = userLoged == user;
     const [teacher,setTeacher] = useState(null);
@@ -22,19 +24,34 @@ function UserPage() {
 
     useEffect(() => {
         user.role == "Teacher" ? 
-        initTeacherInfos()
+        invokeGet("getTeacherInfos",{username: user.username}).then(data => data.json()).then(teacher => {
+            setTeacher(teacher);
+        })
         :
         invokeGet("getStudentInfos",{username: user.username}).then(data => data.json()).then(student => {
             setStudent(student);
         })
-    },[]);
+    },[user]);
 
-    function initTeacherInfos(){
-        invokeGet("getTeacherInfos",{username: user.username}).then(data => data.json()).then(teacher => {
-            console.log(teacher);
-            setTeacher(teacher);
-        });
-    }
+    useEffect(() => {
+        if (!user.followedCourses) {
+            invokeGet("getUserFollowedCourses",{username: user.username})
+                .then(data => data.json())
+                .then(followedCourses => {
+                    setFollowedCourses(followedCourses);
+                });
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (!user.playlists) {
+            invokeGet("getUserPlaylists",{username: user.username})
+                .then(data => data.json())
+                .then(playlists => {
+                    setPlaylists(playlists);
+                });
+        }
+    }, [user]);
 
 
     if (userLoged === null) {
@@ -68,7 +85,7 @@ function UserPage() {
                         <div className='create-course'>
                             <button className="add-course-button" onClick={createCourse}>Ajouter un cour </button>
                         </div>}
-                    <h2>Abonnements : {user.followedCourses.map((course,index) => (index == 0 ? '' : ' - ') + course.title)}</h2>
+                    <h2>Abonnements : {followedCourses.map((course,index) => (index == 0 ? '' : ' - ') + course.title)}</h2>
                 </div>
             </div>
             <div className='user-videos'>
@@ -76,7 +93,7 @@ function UserPage() {
                     <div>    
                         <h2>Playlists</h2>
                         <div className='playlist-button-row'>
-                            {user.playlists.map((playlist) => (
+                            {playlists.map((playlist) => (
                                 <button className='global-button' onClick={() => handleGoToPlaylistPage(playlist)}>{playlist.title}</button>
                             ))}
                         </div>

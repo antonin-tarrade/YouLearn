@@ -101,10 +101,23 @@ public class UserAPI {
         return videos;
     }
 
+
+    @GET
+    @Path("/getUserFollowedCourses")
+    @Produces({ "application/json" })
+    public Collection<Course> getUserFollowedCourses(@QueryParam("username") String username) {
+        User user = em.find(User.class, username);
+        if (user == null)
+            return null;
+        Collection<Course> followedCourses = user.getFollowedCourses();
+        return followedCourses;
+    }
+
+
     @GET
     @Path("/getUserPlaylists")
     @Produces({ "application/json" })
-    public Collection<Playlist> getUserPlaylists(@QueryParam("username") int username) {
+    public Collection<Playlist> getUserPlaylists(@QueryParam("username") String username) {
         User user = em.find(User.class, username);
         if (user == null)
             return null;

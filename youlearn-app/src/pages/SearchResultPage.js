@@ -18,12 +18,11 @@ function SearchResultPage () {
     useEffect(() => {
         console.log("search : " + search);
         invokeGet("searchForVideos",{search : search}).then(data => data.json()).then(videos => {
-                console.log(videos);
                 setVideos(videos);
             }
         )
 
-    },[videos]);
+    },[search]);
 
     return (
 

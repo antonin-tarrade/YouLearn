@@ -108,12 +108,13 @@ function VideoPage() {
         author: userLoged,
         content:comment
       }
-      invokePostAndAwaitResponse("addComment",newComment);
+      invokePostAndAwaitResponse("addComment",newComment).then(()=> setComments(prevComments => [...prevComments, newComment]));
       setComment('');
     }
   };
 
   const handleGoToUserPage = (user) => {
+    console.log(user);
     setUser(user);
     navigate('/user');
   };
@@ -180,7 +181,7 @@ function VideoPage() {
         {comments.map((comment, index) => (
           <li key={index} className="comment-item">
             <span>
-              <button className='App-link' onClick={() => handleGoToUserPage(comment.owner.user)} >{comment.owner.user.username} </button>
+              <button className='App-link' onClick={() => handleGoToUserPage(comment.author)} >{comment.author.username} </button>
             </span>
             <p>{comment.content}</p>
           </li>
