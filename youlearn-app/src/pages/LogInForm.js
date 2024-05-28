@@ -43,17 +43,17 @@ function LogInForm() {
       student.user = newUser;
       student.department = department;
       invokePostAndAwaitResponse("signUpStudent", student)
-        .then(data => data.json()).then(user => setUserLoged(user));
+        .then(data => data.json()).then(student => setUserLoged(student.user));
     } else if (role === 1) {
       let teacher = {}
       teacher.user = newUser;
       teacher.name = name;
       invokePostAndAwaitResponse("signUpTeacher", teacher)
-        .then(data => data.json()).then(user => setUserLoged(user));
+        .then(data => data.json()).then(teacher => setUserLoged(teacher.user));
     } else {
       console.log("Role Error");
     }
-    // navigate('/');
+    navigate('/');
   };
 
   const handleLogIn = (event) => {
