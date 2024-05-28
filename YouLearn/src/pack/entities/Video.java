@@ -2,9 +2,11 @@ package pack.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -52,7 +54,7 @@ public class Video {
         this.course = course;
         this.description = description;
 
-        this.userLikes = new Set<User>();
+        this.userLikes = new HashSet<User>();
     
         
     }

@@ -3,6 +3,10 @@ package pack.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List; 
+import java.util.HashSet;
+import java.util.Set;
+
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -66,6 +70,10 @@ public class User {
 
     public void setFollowedCourses(Collection<Course> followedCourses) {
         this.followedCourses = followedCourses;
+    }
+
+    public void addFollowedCourse(Course course) {
+        this.followedCourses.add(course);
     }
 
     public String getUsername() {

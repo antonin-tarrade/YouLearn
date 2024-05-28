@@ -1,6 +1,8 @@
 package pack;
 
 import java.util.Collection;
+import java.util.List;
+
 import java.util.Date;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -12,6 +14,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
+import pack.UserCourse;
 
 import pack.entities.*;
 
@@ -184,6 +188,26 @@ public class UserAPI {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+
+    
+    @POST
+    @Path("/followCourse")
+    @Consumes({ "application/json" })
+    public boolean followCourse(UserCourse json) {
+        try {
+            User user = em.find(User.class, json.getUser().getUsername());
+            Course course = em.find(Course.class, json.getCourse().getId());
+            Collection<Course> courses = user.getFollowedCourses();
+            if (user == null || course == null || courses.contains(course))
+                return false;
+            user.addFollowedCourse(course);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
