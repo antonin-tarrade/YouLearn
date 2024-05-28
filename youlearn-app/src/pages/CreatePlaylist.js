@@ -5,7 +5,7 @@ import './CreatePlaylist.css';
 import {invokePostAndAwaitResponse } from '../api';
 
 function CreatePlaylist() {
-    const { userLoged } = useUser();
+    const { userLoged,setUser,user } = useUser();
     const navigate = useNavigate();
     const [playlist, setPlaylist] = useState({ title: '', description: '' , isPrivate: false, author: null, videos : []});
 
@@ -22,8 +22,7 @@ function CreatePlaylist() {
     const handleSubmit = (event) => {
         event.preventDefault();
         playlist.author = userLoged;
-        console.log(playlist);
-        invokePostAndAwaitResponse("addPlaylist",playlist);
+        invokePostAndAwaitResponse("addPlaylist",playlist).then(() => setUser(user));
         navigate('/user');
     };
 

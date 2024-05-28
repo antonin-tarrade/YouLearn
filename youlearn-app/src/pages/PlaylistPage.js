@@ -25,7 +25,7 @@ function PlaylistPage() {
     };
 
     return (
-        <div className='PlatlistPageMain'>      
+        <div className='PlatlistPageMain'>   
             <h1>{playlist.title}</h1>
             <div className='playlist-infos'>
                 <span>Par</span>
