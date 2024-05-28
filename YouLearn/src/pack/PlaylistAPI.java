@@ -31,7 +31,7 @@ public class PlaylistAPI {
             // Find author
             User author = em.find(User.class, json.getAuthor().getUsername());
             // Create playlist
-            Playlist playlist = new Playlist(json.isPrivate(), json.getTitle(), json.getDescription(), author);
+            Playlist playlist = new Playlist(json.getIsPrivate(), json.getTitle(), json.getDescription(), author);
             System.out.println("[PERSIST] " + playlist.getClass().getName() + " (id=" + playlist.getId() + ")");
             em.persist(playlist);
             // Return

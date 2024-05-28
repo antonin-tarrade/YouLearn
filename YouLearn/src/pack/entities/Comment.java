@@ -25,7 +25,7 @@ public class Comment {
     @JsonIgnoreProperties({"comments"})
     private Video video;
 
-    private String content;
+    private String content; 
     private Date date;
 
     public Comment() {

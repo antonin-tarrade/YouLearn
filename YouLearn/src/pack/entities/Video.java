@@ -3,6 +3,7 @@ package pack.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -51,7 +52,7 @@ public class Video {
         this.course = course;
         this.description = description;
 
-        this.userLikes = new ArrayList<User>();
+        this.userLikes = new Set<User>();
     
         
     }
