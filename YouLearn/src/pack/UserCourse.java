@@ -7,6 +7,9 @@ public class UserCourse {
     private User user;
     private Course course;
 
+    public UserCourse() {
+    }
+
     public UserCourse(User user, Course course) {
         this.user = user;
         this.course = course;

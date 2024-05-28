@@ -88,4 +88,28 @@ public class PlaylistAPI {
         }
     }
 
+    @POST
+    @Path("/removeVideoFromPlaylist")
+    @Produces({ "application/json" })
+    public boolean removeVideoFromPlaylist(PlaylistVideo json) {
+        try {
+            // Find video and playlist
+            Video video = em.find(Video.class, json.getVideo().getId());
+            Playlist playlist = em.find(Playlist.class, json.getPlaylist().getId());
+            
+            if (video == null || playlist == null)
+                return false;
+            // Remove video from playlist
+            List<Video> videos = playlist.getVideos();
+            videos.remove(video);
+            playlist.setVideos(videos);
+            System.out.println("[MERGE] " + playlist.getClass().getName() + " (id=" + playlist.getId() + ")");
+            em.merge(playlist);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

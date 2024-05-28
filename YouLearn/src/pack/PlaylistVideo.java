@@ -8,6 +8,9 @@ public class PlaylistVideo {
     private Playlist playlist;
     private Video video;
 
+    public PlaylistVideo() {
+    }
+
     public PlaylistVideo(Playlist playlist, Video video) {
         this.playlist = playlist;
         this.video = video;
