@@ -100,13 +100,13 @@ public class PlaylistAPI {
             if (video == null || playlist == null)
                 return false;
             // Remove video from playlist
-            List<Video> videos = playlist.getVideos();
+            Collection<Video> videos = playlist.getVideos();
             videos.remove(video);
             playlist.setVideos(videos);
             System.out.println("[MERGE] " + playlist.getClass().getName() + " (id=" + playlist.getId() + ")");
             em.merge(playlist);
             return true;
-        } catch (Exception e) {
+        } catch (Exception e) { 
             e.printStackTrace();
             return false;
         }
