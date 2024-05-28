@@ -13,6 +13,7 @@ function VideoPage() {
   const [owner,setOwner] = useState(null);
   const [comments,setComments] = useState([]);
   const [likeAmount,setLikeAmount] = useState(0);
+  const [showedVideo,setShowedVideo] = useState(null);
 
   useEffect(() => {
     if (userLoged === null) {
@@ -25,27 +26,29 @@ function VideoPage() {
 
   // Init of video attributes that are hidden in JSON for 
   useEffect(() => {
-    invokeGet("getCourseOwner",{id : video.course.id}).then(data => data.json()).then(owner => {
-      console.log(owner);
-        setOwner(owner);
+    // invokeGet("getVideoCommments",{id : video.id}).then(data => data.json()).then(comments => {
+      //   console.log(comments);
+      //     setComments(comments);
+      // }
+      // )
+      getVideoInfos();
+    },[video])
+
+    const getVideoInfos = () => {
+      invokeGet("getVideoInfos",{id : video.id}).then(data=> data.json()).then((content) => setShowedVideo(content));
     }
-  )
-    invokeGet("getVideoCommments",{id : video.id}).then(data => data.json()).then(comments => {
-      console.log(comments);
-        setComments(comments);
-    }
-    )
-    updateLikes();
     
-  },[])
-
-  const updateLikes = () => {
-    invokeGet("getVideoLikesAmount",{id :video.id}).then(data=>data.json()).then(number => setLikeAmount(number));
-  }
-
+    useEffect(() => {
+      if (showedVideo){
+      invokeGet("getCourseOwner",{id : showedVideo.course.id}).then(data => data.json()).then(owner => {
+        console.log(owner);
+          setOwner(owner);
+      }
+      )}
+    },[showedVideo])
   
   const handlePlaylistToggle = (playlistId) => {
-    // logique pour ajouter ou retirer la video de la playlist
+    
   };
   
   const PlaylistButton = ({ playlists, onPlaylistToggle }) => {
@@ -121,7 +124,11 @@ function VideoPage() {
         author: userLoged,
         content:comment
       }
-      invokePostAndAwaitResponse("addComment",newComment).then(()=> setComments(prevComments => [...prevComments, newComment]));
+      invokePostAndAwaitResponse("addComment",newComment).then(()=> {
+          setComments(prevComments => [...prevComments, newComment]);
+          getVideoInfos();
+        }
+      );
       setComment('');
     }
   };
@@ -145,15 +152,14 @@ function VideoPage() {
   return (
     
     <div className='videoPageMain'>
-      {console.log(video)}
-      <div className='vGrid'>
-        <h1>{video.title}</h1>
+      {showedVideo && <div className='vGrid'>
+        <h1>{showedVideo.title}</h1>
 
         <iframe
           width="960"
           height="540"
-          src={video.url.replace('watch?v=', 'embed/')}
-          title={video.title}
+          src={showedVideo.url.replace('watch?v=', 'embed/')}
+          title={showedVideo.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen>
         </iframe>
@@ -163,7 +169,7 @@ function VideoPage() {
             <strong>Auteur:</strong>
             {owner && <button className='App-link' onClick={() => handleGoToUserPage(owner.user)}>{owner.user.username}</button>}
             <strong> Cour:</strong>
-            <button className='App-link course-button' onClick={() => handleGoToCoursePage(video.course)} >{video.course.title}</button>
+            <button className='App-link course-button' onClick={() => handleGoToCoursePage(showedVideo.course)} >{showedVideo.course.title}</button>
           </p>
           <PlaylistButton playlists={userLoged.playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
@@ -171,11 +177,12 @@ function VideoPage() {
             <p className='likes'><strong>{likeAmount} likes</strong></p>
           </div>
         </div>
-      </div>
+      </div> }
 
       {/* La Description */}
+      
       <h2>Description :</h2>
-      <p>{video.description}</p>
+      {showedVideo && <p>{showedVideo.description}</p>}
 
       {/* Ajouter un commentaire */}
       <h2>Ajouter un commentaire :</h2>
@@ -190,8 +197,8 @@ function VideoPage() {
 
       {/* Les commentaires */}
       <h2>Commentaires :</h2>
-      <ul className='comments'>
-        {comments.map((comment, index) => (
+      {showedVideo && <ul className='comments'>
+        {showedVideo.comments.map((comment, index) => (
           <li key={index} className="comment-item">
             <p>{comment.content}</p>
             <span>
@@ -199,7 +206,7 @@ function VideoPage() {
             </span>
           </li>
         ))}
-      </ul>
+      </ul> }
     </div>
   );
 }
