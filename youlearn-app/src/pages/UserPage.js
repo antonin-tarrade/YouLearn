@@ -6,7 +6,6 @@ import { VideoRow } from './utils';
 import { invokeGet } from '../api';
 
 function UserPage() {
-
     const { userLoged, user, setPlaylist , setCourse} = useUser();
     const [followedCourses, setFollowedCourses] = useState(user.followedCourses || []);
     const [playlists, setPlaylists] = useState(user.playlists || []);
@@ -23,17 +22,19 @@ function UserPage() {
     }, [userLoged, navigate]);
 
     useEffect(() => {
+        setStudent(null);
+        setTeacher(null);
         user.role == "Teacher" ? 
         invokeGet("getTeacherInfos",{username: user.username}).then(data => data.json()).then(teacher => {
+            console.log(teacher);
             setTeacher(teacher);
         })
         :
         invokeGet("getStudentInfos",{username: user.username}).then(data => data.json()).then(student => {
+            console.log(student);
             setStudent(student);
         })
-    },[user]);
 
-    useEffect(() => {
         if (!user.followedCourses) {
             invokeGet("getUserFollowedCourses",{username: user.username})
                 .then(data => data.json())
@@ -41,9 +42,6 @@ function UserPage() {
                     setFollowedCourses(followedCourses);
                 });
         }
-    }, [user]);
-
-    useEffect(() => {
         if (!user.playlists) {
             invokeGet("getUserPlaylists",{username: user.username})
                 .then(data => data.json())
@@ -51,7 +49,7 @@ function UserPage() {
                     setPlaylists(playlists);
                 });
         }
-    }, [user]);
+    },[user]);
 
 
     if (userLoged === null) {
@@ -80,7 +78,7 @@ function UserPage() {
                 </div>
                 <div className='info-container'>
                     <h1>{user.username}</h1>
-                    {(student || teacher ) && <h2>{ user.role == "Student" ? "Departement : "  + student.department : "Cours : " + teacher.courses.map((course,index) => (index == 0 ? '' : ' - ') + course.title )}</h2>}
+                    {(user.role == "Student" && student || user.role == "Teacher" && teacher ) && <h2>{ user.role == "Student" ? "Departement : "  + student.department : "Cours : " + teacher.courses.map((course,index) => (index == 0 ? '' : ' - ') + course.title )}</h2>}
                     {ownPage && userLoged.role == "Teacher" && 
                         <div className='create-course'>
                             <button className="add-course-button" onClick={createCourse}>Ajouter un cour </button>
