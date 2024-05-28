@@ -1,6 +1,7 @@
-import React from 'react';
+import React , {useState,useEffect} from 'react';
 import { useUser } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
+import { invokeGet} from '../api';
 import './utils.css';
 
 
@@ -21,11 +22,26 @@ export const VideoRow = ({videos, titre}) => {
 
     const { setVideo } = useUser();
     const navigate = useNavigate();
+    const [numberOfLikes,setNumberofLikes] = useState([]);
 
     const handleGoToVideo = (video) => {
         setVideo(video);
         navigate('/video');
     };
+
+    useEffect(() => {
+        videos.forEach((video, index) => {
+          invokeGet("getVideoLikesAmount", { id: video.id })
+            .then(data => data.json())
+            .then(number => {
+              setNumberofLikes(prevLikes => {
+                const newLikes = [...prevLikes];
+                newLikes[index] = number;
+                return newLikes;
+              });
+            });
+        });
+      }, [videos]);
 
     return (
         <div className="videoRow">
@@ -36,6 +52,7 @@ export const VideoRow = ({videos, titre}) => {
                     <h2>{titre}</h2>
                     <div className="videoListContainer">
                         {videos.map((video, index) => {
+                            
                             const thumbnail = getYoutubeID(video.url);
                             return (
                                 <div key={index} className="videoItem">
@@ -53,7 +70,7 @@ export const VideoRow = ({videos, titre}) => {
                                     <div className="videoInfo">
                                         <button onClick={() => handleGoToVideo(video)} className="App-link">{video.title}</button>
                                         <p>
-                                            {video.numberOfLike + "  "}
+                                            {numberOfLikes[index] + "  "}
                                             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
                                             <i className="fa fa-thumbs-up"></i>
                                         </p>
