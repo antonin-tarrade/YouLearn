@@ -31,7 +31,7 @@ public class Playlist {
     //Liste des vidéos de la playlist
     @ManyToMany(fetch = FetchType.EAGER)
     // @JsonManagedReference pas besoin car pas de variable de type Playlist dans Video
-    @JsonIgnoreProperties({"playlists"})
+    @JsonIgnoreProperties({"playlists","course"})
     private Collection<Video> videos;
 
     public Playlist() {
