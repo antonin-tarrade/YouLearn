@@ -25,8 +25,8 @@ function HomePage() {
 
             {userLoged.role == "Teacher" && 
             <div>
-                <h2>Créer un cours </h2>
-                <Link to='/createcourse'>Creer un cours</Link>
+                <h2>Créer un cours :</h2>
+                <Link to='/createcourse' className='App-link'>Creer un cours</Link>
             </div>}
 
             <VideoRow videos={userLoged.likedVideos} titre="Vidéos likées" />

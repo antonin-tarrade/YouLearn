@@ -32,8 +32,10 @@
 }
 
 .video-form-input textarea{
-    height:7em;
+    height: 45px;
     width: 12em;
+    resize: vertical;
+    padding-bottom: 10px;
 }
 
 .video-form-input input{

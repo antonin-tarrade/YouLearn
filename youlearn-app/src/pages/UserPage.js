@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import './UserPage.css'
 import { VideoRow } from './utils';
@@ -87,25 +87,27 @@ function UserPage() {
                 </div>
             </div>
             <div className='user-videos'>
-                {userLoged.role == "Student" ?
-                    <div>    
-                        <h2>Playlists</h2>
-                        <div className='playlist-button-row'>
-                            {playlists.map((playlist) => (
-                                <button className='global-button' onClick={() => handleGoToPlaylistPage(playlist)}>{playlist.title}</button>
-                            ))}
-                        </div>
-                    </div> 
-                    : 
-                    <div>    
-                        <h2>Cours</h2>
-                        <div className='playlist-button-row'>
-                            {teacher && teacher.courses.map((course) => (
-                                <button className='global-button' onClick={() => handleGoToCoursePage(course)}>{course.title}</button>
-                            ))}
-                        </div>
-                    </div>
-                }
+                <h2>Playlistes</h2>
+                <div className='playlist-button-row'>
+                    {playlists.length === 0 ? 
+                    <p>{ownPage ? '' : "Aucune Playlists" }</p> :
+                    playlists.map((playlist) => (
+                        <button className='playliste-button' onClick={() => handleGoToPlaylistPage(playlist)}> {playlist.title} </button>
+                    ))
+
+                    }
+                    {ownPage && <Link to='/createplaylist'>
+                        <button className='playliste-button'> + </button>
+                    </Link>}
+                </div>
+                <div>    
+                <h2>Cours</h2>
+                <div className='playlist-button-row'>
+                    {teacher && teacher.courses.map((course) => (
+                        <button className='global-button' onClick={() => handleGoToCoursePage(course)}>{course.title}</button>
+                    ))}
+                </div>
+                </div>
                 <div className='liked-videos'>
                     <VideoRow videos={user.likedVideos} titre={"Vidéos likées"}/>
                 </div>
