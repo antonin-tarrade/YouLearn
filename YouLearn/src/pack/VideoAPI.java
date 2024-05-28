@@ -35,9 +35,11 @@ public class VideoAPI {
     public Video addVideo(Video json) {
         try {
             // Find course
+            System.out.println("\n\n couse (json) : " + json.getCourse().getId());
             Course course = em.find(Course.class, json.getCourse().getId());
+            System.out.println("\n\n Course : " + course);
             // Create video
-            Video video = new Video(json.getTitle(), json.getorderInCourse(), json.getUrl(), course);
+            Video video = new Video(json.getTitle(), json.getDescription(), json.getorderInCourse(), json.getUrl(), course);
             System.out.println("[PERSIST] " + video.getClass().getName() + " (id=" + video.getId() + ")");
             em.persist(video);
             // Return
@@ -134,13 +136,28 @@ public class VideoAPI {
     }
 
     @GET
-    @Path("/searchForVideo")
+    @Path("/searchForVideos")
     @Produces({ "application/json" })
-    public Collection<Video> searchForVideo(@QueryParam("search") String search) {
+    public Collection<Video> searchForVideos(@QueryParam("search") String search) {
+        System.out.println("\n\n Search : " + search);
         String query = "%" + search.replace("%","") + "%";
 
-        Collection<Video> videos = (Collection<Video>) em.createQuery("SELECT b FROM Video v WHERE v.title LIKE :query").setParameter("query", query);
-
+        Collection<Video> videos = (Collection<Video>) em.createQuery("SELECT v FROM Video v WHERE v.title LIKE :query").setParameter("query", query).getResultList();
+        System.out.println("Video nulle ? " + videos==null);
+        System.out.println("Video taille : " + videos.size());
         return videos;
+    }
+
+
+    @GET
+    @Path("/getVideoOwner")
+    @Produces({ "application/json" })
+    @Consumes({ "application/json" })
+    public User getVideoOwner(@QueryParam("id") int id) {
+        Video video = em.find(Video.class, id);
+        if (video == null)
+            return null;
+        User owner = video.getCourse().getOwner().getUser();
+        return owner;
     }
 }

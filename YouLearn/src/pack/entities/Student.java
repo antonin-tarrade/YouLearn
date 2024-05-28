@@ -5,6 +5,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Student {
@@ -12,6 +15,7 @@ public class Student {
     private int id;
 
     @OneToOne
+    //@JsonManagedReference pas besoin car pas de variable de type Student dans User
     private User user;
 
     private String department;

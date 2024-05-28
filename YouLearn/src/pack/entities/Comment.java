@@ -3,12 +3,15 @@ package pack.entities;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Comment {
@@ -16,8 +19,10 @@ public class Comment {
     private int id;
 
     @ManyToOne
+    @JsonIgnoreProperties({"comments","followedCourses","likedVideos","playlists"})
     private User author;
     @ManyToOne
+    @JsonIgnoreProperties({"comments"})
     private Video video;
 
     private String content;
@@ -31,6 +36,7 @@ public class Comment {
         this.date = date;
         this.video = video;
         this.author = author;
+
     }
 
     // Getters / setters

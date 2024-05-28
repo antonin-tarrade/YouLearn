@@ -6,8 +6,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Playlist {
@@ -15,6 +21,7 @@ public class Playlist {
     private int id;
 
     @ManyToOne
+    @JsonIgnoreProperties({"playlists","followedCourses","likedVideos","comments"})
     private User author;
 
     private boolean isPrivate;
@@ -22,7 +29,9 @@ public class Playlist {
     private String description;
 
     //Liste des vidéos de la playlist
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    // @JsonManagedReference pas besoin car pas de variable de type Playlist dans Video
+    @JsonIgnoreProperties({"playlists"})
     private Collection<Video> videos;
 
     public Playlist() {
@@ -33,6 +42,9 @@ public class Playlist {
         this.title = title;
         this.description = description;
         this.author = author;
+
+        this.videos = new ArrayList<Video>();
+
     }
 
     // Getters / setters

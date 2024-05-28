@@ -6,6 +6,11 @@
   padding-right: 5%;
 }
 
+.inline-search-icon{
+  width: 1em;
+  height:1em;
+}
+
 h1 {
   font-size: 2.5em;
   margin: 0;

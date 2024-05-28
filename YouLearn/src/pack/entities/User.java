@@ -2,9 +2,7 @@ package pack.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
- 
+import java.util.List; 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -13,21 +11,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import pack.UserRole;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+ 
+
+@Entity 
+
 public class User {
     @Id
     private String username;
 
+    
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"followers"})
     private Collection<Course> followedCourses;
+
     @ManyToMany(mappedBy = "userLikes",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"userLikes"})
     private Collection<Video> likedVideos;
+
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"author","video"})
     private Collection<Comment> comments;
+
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"author"})
     private Collection<Playlist> playlists;
 
     private String email;
@@ -40,10 +50,13 @@ public class User {
     public User(String username, String email, String password, UserRole role) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.password = password; 
         this.role = role;
 
         this.followedCourses = new ArrayList<Course>();
+        this.likedVideos = new ArrayList<Video>();
+        this.comments = new ArrayList<Comment>();
+        this.playlists = new ArrayList<Playlist>();
     }
 
 

@@ -1,13 +1,18 @@
 package pack.entities;
 
 import java.util.Collection;
-
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Teacher {
@@ -15,8 +20,12 @@ public class Teacher {
     private int id;
 
     @OneToOne
+    //@JsonManagedReference pas besoin car pas de variable de type Teacher dans User
     private User user;
-    @OneToMany(mappedBy = "owner")
+
+    
+    @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"owner"}) 
     private Collection<Course> courses;
 
     private String name;
@@ -27,6 +36,8 @@ public class Teacher {
     public Teacher(User user, String name) {
         this.user = user;
         this.name = name;
+
+        this.courses = new ArrayList<Course>();
     }
 
     // Getters / setters

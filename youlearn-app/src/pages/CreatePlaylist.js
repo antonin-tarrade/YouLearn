@@ -20,7 +20,7 @@ function CreatePlaylist() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // loguique ajout playliste dans backend
+        
         navigate('/user');
     };
 

@@ -39,7 +39,7 @@ export async function invokeGet(method, params = {}) {
 
   if (res.ok) {
     console.log("GET success : " + url);
-    return await res;
+    return res;
   } else {
     console.log("GET failure : " + url);
     return null;

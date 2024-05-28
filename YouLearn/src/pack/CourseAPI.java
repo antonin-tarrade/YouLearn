@@ -60,6 +60,15 @@ public class CourseAPI {
     }
 
     @GET
+    @Path("/getCourses")
+    @Produces({ "application/json" })
+    public Collection<Course> getCourses(@QueryParam("teacherId") int teacherId){
+        Collection<Course> courses = (Collection<Course>) em.createQuery("SELECT c FROM Course c WHERE c.owner.id = :id")
+                .setParameter("id", teacherId).getResultList();
+        return courses;
+    }
+
+    @GET
     @Path("/getCourseInfos")
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
@@ -90,5 +99,17 @@ public class CourseAPI {
             return null;
         Collection<User> followers = course.getFollowers();
         return followers;
+    }
+
+    @GET
+    @Path("/getCourseOwner")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    public Teacher getCourseOwner(@QueryParam("id") int id) {
+        Course course = em.find(Course.class, id);
+        if (course == null)
+            return null;
+        Teacher owner = course.getOwner();
+        return owner;
     }
 }

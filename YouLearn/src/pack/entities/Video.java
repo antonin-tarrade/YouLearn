@@ -2,16 +2,22 @@ package pack.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToMany; 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Video {
@@ -19,26 +25,35 @@ public class Video {
     private int id;
 
     @ManyToOne
+    @JsonIgnoreProperties({"videos"})
     private Course course;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"likedVideos"})
     private Collection<User> userLikes;
-    @OneToMany(mappedBy = "video")
+
+    @OneToMany(mappedBy = "video",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"video"})
     private Collection<Comment> comments;
 
     private String title;
+    private String description;
     private int orderInCourse;
     private String url;
 
     public Video() {
     }
 
-    public Video(String title, int orderInCourse, String url, Course course) {
+    public Video(String title, String description, int orderInCourse, String url, Course course) {
         this.title = title;
         this.orderInCourse = orderInCourse;
         this.url = url;
         this.course = course;
+        this.description = description;
 
         this.userLikes = new ArrayList<User>();
+    
+        
     }
 
     // Getters / setters
@@ -104,5 +119,13 @@ public class Video {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

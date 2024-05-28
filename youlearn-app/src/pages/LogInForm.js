@@ -43,17 +43,16 @@ function LogInForm() {
       student.user = newUser;
       student.department = department;
       invokePostAndAwaitResponse("signUpStudent", student)
-        .then(data => console.log(data.json()));
+        .then(data => data.json()).then(student => setUserLoged(student.user));
     } else if (role === 1) {
       let teacher = {}
       teacher.user = newUser;
       teacher.name = name;
       invokePostAndAwaitResponse("signUpTeacher", teacher)
-        .then(data => console.log(data.json()));
+        .then(data => data.json()).then(teacher => setUserLoged(teacher.user));
     } else {
       console.log("Role Error");
     }
-    setUserLoged(userExample);
     navigate('/');
   };
 
@@ -62,10 +61,11 @@ function LogInForm() {
     let signUser = {}
     signUser.username = id;
     signUser.password = password;
-    invokePostAndAwaitResponse("loginUser", signUser).then(data => data.json()).then(json => console.log(json));
-
-    setUserLoged(userExample);
-    console.log("userLoged après setUserLoged:", userLoged);
+    invokePostAndAwaitResponse("loginUser", signUser).then(data => data.json()).then(user => {
+        console.log("user logged : ", user)
+        setUserLoged(user);
+      }
+    );
     navigate('/');
   };
 

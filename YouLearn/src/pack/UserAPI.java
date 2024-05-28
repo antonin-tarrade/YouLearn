@@ -75,17 +75,18 @@ public class UserAPI {
     @Path("/getStudentInfos")
     @Produces({ "application/json" })
     public Student getStudentInfos(@QueryParam("username") String username) {
-        Student student = (Student) em.createQuery("SELECT s FROM Student s WHERE s.user = :username")
+        Student student = (Student) em.createQuery("SELECT s FROM Student s WHERE s.user.username = :username")
                 .setParameter("username", username).getSingleResult();
         return student;
-    }
+    } 
 
     @GET
     @Path("/getTeacherInfos")
     @Produces({ "application/json" })
     public Teacher getTeacherInfos(@QueryParam("username") String username) {
-        Teacher teacher = (Teacher) em.createQuery("SELECT t FROM Teacher t WHERE t.user = :username")
-                .setParameter("username", username).getSingleResult();
+        Teacher teacher = (Teacher) em.createQuery("SELECT t FROM Teacher t WHERE t.user.username = :username")
+            .setParameter("username", username).getSingleResult();
+            System.out.println(teacher.getName());
         return teacher;
     }
 
@@ -100,10 +101,23 @@ public class UserAPI {
         return videos;
     }
 
+
+    @GET
+    @Path("/getUserFollowedCourses")
+    @Produces({ "application/json" })
+    public Collection<Course> getUserFollowedCourses(@QueryParam("username") String username) {
+        User user = em.find(User.class, username);
+        if (user == null)
+            return null;
+        Collection<Course> followedCourses = user.getFollowedCourses();
+        return followedCourses;
+    }
+
+
     @GET
     @Path("/getUserPlaylists")
     @Produces({ "application/json" })
-    public Collection<Playlist> getUserPlaylists(@QueryParam("username") int username) {
+    public Collection<Playlist> getUserPlaylists(@QueryParam("username") String username) {
         User user = em.find(User.class, username);
         if (user == null)
             return null;

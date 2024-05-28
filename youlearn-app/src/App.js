@@ -11,6 +11,7 @@ import CoursePage from './pages/CoursePage';
 import PlaylistPage from './pages/PlaylistPage';
 import CreateCourse from './pages/CreateCourse';
 import CreatePlaylist from './pages/CreatePlaylist';
+import SearchResultPage from './pages/SearchResultPage';
 
 import './App.css';
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/playlist" element={<div> {topSpace} <PlaylistPage /></div>} />
             <Route path="/createcourse" element={<div> {topSpace} <CreateCourse /></div>} />
             <Route path="/createplaylist" element={<div> {topSpace} <CreatePlaylist /></div>} />
+            <Route path="/searchresultpage" element={<div> {topSpace} <SearchResultPage /></div>} />
           </Routes>
         </div>
       </Router>
