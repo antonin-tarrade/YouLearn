@@ -15,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 
 import pack.entities.*;
 
+import pack.PlaylistVideo;
+
 @Singleton
 @Path("/")
 public class PlaylistAPI {
@@ -64,4 +66,26 @@ public class PlaylistAPI {
         Playlist playlist = em.find(Playlist.class, id);
         return playlist;
     }
+
+    @POST
+    @Path("/addVideoToPlaylist")
+    @Produces({ "application/json" })
+    public boolean addVideoToPlaylist(PlaylistVideo json) {
+        try {
+            // Find video and playlist
+            Video video = em.find(Video.class, json.getVideo().getId());
+            Playlist playlist = em.find(Playlist.class, json.getPlaylist().getId());
+            if (video == null || playlist == null)
+                return false;
+            // Add video to playlist
+            playlist.addVideo(video);
+            System.out.println("[MERGE] " + playlist.getClass().getName() + " (id=" + playlist.getId() + ")");
+            em.merge(playlist);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
