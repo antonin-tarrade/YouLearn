@@ -78,10 +78,10 @@ function UserPage() {
                 </div>
                 <div className='info-container'>
                     <h1>{user.username}</h1>
-                    {(user.role == "Student" && student || user.role == "Teacher" && teacher ) && <h2>{ user.role == "Student" ? "Departement : "  + student.department : "Cours : " + teacher.courses.map((course,index) => (index == 0 ? '' : ' - ') + course.title )}</h2>}
+                    {(user.role == "Student" && student || user.role == "Teacher" && teacher ) && <h2>{ user.role == "Student" ? "Département : "  + student.department : "Cours : " + teacher.courses.map((course,index) => (index == 0 ? '' : ' - ') + course.title )}</h2>}
                     {ownPage && userLoged.role == "Teacher" && 
                         <div className='create-course'>
-                            <button className="add-course-button" onClick={createCourse}>Ajouter un cour </button>
+                            <button className="add-course-button" onClick={createCourse}>Ajouter un cours </button>
                         </div>}
                     <h2>Abonnements : {followedCourses.map((course,index) => (index == 0 ? '' : ' - ') + course.title)}</h2>
                 </div>
