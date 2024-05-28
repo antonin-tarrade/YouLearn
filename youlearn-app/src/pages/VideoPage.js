@@ -47,19 +47,23 @@ function VideoPage() {
       )}
     },[showedVideo])
   
-  const handlePlaylistToggle = (playlistId) => {
-    
+  const handlePlaylistToggle = (isChecked,playlist) => {
+    if (isChecked) {
+      invokePostAndAwaitResponse("addVideoToPlaylist",{video : video, playlist : playlist}).then(() => getVideoInfos)
+    } else {
+
+    }
   };
   
-  const PlaylistButton = ({ playlists, onPlaylistToggle }) => {
+  const PlaylistButton = ({ playlists, onPlaylistToggle}) => {
     const [open, setOpen] = useState(false);
     
     const handleClick = () => {
       setOpen(!open);
     };
     
-    const handleCheckboxChange = (playlistId) => {
-      onPlaylistToggle(playlistId);
+    const handleCheckboxChange = (event,playlistId) => {
+      onPlaylistToggle(event.target.checked,playlistId);
     };
     
     return (
@@ -79,7 +83,7 @@ function VideoPage() {
                   <input
                     type="checkbox"
                     checked={playlist.isVideoInPlaylist}
-                    onChange={() => handleCheckboxChange(playlist.id)}
+                    onChange={(event) => handleCheckboxChange(event,playlist)}
                     />
                   {playlist.title}
                 </label>

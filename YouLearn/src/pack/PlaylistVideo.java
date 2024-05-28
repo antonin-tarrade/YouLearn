@@ -22,5 +22,5 @@ public class PlaylistVideo {
 
     public Video getVideo() {
         return video;
-    }
+    } 
 }
