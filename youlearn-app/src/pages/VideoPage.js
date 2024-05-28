@@ -12,6 +12,7 @@ function VideoPage() {
   const navigate = useNavigate();
   const [owner,setOwner] = useState(null);
   const [comments,setComments] = useState([]);
+  const [likeAmount,setLikeAmount] = useState(0);
 
   useEffect(() => {
     if (userLoged === null) {
@@ -28,15 +29,19 @@ function VideoPage() {
       console.log(owner);
         setOwner(owner);
     }
-    )
-  },[])
-  useEffect(() => {
+  )
     invokeGet("getVideoCommments",{id : video.id}).then(data => data.json()).then(comments => {
       console.log(comments);
         setComments(comments);
     }
     )
+    updateLikes();
+    
   },[])
+
+  const updateLikes = () => {
+    invokeGet("getVideoLikesAmount",{id :video.id}).then(data=>data.json()).then(number => setLikeAmount(number));
+  }
 
   
   const handlePlaylistToggle = (playlistId) => {
@@ -85,9 +90,17 @@ function VideoPage() {
   
   const LikeButton = () => {
     const [liked, setLiked] = useState(false);
+    invokeGet("hasUserLiked",{username: userLoged.username,id : video.id}).then(data => data.json()).then((liked) => setLiked(liked));
     
     const handleClick = () => {
-      setLiked(!liked);
+      if (liked) {
+        invokeGet("unlikeVideo",{username: userLoged.username,id : video.id});
+        setLiked(false);
+      } else {
+        invokeGet("likeVideo",{username: userLoged.username,id : video.id});
+        setLiked(true);
+      }
+      updateLikes();
     };
     
     return (
@@ -155,7 +168,7 @@ function VideoPage() {
           <PlaylistButton playlists={userLoged.playlists} onPlaylistToggle={handlePlaylistToggle} />
           <div className='hGrid'>
             <LikeButton />
-            <p className='likes'><strong>{0} likes</strong></p>
+            <p className='likes'><strong>{likeAmount} likes</strong></p>
           </div>
         </div>
       </div>

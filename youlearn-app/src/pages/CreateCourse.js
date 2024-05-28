@@ -100,14 +100,14 @@ function CreateCourse() {
     return (
         <div className="create-course-page">
             <div className="course-form-container">
-                <h1>Créer le cour :</h1>
+                <h1>Créer le cours :</h1>
                 <form className="add-course-form" onSubmit={onCourseSubmitted}>
                     <label className='course-label'>
-                        <p className='course-title-label'>Titre du cour :</p>
+                        <p className='course-title-label'>Titre du cours :</p>
                         <input className="course-title-input" type="text" name="title" value={course.title} onChange={handleCourseChange} required />
                     </label>
                     <label className='course-label'>
-                        <p className='course-description-label'>Description du cour :</p>
+                        <p className='course-description-label'>Description du cours :</p>
                         <textarea className="course-description-input" name="description" value={course.description} onChange={handleCourseChange} required />
                     </label>
                     <p>Videos :</p>
@@ -124,7 +124,7 @@ function CreateCourse() {
                         </Droppable>
                     </DragDropContext>
                     <button type="button" className="add-video-button" onClick={addVideo}>Ajouter une vidéo</button>
-                    <button type="submit" className='global-button create-button'> Créer le cour</button>
+                    <button type="submit" className='global-button create-button'> Créer le cours</button>
                 </form>
             </div>
         </div>
