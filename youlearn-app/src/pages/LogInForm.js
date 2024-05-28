@@ -19,6 +19,7 @@ function LogInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hasAccount, setHasAccount] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (userLoged !== null) {
@@ -56,17 +57,33 @@ function LogInForm() {
     navigate('/');
   };
 
+  const manageLoginInResponce = (data) => {
+    if (data === null) {
+      console.log("Mauvais mot de passe ou identifiant");
+      return null;
+    } else {
+      return data.json();
+    }
+  }
+
   const handleLogIn = (event) => {
     event.preventDefault();
     let signUser = {}
     signUser.username = id;
     signUser.password = password;
-    invokePostAndAwaitResponse("loginUser", signUser).then(data => data.json()).then(user => {
+
+    invokePostAndAwaitResponse("loginUser", signUser)
+    .then(data => manageLoginInResponce(data))
+    .then(user => {
+      if (user === null) {
+        console.log("An error during login:");
+        setErrorMessage("Mauvais mot de passe ou identifiant");
+      } else {
         console.log("user logged : ", user)
         setUserLoged(user);
+        navigate('/');
       }
-    );
-    navigate('/');
+    });
   };
 
   const handleCreateAccount = (event) => {
@@ -123,6 +140,7 @@ function LogInForm() {
           <p className='form-text'>Mot de passe:</p>
           <input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
         </label>
+        <p className='error-message'>{errorMessage}</p>
         <input className={`global-button ${id && password ? 'visible' : ''}`} type="submit" value={`${hasAccount ? 'Se connecter' : 'S\'enregistrer'}`} name="button" />
         <div className={`links ${hasAccount ? 'visible' : ''}`}>
           <button className='link' onClick={handleCreateAccount}>Créer un compte</button>
