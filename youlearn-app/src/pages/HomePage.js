@@ -1,19 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { VideoRow } from './utils';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as SearchIcon } from '../img/search.svg';
 import './HomePage.css';
+import {invokeGet} from '../api'
 
 function HomePage() {
     const { userLoged } = useUser();
     const navigate = useNavigate();
+    const [playlists,setPlaylists] = useState([]);
 
     useEffect(() => {
         if (userLoged === null) {
             navigate('/login');
         }
     }, [userLoged, navigate]);
+
+    useEffect(() => {
+       if (userLoged){
+         invokeGet("getUserPlaylists",{username: userLoged.username})
+            .then(data => data.json())
+            .then(playlists => {
+                setPlaylists(playlists);
+            });
+       }
+    },[userLoged])
 
     if (userLoged === null) {
         return null;
@@ -42,8 +54,8 @@ function HomePage() {
             </div>
             <h1>Tes Playlists</h1>
             <div className="videoList">
-                {userLoged.playlists.length > 0 ? 
-                    userLoged.playlists.map((playlist) => (
+                {playlists.length > 0 ? 
+                    playlists.map((playlist) => (
                     <VideoRow videos={playlist.videos} titre={playlist.title} key={playlist.title} />
                     )) 
                     : <h2>Aucune playlists, clique sur le + en dessous d'une vidéo pour l'ajouter à une playlist !</h2>

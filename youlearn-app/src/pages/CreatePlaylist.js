@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import './CreatePlaylist.css';
+import {invokePostAndAwaitResponse } from '../api';
 
 function CreatePlaylist() {
-    const { userLoged } = useUser();
+    const { userLoged,setUser,user } = useUser();
     const navigate = useNavigate();
-    const [playlist, setPlaylist] = useState({ title: '', description: '' });
+    const [playlist, setPlaylist] = useState({ title: '', description: '' , isPrivate: false, author: null, videos : []});
 
     useEffect(() => {
         if (userLoged === null) {
@@ -20,7 +21,8 @@ function CreatePlaylist() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+        playlist.author = userLoged;
+        invokePostAndAwaitResponse("addPlaylist",playlist).then(() => setUser(user));
         navigate('/user');
     };
 

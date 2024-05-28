@@ -7,8 +7,8 @@ import { invokeGet } from '../api';
 
 function UserPage() {
     const { userLoged, user, setPlaylist , setCourse} = useUser();
-    const [followedCourses, setFollowedCourses] = useState(user.followedCourses || []);
-    const [playlists, setPlaylists] = useState(user.playlists || []);
+    const [followedCourses, setFollowedCourses] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
     const navigate = useNavigate();
     let ownPage  = userLoged == user;
     const [teacher,setTeacher] = useState(null);
@@ -35,20 +35,20 @@ function UserPage() {
             setStudent(student);
         })
 
-        if (!user.followedCourses) {
-            invokeGet("getUserFollowedCourses",{username: user.username})
-                .then(data => data.json())
-                .then(followedCourses => {
-                    setFollowedCourses(followedCourses);
-                });
-        }
-        if (!user.playlists) {
-            invokeGet("getUserPlaylists",{username: user.username})
-                .then(data => data.json())
-                .then(playlists => {
-                    setPlaylists(playlists);
-                });
-        }
+        
+        invokeGet("getUserFollowedCourses",{username: user.username})
+            .then(data => data.json())
+            .then(followedCourses => {
+                setFollowedCourses(followedCourses);
+            });
+        
+        
+        invokeGet("getUserPlaylists",{username: user.username})
+            .then(data => data.json())
+            .then(playlists => {
+                setPlaylists(playlists);
+            });
+    
     },[user]);
 
 
