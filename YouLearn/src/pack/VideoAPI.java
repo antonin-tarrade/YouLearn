@@ -102,11 +102,12 @@ public class VideoAPI {
         System.out.println("\n\n Search : " + search);
         String query = "%" + search.replace("%","") + "%";
 
-        Collection<Video> videos = (Collection<Video>) em.createQuery("SELECT b FROM Video v WHERE v.title LIKE :query").setParameter("query", query);
+        Collection<Video> videos = (Collection<Video>) em.createQuery("SELECT v FROM Video v WHERE v.title LIKE :query").setParameter("query", query).getResultList();
         System.out.println("Video nulle ? " + videos==null);
         System.out.println("Video taille : " + videos.size());
         return videos;
     }
+
 
     @GET
     @Path("/getVideoOwner")
